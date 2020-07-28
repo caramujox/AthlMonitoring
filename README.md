@@ -7,7 +7,7 @@ Repositório destinado ao Trabalho de Conclusão de Curso apresentado à Escola 
 Membros do grupo:\
 Caio de Araujo Morais - RA: 14.03195-7 - @caramujox\
 Carolina Peixoto Nunes - RA: 16.01319-0 -\
-Pedro Lopes Marin Cattel - RA: 15.01288-3 - @pedrocattel\
+Pedro Lopes Marin Cattel - RA: 15.01288-3 - @pedrocattel
 
 Orientador:\
 Murilo Zanini de Carvalho - @Murilo-ZC
