@@ -221,19 +221,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    widget.authService.getCurrentUser().then((userResp) {
-      Firestore.instance
-          .collection("users")
-          .document(userResp.uid)
-          .get()
-          .then((doc) {
-        if (doc['adm']) {
-          setState(() {
-            _visible = !_visible;
-          });
-        } else
-          return;
-      });
-    });
+//    widget.authService.getCurrentUser().then((userResp) {
+//      Firestore.instance
+//          .collection("users")
+//          .document(userResp.uid)
+//          .get()
+//          .then((doc) {
+//        if (doc['adm']) {
+//          setState(() {
+//            _visible = !_visible;
+//          });
+//        } else
+//          return;
+//      });
+//    });
   }
 }
