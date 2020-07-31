@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "61801750820",
+    "firebase_url": "https://athlmonitoring-62273.firebaseio.com",
+    "project_id": "athlmonitoring-62273",
+    "storage_bucket": "athlmonitoring-62273.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61801750820:android:c85fe828598e356d1293b1",
+        "android_client_info": {
+          "package_name": "br.maua.athl_monitoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61801750820-bs4ib0g16ucimrrm7e84cgjpt43dmmou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdfOFEHYVhfoeyaW1CwtA_65p9JtjJmhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61801750820-bs4ib0g16ucimrrm7e84cgjpt43dmmou.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

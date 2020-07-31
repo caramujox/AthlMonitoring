@@ -21,6 +21,12 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  cloud_firestore: ^0.13.7
+  firebase_auth: ^0.16.1
+  flutter_facebook_login: ^3.0.0
+  google_sign_in: ^4.5.1
+  http: ^0.12.2
+
   flutter:
     sdk: flutter
 
@@ -48,7 +54,13 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+  assets:
+    - assets/images/gaspar_vetorizado.png
+    - assets/images/google_logo.png
+    - assets/images/facebook_logo.png
+    - assets/images/nacao_grena.png
+    - assets/images/account_circle_grey.png
+    - assets/images/logoalvoaaabm_400x400.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
