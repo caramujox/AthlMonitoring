@@ -186,8 +186,7 @@ class _AuthPageState extends State<AuthPage> {
                       _pwdController.text.toString()).then((userResp) {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context){
-                          //return HomeScreen(authService: new AuthService(), user: userResp);
-                          return MyHomePage();
+                          return HomeScreen(authService: new AuthService(), user: userResp);
                         }));
                   });
                 },
@@ -293,8 +292,7 @@ class _AuthPageState extends State<AuthPage> {
           onPressed: () {
             widget.authService.singInGoogle().then((retUser) {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                //return HomeScreen(authService: new AuthService(), user: retUser,);
-                return MyHomePage();
+                return HomeScreen(authService: new AuthService(), user: retUser,);
               }));
             });
           },
@@ -338,8 +336,7 @@ class _AuthPageState extends State<AuthPage> {
           onPressed: () {
             widget.authService.singInFacebook().then((retUser) {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                //return HomeScreen(authService: new AuthService(), user: retUser,);
-                return MyHomePage();
+                return HomeScreen(authService: new AuthService(), user: retUser,);
               }));
             });
           },

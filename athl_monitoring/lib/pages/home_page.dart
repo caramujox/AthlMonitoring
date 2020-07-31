@@ -1,91 +1,239 @@
-
-
+import 'package:athl_monitoring/pages/auth_page.dart';
+import 'package:athl_monitoring/services/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:athl_monitoring/util/placeholder_widget.dart';
+import 'package:athl_monitoring/util/const_colors.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  HomeScreen({this.authService, this.user, this.logoutCallBack});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  final AuthService authService;
+  final VoidCallback logoutCallBack;
+  final FirebaseUser user;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    PlaceholderWidget(Colors.green),
+    PlaceholderWidget(Colors.blue),
+    PlaceholderWidget(Colors.yellow),
 
-  void _incrementCounter() {
+  ];
+
+  bool _visible = true;
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return _construirHome();
+  }
+
+  _construirHome() {
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: _homeAppBar(),
+      body: _homeBody(),
+      bottomNavigationBar: _homeBottomNavigationBar(),
+      drawer: _homeDrawer(),
+    );
+  }
+
+  _homeAppBar() {
+    return AppBar(
+      title: Text(
+        "Alojas Mauá",
+        style: GoogleFonts.permanentMarker(
+          fontSize: 25,
+        ),
+      ),
+      centerTitle: true,
+      leading: Container(
+        padding: EdgeInsets.all(1.5),
+        child: IconButton(
+          icon: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 20,
+            backgroundImage: widget.user.photoUrl == null
+                ? AssetImage("assets/images/account_circle_grey.png")
+                : NetworkImage(widget.user.photoUrl),
+          ),
+          iconSize: 32,
+          onPressed: () => _scaffoldKey.currentState.openDrawer(),
+        ),
+      ),
+    );
+  }
+
+  _homeBody() {
+    return _children[_currentIndex];
+  }
+
+  _homeBottomNavigationBar() {
+    return BottomNavigationBar(
+      backgroundColor: ConstColors.ccBlueVioletWheel,
+      onTap: onTabTapped,
+      currentIndex: _currentIndex,
+      selectedItemColor: Colors.white,
+      type: BottomNavigationBarType.fixed,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          title: Text(
+            'Home',
+            style: TextStyle(fontFamily: 'Adumu'),
+//          style: GoogleFonts.permanentMarker(),
+          ),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.directions_bus),
+          title: Text(
+            'Ônibus',
+            style: TextStyle(fontFamily: 'Adumu'),
+          ),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.assignment),
+          title: Text(
+            'Jogos',
+            style: TextStyle(fontFamily: 'Adumu'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _homeDrawer() {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Center(
+              child: Container(
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  radius: 60.0,
+                  backgroundImage: widget.user.photoUrl == null
+                      ? AssetImage("assets/images/account_circle_grey.png")
+                      : NetworkImage(widget.user.photoUrl),
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1.5, color: Colors.white),
+                  color: Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+                padding: EdgeInsets.all(1.5),
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: ConstColors.ccBlueVioletWheel,
+            ),
+          ),
+          ListTile(
+            title: Text(
+              'Configurações da conta',
+              style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
+            ),
+            onTap: () {
+              // Update the state of the app
+              // ...
+              // Then close the drawer
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text(
+              widget.user.displayName == null
+                  ? "Visitante"
+                  : widget.user.displayName,
+              style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('Logout',
+                style:
+                TextStyle(color: Colors.grey, fontStyle: FontStyle.italic)),
+            onTap: () {
+              widget.authService.signOut();
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  PageRouteBuilder(pageBuilder: (BuildContext context,
+                      Animation animation, Animation secondaryAnimation) {
+                    return AuthPage(
+                      authService: new AuthService(),
+                    );
+                  }, transitionsBuilder: (BuildContext context,
+                      Animation<double> animation,
+                      Animation<double> secondaryAnimation,
+                      Widget child) {
+                    return new SlideTransition(
+                      position: new Tween<Offset>(
+                        begin: const Offset(1.0, 0.0),
+                        end: Offset.zero,
+                      ).animate(animation),
+                      child: child,
+                    );
+                  }),
+                      (Route route) => false);
+            },
+          ),
+          Divider(
+            color: Colors.grey,
+            height: 15,
+            thickness: 1.5,
+            indent: 20,
+            endIndent: 20,
+          ),
+          Offstage(
+            offstage: _visible,
+            child: ListTile(
+              title: Text('Cadastrar Roteiro de Onibus',
+                  style: TextStyle(
+                      color: Colors.grey, fontStyle: FontStyle.italic)),
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return null;
+                }));
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  void onTabTapped(int index) {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _currentIndex = index;
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+  void initState() {
+    super.initState();
+    widget.authService.getCurrentUser().then((userResp) {
+      Firestore.instance
+          .collection("users")
+          .document(userResp.uid)
+          .get()
+          .then((doc) {
+        if (doc['adm']) {
+          setState(() {
+            _visible = !_visible;
+          });
+        } else
+          return;
+      });
+    });
   }
 }

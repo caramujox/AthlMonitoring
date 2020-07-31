@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "61801750820-q81ou3g8lqlrrssqtlrl7tjcdaf00869.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.maua.athl_monitoring",
+            "certificate_hash": "c172e7b2e75c59d3bb2dfae24646ffd360a92025"
+          }
+        },
+        {
           "client_id": "61801750820-bs4ib0g16ucimrrm7e84cgjpt43dmmou.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -30,7 +30,7 @@ class _WrapperState extends State<Wrapper> {
           _user = user;
         }
         authStatus =
-        user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
+            user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
       });
     });
   }
@@ -48,13 +48,12 @@ class _WrapperState extends State<Wrapper> {
         );
         break;
       case AuthStatus.LOGGED_IN:
-//        return HomePage(
-//          logoutCallBack: logoutCallback,
-//          authService: widget.authService,
-//          user: _user,
-//        )
-//        ;
-      return MyHomePage();
+        return HomeScreen(
+          logoutCallBack: logoutCallback,
+          authService: widget.authService,
+          user: _user,
+        );
+
         break;
       default:
         return buildWaitingScreen();
@@ -83,10 +82,8 @@ class _WrapperState extends State<Wrapper> {
   Widget buildWaitingScreen() {
     return Scaffold(
         body: Container(
-          alignment: Alignment.center,
-          child: CircularProgressIndicator(),
-        )
-    );
+      alignment: Alignment.center,
+      child: CircularProgressIndicator(),
+    ));
   }
 }
-
