@@ -134,7 +134,6 @@ class AuthService implements BaseAuth {
         'email': user.email.toString(),
         'uid': user.uid.toString(),
         'urlPhoto': user.photoUrl.toString(),
-        'adm': false,
       });
     }
   }
