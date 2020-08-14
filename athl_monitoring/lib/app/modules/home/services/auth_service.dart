@@ -7,25 +7,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-abstract class BaseAuth {
-  Future<FirebaseUser> signIn(String email, String password);
+import 'interfaces/base_auth_interface.dart';
 
-  Future<FirebaseUser> singInGoogle();
-
-  Future<FirebaseUser> signUp(String email, String password);
-
-  Future<FirebaseUser> singInFacebook();
-
-  Future<FirebaseUser> getCurrentUser();
-
-  Future<void> sendEmailVerification();
-
-  Future<void> signOut();
-
-  Future<bool> isEmailVerified();
-}
-
-class AuthService implements BaseAuth {
+class AuthService implements IBaseAuth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin facebookLogin = new FacebookLogin();
