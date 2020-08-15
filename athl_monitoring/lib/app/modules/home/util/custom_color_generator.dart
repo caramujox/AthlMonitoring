@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class custom_color {
   Map<int, Color> color =
   {
