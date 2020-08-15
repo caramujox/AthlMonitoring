@@ -15,8 +15,8 @@ class AtletaService extends Disposable implements IAtletaService {
   AtletaService({@required this.atletaRepository});
 
   @override
-  Future delete(AtletaModel userModel) {
-    return atletaRepository.delete(userModel);
+  Future delete(AtletaModel atletaModel) {
+    return atletaRepository.delete(atletaModel);
     }
   
     @override

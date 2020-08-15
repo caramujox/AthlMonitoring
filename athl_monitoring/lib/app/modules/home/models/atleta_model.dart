@@ -15,8 +15,7 @@ class AtletaModel  {
       email: doc['email'],
       uid: doc['uid'],
       urlPhoto: doc['urlPhoto'],
-      num: doc['numero'],
-      
+      num: doc['numero'],      
     );
   }
 
