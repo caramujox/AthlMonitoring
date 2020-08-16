@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/user_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +16,9 @@ class AuthService implements IBaseAuth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin facebookLogin = new FacebookLogin();
-  final IBaseAuth baseAuth;
+  final UserRepository userRepository;
 
-  AuthService({@required this.baseAuth});
+  AuthService({@required this.userRepository});
 
   @override
   Future<FirebaseUser> getCurrentUser() async {
@@ -48,7 +50,7 @@ class AuthService implements IBaseAuth {
   Future<FirebaseUser> singInGoogle() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+        await googleUser.authentication;
 
     UserUpdateInfo info = new UserUpdateInfo();
     info.photoUrl = googleUser.photoUrl;
@@ -61,7 +63,12 @@ class AuthService implements IBaseAuth {
     FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
     user.updateProfile(info);
 
-    _cadastrarUserFirebase(user);
+    userRepository.save(new UserModel(
+        nome: user.displayName,
+        urlPhoto: user.photoUrl,
+        email: user.email,
+        uid: user.uid));
+
     return user;
   }
 
@@ -82,7 +89,11 @@ class AuthService implements IBaseAuth {
         info.photoUrl = profile['picture']['data']['url'].toString();
         FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
         user.updateProfile(info);
-        _cadastrarUserFirebase(user);
+        userRepository.save(new UserModel(
+            nome: user.displayName,
+            urlPhoto: user.photoUrl,
+            email: user.email,
+            uid: user.uid));
 
         return user;
         break;
@@ -103,26 +114,23 @@ class AuthService implements IBaseAuth {
   }
 
   @override
-  Future<FirebaseUser> signUp(String email, String password) async {
-    AuthResult res = await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
-    FirebaseUser user = res.user;
-    _cadastrarUserFirebase(user);
+  Future<FirebaseUser> signUp(
+      String email, String password, String name) async {
+    FirebaseUser userC = (await _auth.createUserWithEmailAndPassword(
+            email: email, password: password))
+        .user;
+    UserUpdateInfo info = UserUpdateInfo();
+    info.displayName = name;
+    await userC.updateProfile(info);
+    await userC.reload();
+    FirebaseUser user = await _auth.currentUser();
+
+    userRepository.save(new UserModel(
+        nome: user.displayName,
+        urlPhoto: user.photoUrl,
+        email: user.email,
+        uid: user.uid));
+
     return user;
-  }
-
-  _cadastrarUserFirebase(FirebaseUser user) async {
-    final firestoreRef = Firestore.instance.collection("users");
-
-    if ((await firestoreRef.document(user.uid.toString()).get()).exists)
-      return;
-    else {
-      await firestoreRef.document(user.uid).setData({
-        'nome': user.displayName.toString(),
-        'email': user.email.toString(),
-        'uid': user.uid.toString(),
-        'urlPhoto': user.photoUrl.toString(),
-      });
-    }
   }
 }

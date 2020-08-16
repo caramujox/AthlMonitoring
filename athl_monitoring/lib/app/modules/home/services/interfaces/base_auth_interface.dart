@@ -5,7 +5,7 @@ abstract class IBaseAuth {
 
   Future<FirebaseUser> singInGoogle();
 
-  Future<FirebaseUser> signUp(String email, String password);
+  Future<FirebaseUser> signUp(String email, String password, String name);
 
   Future<FirebaseUser> singInFacebook();
 
