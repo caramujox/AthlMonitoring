@@ -25,8 +25,6 @@ class AtletaRepository extends Disposable implements IAtletaRepository{
 
   @override
   Future save(AtletaModel model) async {
-    int total = (await Firestore.instance.collection('atletas').getDocuments())
-        .documents.length;
 
     if (model.reference == null) {
       model.reference = await Firestore.instance.collection('atletas').add({
