@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/user_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -133,4 +132,11 @@ class AuthService implements IBaseAuth {
 
     return user;
   }
+
+  @override
+  Stream<List<UserModel>> get() {
+    return userRepository.get();
+  }
+
+  
 }
