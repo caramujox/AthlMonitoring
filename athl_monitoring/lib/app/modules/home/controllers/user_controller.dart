@@ -56,6 +56,11 @@ abstract class _UserControllerBase with Store {
   }
 
   @action
+  signUp(String email,String password,String name) {
+    auth.signUp(email, password, name);
+  }
+
+  @action
   UserModel getUserInfo(FirebaseUser fbUser) {
     userList = auth.get().asObservable();
     List<UserModel> list = userList.data;

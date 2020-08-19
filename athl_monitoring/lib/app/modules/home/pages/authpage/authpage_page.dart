@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthpagePage extends StatefulWidget {
   final String title;
+
   const AuthpagePage({Key key, this.title = "Authpage"}) : super(key: key);
 
   @override
@@ -261,20 +262,16 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
 
   _showRegisterButton() {
     return Padding(
-      padding: EdgeInsets.all(20.0),
-      child: FlatButton(
-          child: Text('Não tem uma conta? Cadastre-se!',
-              style: new TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w900,
-                  color: ConstColors.ccBlueVioletWheel)),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              //return Register();
-              return null;
+        padding: EdgeInsets.all(20.0),
+        child: FlatButton(
+            child: Text('Não tem uma conta? Cadastre-se!',
+                style: new TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w900,
+                    color: ConstColors.ccBlueVioletWheel)),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/register');
             }));
-          }),
-    );
   }
 
   _showGoogleAuthBtn() {
@@ -285,15 +282,7 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
         child: OutlineButton(
           splashColor: Colors.grey,
           onPressed: () {
-            // widget.authService.singInGoogle().then((retUser) {
-            //   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            //     return HomeScreen(
-            //       authService: new AuthService(),
-            //       user: retUser,
-            //     );
-            //   }));
-            // });
-            controller.signInGoogle().then((retUser){
+            controller.signInGoogle().then((retUser) {
               Navigator.of(context).pushNamed('/atletas');
             });
           },

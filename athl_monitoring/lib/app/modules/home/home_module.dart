@@ -1,3 +1,5 @@
+import 'package:athl_monitoring/app/modules/home/pages/authpage/register_page.dart';
+
 import 'pages/wrapper/wrapper_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
@@ -34,7 +36,8 @@ class HomeModule extends ChildModule {
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, child: (_, args) => AuthpagePage()),
-        Router('/atletas', child: (_, args) => HomePage())
+        Router('/atletas', child: (_, args) => HomePage()),
+        Router('/register', child: (_,args) => RegisterForm())
       ];
 
   static Inject get to => Inject<HomeModule>.of();

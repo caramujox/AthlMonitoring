@@ -1,7 +1,8 @@
+import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:athl_monitoring/app/modules/home/services/auth_service.dart';
-import 'package:athl_monitoring/app/modules/home/controllers/auth_controller';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 
 class RegisterForm extends StatefulWidget {
@@ -15,7 +16,7 @@ class RegisterForm extends StatefulWidget {
 }
 
 
-class _RegisterFormState extends ModularState<RegisterForm, AuthController> {
+class _RegisterFormState extends ModularState<RegisterForm, UserController> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController passController = TextEditingController();
@@ -188,7 +189,7 @@ class _RegisterFormState extends ModularState<RegisterForm, AuthController> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-
+        controller.signUp(emailController.text, passController.text, nomeController.text);
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
