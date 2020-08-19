@@ -1,8 +1,7 @@
-import 'package:athl_monitoring/app/core/interfaces/base_interface.dart';
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class IBaseAuth extends IBaseInterface{
+abstract class IBaseAuth {
   Future<FirebaseUser> signIn(String email, String password);
 
   Future<FirebaseUser> singInGoogle();
@@ -17,5 +16,8 @@ abstract class IBaseAuth extends IBaseInterface{
 
   Future<void> signOut();
 
-  Future<bool> isEmailVerified();  
+  Future<bool> isEmailVerified();
+
+  Stream<List<UserModel>> get();
+
 }

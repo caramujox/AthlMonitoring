@@ -1,4 +1,6 @@
+import 'package:athl_monitoring/app/modules/home/pages/atletas_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/authpage/register_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/register_atleta.dart';
 
 import 'pages/wrapper/wrapper_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
@@ -36,8 +38,10 @@ class HomeModule extends ChildModule {
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, child: (_, args) => AuthpagePage()),
-        Router('/atletas', child: (_, args) => HomePage()),
-        Router('/register', child: (_,args) => RegisterForm())
+        Router('/home', child: (_, args) => HomePage()),
+        Router('/atletas', child: (_, args) => AtletaPage()),
+        Router('/register', child: (_,args) => RegisterForm()),
+        Router('/regAtleta', child: (_,args) => RegisterAtletaForm())
       ];
 
   static Inject get to => Inject<HomeModule>.of();

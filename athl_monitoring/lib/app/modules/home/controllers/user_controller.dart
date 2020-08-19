@@ -21,8 +21,9 @@ abstract class _UserControllerBase with Store {
   ObservableStream<List<UserModel>> userList;
 
   @action
-  getUser() {
+   getUser() {
     user = auth.getCurrentUser().asObservable();
+    return user.asStream().data;
   }
 
   @action
@@ -62,7 +63,7 @@ abstract class _UserControllerBase with Store {
 
   @action
   UserModel getUserInfo(FirebaseUser fbUser) {
-    userList = auth.get().asObservable();
+    userList = getUser();
     List<UserModel> list = userList.data;
     UserModel model = UserModel();
 
@@ -74,3 +75,5 @@ abstract class _UserControllerBase with Store {
     return model;
   }
 }
+
+

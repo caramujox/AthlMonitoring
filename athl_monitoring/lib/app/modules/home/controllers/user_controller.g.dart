@@ -108,6 +108,17 @@ mixin _$UserController on _UserControllerBase, Store {
   }
 
   @override
+  dynamic signUp(String email, String password, String name) {
+    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
+        name: '_UserControllerBase.signUp');
+    try {
+      return super.signUp(email, password, name);
+    } finally {
+      _$_UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   UserModel getUserInfo(FirebaseUser fbUser) {
     final _$actionInfo = _$_UserControllerBaseActionController.startAction(
         name: '_UserControllerBase.getUserInfo');

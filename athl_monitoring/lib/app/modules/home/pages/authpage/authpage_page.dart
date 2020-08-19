@@ -181,7 +181,7 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
                       .signIn(_emailController.text.toString(),
                           _pwdController.text.toString())
                       .then((userResp) {
-                    Navigator.of(context).pushNamed('/');
+                    Navigator.of(context).pushNamed('/atletas');
                   });
                 },
                 shape: RoundedRectangleBorder(
@@ -283,7 +283,7 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
           splashColor: Colors.grey,
           onPressed: () {
             controller.signInGoogle().then((retUser) {
-              Navigator.of(context).pushNamed('/atletas');
+              Navigator.of(context).pushNamed('/home');
             });
           },
           shape:

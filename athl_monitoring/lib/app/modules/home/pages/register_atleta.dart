@@ -1,32 +1,26 @@
-import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
-import 'package:athl_monitoring/app/modules/home/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 
-class RegisterForm extends StatefulWidget {
-  RegisterForm({this.authService, this.loginCallBack});
-
-  final AuthService authService;
-  final VoidCallback loginCallBack;
+class RegisterAtletaForm extends StatefulWidget {
 
   @override
-  _RegisterFormState createState() => _RegisterFormState();
+  _RegisterAtletaFormState createState() => _RegisterAtletaFormState();
 }
 
+class _RegisterAtletaFormState extends ModularState<RegisterAtletaForm, UserController> {
+  final TextEditingController emailAtletaController = TextEditingController();
+  final TextEditingController codEquipeController = TextEditingController();
 
-class _RegisterFormState extends ModularState<RegisterForm, UserController> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController nomeController = TextEditingController();
-  final TextEditingController passController = TextEditingController();
-
-  Widget _buildNameTF() {
+  Widget _buildCodAtletaTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Nome Completo',
+          'Email do atleta',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -49,7 +43,7 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
           ),
           height: 60.0,
           child: TextFormField(
-            controller: nomeController,
+            controller: emailAtletaController,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -58,10 +52,10 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.person,
+                Icons.email,
                 color: Colors.white,
               ),
-              hintText: 'Digite seu nome completo',
+              hintText: 'Digite o email do Atleta',
               hintStyle: TextStyle(
                 color: Colors.white54,
                 fontFamily: 'OpenSans',
@@ -73,14 +67,14 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
     );
   }
 
-  Widget _buildEmailTF() {
+  Widget _buildCodEquipe() {
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Email',
+            'Código da equipe',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -103,8 +97,8 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
             ),
             height: 60.0,
             child: TextFormField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
+              controller: codEquipeController,
+              keyboardType: TextInputType.number,
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'OpenSans',
@@ -113,10 +107,10 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
-                  Icons.email,
+                  Icons.people,
                   color: Colors.white,
                 ),
-                hintText: 'Digite seu email',
+                hintText: 'Digite o código da equipe',
                 hintStyle: TextStyle(
                   color: Colors.white54,
                   fontFamily: 'OpenSans',
@@ -129,76 +123,23 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
     );
   }
 
-  Widget _buildPasswordTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Senha',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xFF673AB7),
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 6.0,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          height: 60.0,
-          child: TextFormField(
-            controller: passController,
-            obscureText: true,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              hintText: 'Digite sua senha',
-              hintStyle: TextStyle(
-                color: Colors.white54,
-                fontFamily: 'OpenSans',
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildRegisterBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: RaisedButton(
-        elevation: 5.0,
-        onPressed: () {
-        controller.signUp(emailController.text, passController.text, nomeController.text);
-        controller.signIn(emailController.text, passController.text);
+        onPressed: (){
+          print(controller.getUserInfo(controller.getUser()));
+          Navigator.pop(context);
         },
+        elevation: 5.0,
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
         color: Colors.white,
         child: Text(
-          'Registrar',
+          'Adicionar',
           style: TextStyle(
             color: Color(0xFF673AB7),
             letterSpacing: 1.5,
@@ -250,7 +191,7 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Cadastro',
+                        'Adicione o atleta',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OpenSans',
@@ -259,14 +200,15 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
                         ),
                       ),
                       SizedBox(height: 30.0),
-                      _buildNameTF(),
-                      _buildEmailTF(),
+                      _buildCodAtletaTF(),
+                      _buildCodEquipe(),
                       SizedBox(
                         height: 10.0,
                       ),
-                      _buildPasswordTF(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                        ],
                       ),
                       _buildRegisterBtn(),
                     ],

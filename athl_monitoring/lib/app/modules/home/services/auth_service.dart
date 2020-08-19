@@ -1,21 +1,19 @@
 import 'dart:convert';
-
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
-import 'package:athl_monitoring/app/modules/home/repositories/user_repository.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/interfaces/user_repository_interface.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-
 import 'interfaces/base_auth_interface.dart';
 
 class AuthService implements IBaseAuth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin facebookLogin = new FacebookLogin();
-  final UserRepository userRepository;
+  final IUserRepository userRepository;
 
   AuthService({@required this.userRepository});
 
