@@ -1,4 +1,6 @@
+import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../util/items.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -6,7 +8,7 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
   List<Widget> slides = items
       .map((item) => Container(
           padding: EdgeInsets.symmetric(horizontal: 18.0),
@@ -51,7 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ],
           )))
       .toList();
-  
+
   List<Widget> indicator() => List<Widget>.generate(
       slides.length,
       (index) => Container(

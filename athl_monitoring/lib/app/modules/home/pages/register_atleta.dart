@@ -131,7 +131,7 @@ class _RegisterAtletaFormState
         return RaisedButton(
           onPressed: () async {
             FirebaseUser fbUser = await controller.getUser();
-            print(controller.getUserInfo(fbUser));
+            print(controller.getUserInfo());
             Navigator.pop(context);
           },
           elevation: 5.0,

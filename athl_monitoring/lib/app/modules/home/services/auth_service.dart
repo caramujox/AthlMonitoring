@@ -135,4 +135,10 @@ class AuthService implements IBaseAuth {
   Stream<List<UserModel>> get() {
     return userRepository.get();
   }  
+
+  @override
+  Future<UserModel> getUserModel() async{
+    FirebaseUser x = await _auth.currentUser();
+    return userRepository.index(x);
+  }
 }

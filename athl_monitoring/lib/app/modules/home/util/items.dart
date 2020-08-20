@@ -2,7 +2,7 @@ List items = [
   {
     "header": "Insira",
     "description":
-        "seus dados em tempo real",
+        "dados em tempo real",
     "image": "assets/images/welcome1.png"
   },
   {

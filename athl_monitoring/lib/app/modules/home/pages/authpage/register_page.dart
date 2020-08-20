@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-
 class RegisterForm extends StatefulWidget {
   RegisterForm({this.authService, this.loginCallBack});
 
@@ -14,7 +13,6 @@ class RegisterForm extends StatefulWidget {
   @override
   _RegisterFormState createState() => _RegisterFormState();
 }
-
 
 class _RegisterFormState extends ModularState<RegisterForm, UserController> {
   final TextEditingController emailController = TextEditingController();
@@ -189,8 +187,10 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-        controller.signUp(emailController.text, passController.text, nomeController.text);
-        controller.signIn(emailController.text, passController.text);
+          controller.signUp(
+              emailController.text, passController.text, nomeController.text);
+          controller.signIn(emailController.text, passController.text);
+          Navigator.of(context).pushNamed('/atletas');
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

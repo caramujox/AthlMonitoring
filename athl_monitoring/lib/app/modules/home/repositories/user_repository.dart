@@ -1,6 +1,7 @@
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/user_repository_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserRepository extends IUserRepository {
@@ -20,7 +21,7 @@ class UserRepository extends IUserRepository {
   }
 
   @override
-  Future<UserModel> index(UserModel model) {
+  Future<UserModel> index(FirebaseUser model) {
     return firestore
         .collection('users')
         .document(model.uid)

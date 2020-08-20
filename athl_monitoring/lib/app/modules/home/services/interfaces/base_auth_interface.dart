@@ -19,5 +19,7 @@ abstract class IBaseAuth {
   Future<bool> isEmailVerified();
 
   Stream<List<UserModel>> get();
+  
+  Future<UserModel> getUserModel();
 
 }

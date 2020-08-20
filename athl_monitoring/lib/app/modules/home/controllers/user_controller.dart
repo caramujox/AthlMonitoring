@@ -56,22 +56,9 @@ abstract class _UserControllerBase with Store {
   }
 
   @action
-  getUserInfo(FirebaseUser fbUser) {
-    userList = auth.get().asObservable();
-    List<UserModel> list = userList.data;
-    UserModel model = UserModel();
-    if (userList.data == null) {
-      print("userList.data ta nulo, vou retornar pra ver no que dá");
-      return;
-    } else {
-      list.forEach((element) {
-        if (element.uid == fbUser.uid) {
-          model = element;
-        }
-      });
+  getUserInfo() {
+    return auth.getUserModel();
     }
-    return model;
-  }
 
   @action
   getUser() {

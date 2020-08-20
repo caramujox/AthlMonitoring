@@ -71,14 +71,6 @@ mixin _$UserController on _UserControllerBase, Store {
         .run(() => super.sendEmailVerification());
   }
 
-  final _$getUserInfoAsyncAction =
-      AsyncAction('_UserControllerBase.getUserInfo');
-
-  @override
-  Future<UserModel> getUserInfo(FirebaseUser fbUser) {
-    return _$getUserInfoAsyncAction.run(() => super.getUserInfo(fbUser));
-  }
-
   final _$_UserControllerBaseActionController =
       ActionController(name: '_UserControllerBase');
 
@@ -110,6 +102,17 @@ mixin _$UserController on _UserControllerBase, Store {
         name: '_UserControllerBase.signUp');
     try {
       return super.signUp(email, password, name);
+    } finally {
+      _$_UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getUserInfo() {
+    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
+        name: '_UserControllerBase.getUserInfo');
+    try {
+      return super.getUserInfo();
     } finally {
       _$_UserControllerBaseActionController.endAction(_$actionInfo);
     }
