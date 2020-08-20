@@ -134,13 +134,5 @@ class AuthService implements IBaseAuth {
   @override
   Stream<List<UserModel>> get() {
     return userRepository.get();
-  }
-
-  @override
-  UserModel getUserInfo() {
-    // TODO: implement getUserInfo
-    throw UnimplementedError();
-  }
-
-  
+  }  
 }

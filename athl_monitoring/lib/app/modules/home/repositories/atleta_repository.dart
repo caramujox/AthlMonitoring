@@ -44,10 +44,8 @@ class AtletaRepository extends Disposable implements IAtletaRepository{
   }
 
   @override
-  Future<AtletaModel> index(AtletaModel model) async{
-    
-    
-    return Firestore.instance.collection('atletas').document(model.uid).get().then((doc) => AtletaModel.fromDocument(doc));
+  Future<AtletaModel> index(AtletaModel model) async{   
+      return Firestore.instance.collection('atletas').document(model.uid).get().then((doc) => AtletaModel.fromDocument(doc));
   }
   //dispose will be called automatically
   @override

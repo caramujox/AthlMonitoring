@@ -283,7 +283,7 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
           splashColor: Colors.grey,
           onPressed: () {
             controller.signInGoogle().then((retUser) {
-              Navigator.of(context).pushNamed('/home');
+              Navigator.of(context).pushNamed('/atletas');
             });
           },
           shape:

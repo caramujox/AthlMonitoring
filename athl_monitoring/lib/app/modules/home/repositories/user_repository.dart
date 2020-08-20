@@ -30,15 +30,14 @@ class UserRepository extends IUserRepository {
 
   @override
   Future save(UserModel model) async {
-    if (model.reference == null) {
-      model.reference = await Firestore.instance.collection('users').add({
-        'nome': model.nome,
-        'email': model.email,
-        'uid': model.uid,
-        'urlPhoto': model.urlPhoto,
-      });
+    if ((await Firestore.instance
+            .collection('users')
+            .document(model.uid.toString())
+            .get())
+        .exists) {
+      return;
     } else {
-      model.reference.updateData({
+      Firestore.instance.collection('users').document(model.uid).setData({
         'nome': model.nome,
         'email': model.email,
         'uid': model.uid,

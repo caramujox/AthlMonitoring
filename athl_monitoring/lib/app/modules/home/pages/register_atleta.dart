@@ -2,16 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-
 class RegisterAtletaForm extends StatefulWidget {
-
   @override
   _RegisterAtletaFormState createState() => _RegisterAtletaFormState();
 }
 
-class _RegisterAtletaFormState extends ModularState<RegisterAtletaForm, UserController> {
+class _RegisterAtletaFormState
+    extends ModularState<RegisterAtletaForm, UserController> {
   final TextEditingController emailAtletaController = TextEditingController();
   final TextEditingController codEquipeController = TextEditingController();
 
@@ -127,28 +127,31 @@ class _RegisterAtletaFormState extends ModularState<RegisterAtletaForm, UserCont
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
-      child: RaisedButton(
-        onPressed: (){
-          print(controller.getUserInfo(controller.getUser()));
-          Navigator.pop(context);
-        },
-        elevation: 5.0,
-        padding: EdgeInsets.all(15.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        color: Colors.white,
-        child: Text(
-          'Adicionar',
-          style: TextStyle(
-            color: Color(0xFF673AB7),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
+      child: Observer(builder: (_) {
+        return RaisedButton(
+          onPressed: () async {
+            FirebaseUser fbUser = await controller.getUser();
+            print(controller.getUserInfo(fbUser));
+            Navigator.pop(context);
+          },
+          elevation: 5.0,
+          padding: EdgeInsets.all(15.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
           ),
-        ),
-      ),
+          color: Colors.white,
+          child: Text(
+            'Adicionar',
+            style: TextStyle(
+              color: Color(0xFF673AB7),
+              letterSpacing: 1.5,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+            ),
+          ),
+        );
+      }),
     );
   }
 
@@ -207,8 +210,7 @@ class _RegisterAtletaFormState extends ModularState<RegisterAtletaForm, UserCont
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                        ],
+                        children: <Widget>[],
                       ),
                       _buildRegisterBtn(),
                     ],

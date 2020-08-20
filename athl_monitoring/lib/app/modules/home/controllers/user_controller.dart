@@ -11,7 +11,7 @@ abstract class _UserControllerBase with Store {
   final IBaseAuth auth;
 
   _UserControllerBase({@required this.auth}) {
-    getUser();
+   // getUser();
   }
 
   @observable
@@ -19,12 +19,6 @@ abstract class _UserControllerBase with Store {
 
   @observable
   ObservableStream<List<UserModel>> userList;
-
-  @action
-   getUser() {
-    user = auth.getCurrentUser().asObservable();
-    return user.asStream().data;
-  }
 
   @action
   signIn(String email, String password) async {
@@ -57,23 +51,31 @@ abstract class _UserControllerBase with Store {
   }
 
   @action
-  signUp(String email,String password,String name) {
+  signUp(String email, String password, String name) {
     auth.signUp(email, password, name);
   }
 
   @action
-  UserModel getUserInfo(FirebaseUser fbUser) {
-    userList = getUser();
+  getUserInfo(FirebaseUser fbUser) {
+    userList = auth.get().asObservable();
     List<UserModel> list = userList.data;
     UserModel model = UserModel();
-
-    list.forEach((element) {
-      if (element.uid == fbUser.uid) {
-        model = element;
-      }
-    });
+    if (userList.data == null) {
+      print("userList.data ta nulo, vou retornar pra ver no que dá");
+      return;
+    } else {
+      list.forEach((element) {
+        if (element.uid == fbUser.uid) {
+          model = element;
+        }
+      });
+    }
     return model;
   }
+
+  @action
+  getUser() {
+    user = auth.getCurrentUser().asObservable();
+    return user;
+  }
 }
-
-
