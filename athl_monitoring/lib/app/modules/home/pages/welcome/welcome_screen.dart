@@ -1,7 +1,7 @@
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
+import 'package:athl_monitoring/app/modules/home/util/items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../util/items.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override

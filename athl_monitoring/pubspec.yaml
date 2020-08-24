@@ -61,7 +61,10 @@ flutter:
   - assets/images/facebook_logo.png
   - assets/images/nacao_grena.png
   - assets/images/account_circle_grey.png
-  - assets/images/logoalvoaaabm_400x400.jpg
+  - assets/images/welcome1.png
+  - assets/images/welcome2.png
+  - assets/images/welcome3.png
+  - assets/images/welcome4.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

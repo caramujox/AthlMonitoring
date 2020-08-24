@@ -39,9 +39,9 @@ class HomeModule extends ChildModule {
         Router(Modular.initialRoute, child: (_, args) => AuthpagePage()),
         Router('/home', child: (_, args) => HomePage()),
         Router('/atletas', child: (_, args) => AtletaPage()),
-        Router('/register', child: (_,args) => RegisterForm()),
-        Router('/regAtleta', child: (_,args) => RegisterAtletaForm()),
-        Router('/welcome', child: (_,args) => WelcomeScreen())
+        Router('/register', child: (_, args) => RegisterForm()),
+        Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
+        Router('/welcome', child: (_, args) => WelcomeScreen())
       ];
 
   static Inject get to => Inject<HomeModule>.of();
