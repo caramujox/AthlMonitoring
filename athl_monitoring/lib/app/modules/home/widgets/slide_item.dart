@@ -1,4 +1,4 @@
-import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_treinador.dart';
+import 'package:athl_monitoring/app/modules/home/pages/authpage/register_page.dart';
 import 'package:flutter/material.dart';
 
 class SlideItem extends StatelessWidget {
@@ -62,30 +62,57 @@ class SlideItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 65.0),
                 child: Container(
-                  child: RaisedButton(
-                    elevation: 5.0,
-                    padding: EdgeInsets.all(15.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    RaisedButton(
+                      elevation: 5.0,
+                      padding: EdgeInsets.all(15.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      color: Color(0xFF673AB7),
+                      child: Text("Atleta",
+                          style: TextStyle(
+                            color: Colors.white,
+                            letterSpacing: 1.5,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          )),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) {
+                            return RegisterForm();
+                          },
+                        ));
+                      },
                     ),
-                    color: Color(0xFF673AB7),
-                    child: Text("Atleta",
-                        style: TextStyle(
-                          color: Colors.white,
-                          letterSpacing: 1.5,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        )),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return WelcomePageTreinador();
-                        },
-                      ));
-                    },
-                  ),
-                ),
+                    RaisedButton(
+                      elevation: 5.0,
+                      padding: EdgeInsets.all(15.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      color: Color(0xFF673AB7),
+                      child: Text("Treinador",
+                          style: TextStyle(
+                            color: Colors.white,
+                            letterSpacing: 1.5,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          )),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) {
+                            return RegisterForm();
+                          },
+                        ));
+                      },
+                    ),
+                  ],
+                )),
               ),
             )
           ],

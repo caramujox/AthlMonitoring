@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
+import 'package:athl_monitoring/app/modules/home/pages/atletas_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/authpage/authpage_page.dart';
 import 'package:athl_monitoring/app/modules/home/util/items.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/slide_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -32,7 +37,28 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
   double currentPage = 0.0;
   final _pageViewController = new PageController();
 
+  //Verifica se o usuário já visualizou a welcome_screen
   @override
+  void initState() {
+    super.initState();
+    new Timer(new Duration(milliseconds: 50), () {
+      checkFirstSeen();
+    });
+  }
+
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
+    //bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen) {
+      Navigator.of(context).pushReplacement(
+          new MaterialPageRoute(builder: (context) => new AuthpagePage()));
+    } else {
+      prefs.setBool('seen', true);
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(

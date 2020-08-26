@@ -15,9 +15,7 @@ import 'package:athl_monitoring/app/modules/home/services/interfaces/base_auth_i
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'services/atleta_service.dart';
 import 'repositories/atleta_repository.dart';
-import 'home_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:dio/dio.dart';
 import 'home_page.dart';
 
 class HomeModule extends ChildModule {
