@@ -56,7 +56,7 @@ class _HomePageState extends ModularState<HomePage, AtletaController> {
                             child: GridItem(
                               index: index,
                               nome: list[index-1].nome,
-                              num: list[index-1].number.toString(),
+                              //num: list[index-1].number.toString(),
                               photoUrl: list[index-1].urlPhoto,
                             ),
                             onTap: () {

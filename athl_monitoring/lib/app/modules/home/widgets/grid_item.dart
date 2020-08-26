@@ -23,7 +23,7 @@ class GridItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  nome,
+                  nome == null ? 'sem nome':nome,
                   style: TextStyle(fontSize: 22),
                 ),
               ),
