@@ -36,9 +36,10 @@ class HomeModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => AuthpagePage()),
+        Router(Modular.initialRoute, child: (_, args) => WelcomeScreen()),
         Router('/home', child: (_, args) => HomePage()),
         Router('/atletas', child: (_, args) => AtletaPage()),
+        Router('/authpage', child: (_, args) => AuthpagePage()),
         Router('/register', child: (_, args) => RegisterForm()),
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
         Router('/welcome', child: (_, args) => WelcomeScreen())

@@ -1,5 +1,6 @@
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:athl_monitoring/app/modules/home/util/items.dart';
+import 'package:athl_monitoring/app/modules/home/widgets/slide_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,48 +11,10 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
   List<Widget> slides = items
-      .map((item) => Container(
-          padding: EdgeInsets.symmetric(horizontal: 18.0),
-          child: Column(
-            children: <Widget>[
-              Flexible(
-                flex: 1,
-                fit: FlexFit.tight,
-                child: Image.asset(
-                  item['image'],
-                  fit: BoxFit.fitWidth,
-                  width: 220.0,
-                  alignment: Alignment.bottomCenter,
-                ),
-              ),
-              Flexible(
-                flex: 1,
-                fit: FlexFit.tight,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text(item['header'],
-                          style: TextStyle(
-                              fontSize: 50.0,
-                              fontWeight: FontWeight.w300,
-                              color: Color(0XFF3F3D56),
-                              height: 2.0)),
-                      Text(
-                        item['description'],
-                        style: TextStyle(
-                            color: Colors.grey,
-                            letterSpacing: 1.2,
-                            fontSize: 16.0,
-                            height: 1.3),
-                        textAlign: TextAlign.center,
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
-          )))
+      .map((item) => SlideItem(
+          description: item['description'],
+          image: item['image'],
+          header: item['header']))
       .toList();
 
   List<Widget> indicator() => List<Widget>.generate(
@@ -68,6 +31,7 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
           ));
   double currentPage = 0.0;
   final _pageViewController = new PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,6 +48,14 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
                     currentPage = _pageViewController.page;
                   });
                 });
+                //return slides[index];
+                List<Widget> slides = items
+                    .map((item) => SlideItem(
+                        description: item['description'],
+                        image: item['image'],
+                        header: item['header'],
+                        index: index))
+                    .toList();
                 return slides[index];
               },
             ),
