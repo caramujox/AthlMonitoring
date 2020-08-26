@@ -1,41 +1,40 @@
-import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
+import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'models/atleta_model.dart';
+import 'package:mobx/mobx.dart';
 
-class HomePage extends StatefulWidget {
-  final String title;
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
-
+class GridEquipePage extends StatefulWidget {
+  const GridEquipePage({Key key}):super(key:key);
   @override
-  _HomePageState createState() => _HomePageState();
+  _GridEquipePageState createState() => _GridEquipePageState();
 }
 
-class _HomePageState extends ModularState<HomePage, AtletaController> {
-  //use 'controller' variable to access controller
-
+class _GridEquipePageState
+    extends ModularState<GridEquipePage, EquipeController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Observer(builder: (_) {
-      if (controller.atletaList.data == null) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      } else if (controller.atletaList.hasError) {
-        return Center(
-            child: RaisedButton(
-          onPressed: controller.getList,
-          child: Text('Error'),
-        ));
-      } else {
-        List<AtletaModel> list = controller.atletaList.data;
-        return Stack(children: <Widget>[
-          Container(
-            child: FutureBuilder(
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+    return Scaffold(
+      body: Observer(
+        builder: (_) {
+          if (controller.equipeList == null) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (controller.equipeList.hasError) {
+            return Center(
+                child: RaisedButton(
+              onPressed: controller.getList,
+              child: Text('Error'),
+            ));
+          } else {
+            List<EquipeModel> list = controller.equipeList.data;
+            return Stack(children: <Widget>[
+              Container(child: FutureBuilder(builder:
+                  (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 return GridView.builder(
                     gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3),
@@ -45,7 +44,7 @@ class _HomePageState extends ModularState<HomePage, AtletaController> {
                         return IconButton(
                           icon: Icon(Icons.add),
                           onPressed: () {
-                            print("add nessa bagaça");
+                            print("ADD");
                           },
                         );
                       }
@@ -58,20 +57,18 @@ class _HomePageState extends ModularState<HomePage, AtletaController> {
                               child: GridItem(
                                 index: index,
                                 nome: list[index - 1].nome,
-                                //num: list[index-1].number.toString(),
-                                photoUrl: list[index - 1].urlPhoto,
                               ),
                               onTap: () {
-                                print("topper");
+                                print("SUCESSO IRMAOS");
                               },
                             ),
                           ));
                     });
-              },
-            ),
-          )
-        ]);
-      }
-    }));
+              }))
+            ]);
+          }
+        },
+      ),
+    );
   }
 }

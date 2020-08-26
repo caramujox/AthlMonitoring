@@ -8,7 +8,7 @@ class EquipeController = _EquipeControllerBase with _$EquipeController;
 abstract class _EquipeControllerBase with Store {
  final IEquipeService equipeService;
 
-  _EquipeControllerBase({this.equipeService}){
+  _EquipeControllerBase({IEquipeService this.equipeService}){
     getList();
   }
   

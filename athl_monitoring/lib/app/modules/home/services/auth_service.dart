@@ -138,5 +138,11 @@ class AuthService implements IBaseAuth {
     return userRepository.get();
   }
 
+  @override
+  UserModel getUserInfo() {
+    // TODO: implement getUserInfo
+    throw UnimplementedError();
+  }
+
   
 }

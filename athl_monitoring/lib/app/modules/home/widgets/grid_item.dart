@@ -36,7 +36,7 @@ class GridItem extends StatelessWidget {
                     color: Colors.transparent,
                   ),
                   imageUrl:
-                      photoUrl,
+                      photoUrl != null? photoUrl:"",
                 ),
               ),
               Align(
@@ -44,7 +44,7 @@ class GridItem extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    num,
+                    num != null? num:"",
                     style: TextStyle(fontSize: 32),
                   ),
                 )

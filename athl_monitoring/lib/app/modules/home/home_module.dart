@@ -1,3 +1,10 @@
+import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
+import 'package:athl_monitoring/app/modules/home/pages/gridequipe/gridEquipe_page.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/equipe_repository.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/interfaces/equipe_repository_interface.dart';
+import 'package:athl_monitoring/app/modules/home/services/equipe_services.dart';
+import 'package:athl_monitoring/app/modules/home/services/interfaces/equipe_service_interface.dart';
+
 import 'pages/wrapper/wrapper_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
@@ -25,6 +32,13 @@ class HomeModule extends ChildModule {
         Bind<IAtletaRepository>(
             (i) => AtletaRepository(firestore: Firestore.instance)),
         Bind((i) => AtletaController(atletaService: i.get())),
+
+        
+        Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
+        Bind<IEquipeRepository>(
+            (i) => EquipeRepository(firestore: Firestore.instance)),
+        Bind((i) => EquipeController(equipeService: i.get())),
+
         Bind<IBaseAuth>((i) => AuthService(userRepository: i.get())),
         Bind<IUserRepository>(
             (i) => UserRepository(firestore: Firestore.instance)),
