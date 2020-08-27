@@ -19,14 +19,14 @@ class AtletaService extends Disposable implements IAtletaService {
     return atletaRepository.delete(atletaModel);
     }
   
-    @override
-    Stream<List<AtletaModel>> get() {
-      return atletaRepository.get();
-    }
+  @override
+  Stream<List<AtletaModel>> get() {
+    return atletaRepository.get();
+  }
   
-    @override
-    Future save(AtletaModel atletaModel) {
-      return atletaRepository.save(atletaModel);
+  @override
+  Future save(AtletaModel atletaModel) {
+    return atletaRepository.save(atletaModel);
   }
 
   @override

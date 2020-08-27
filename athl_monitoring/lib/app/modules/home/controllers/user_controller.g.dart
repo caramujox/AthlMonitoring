@@ -74,18 +74,7 @@ mixin _$UserController on _UserControllerBase, Store {
   final _$_UserControllerBaseActionController =
       ActionController(name: '_UserControllerBase');
 
-  @override
-  dynamic getUser() {
-    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
-        name: '_UserControllerBase.getUser');
-    try {
-      return super.getUser();
-    } finally {
-      _$_UserControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
-  @override
   dynamic signOut() {
     final _$actionInfo = _$_UserControllerBaseActionController.startAction(
         name: '_UserControllerBase.signOut');
@@ -102,17 +91,40 @@ mixin _$UserController on _UserControllerBase, Store {
         name: '_UserControllerBase.isEmailVerified');
     try {
       return super.isEmailVerified();
+
     } finally {
       _$_UserControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  UserModel getUserInfo(FirebaseUser fbUser) {
+  dynamic signUp(String email, String password, String name) {
+    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
+        name: '_UserControllerBase.signUp');
+    try {
+      return super.signUp(email, password, name);
+    } finally {
+      _$_UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getUserInfo() {
     final _$actionInfo = _$_UserControllerBaseActionController.startAction(
         name: '_UserControllerBase.getUserInfo');
     try {
-      return super.getUserInfo(fbUser);
+      return super.getUserInfo();
+    } finally {
+      _$_UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getUser() {
+    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
+        name: '_UserControllerBase.getUser');
+    try {
+      return super.getUser();
     } finally {
       _$_UserControllerBaseActionController.endAction(_$actionInfo);
     }
