@@ -16,6 +16,7 @@ List items = [
   },
   {
     "header": "Começar",
+
     "description": "inicie sua seção como:",
     "image": "assets/images/welcome4.png"
   }

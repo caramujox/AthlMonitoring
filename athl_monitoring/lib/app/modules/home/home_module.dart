@@ -26,6 +26,12 @@ class HomeModule extends ChildModule {
         Bind<IAtletaRepository>(
             (i) => AtletaRepository(firestore: Firestore.instance)),
         Bind((i) => AtletaController(atletaService: i.get())),
+       
+        Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
+        Bind<IEquipeRepository>(
+            (i) => EquipeRepository(firestore: Firestore.instance)),
+        Bind((i) => EquipeController(equipeService: i.get())),
+
         Bind<IBaseAuth>((i) => AuthService(userRepository: i.get())),
         Bind<IUserRepository>(
             (i) => UserRepository(firestore: Firestore.instance)),

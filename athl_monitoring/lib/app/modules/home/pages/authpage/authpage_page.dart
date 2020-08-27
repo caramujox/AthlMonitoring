@@ -5,7 +5,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthpagePage extends StatefulWidget {
   final String title;
-
   const AuthpagePage({Key key, this.title = "Authpage"}) : super(key: key);
 
   @override
