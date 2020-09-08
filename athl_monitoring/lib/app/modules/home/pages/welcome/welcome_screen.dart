@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
+import 'package:athl_monitoring/app/modules/home/home_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/atletas_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/authpage/authpage_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_treinador.dart';
 import 'package:athl_monitoring/app/modules/home/util/items.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/slide_item.dart';
 import 'package:flutter/material.dart';
@@ -48,12 +50,12 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
-    //bool _seen = (prefs.getBool('seen') ?? false);
+    //bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
+    bool _seen = (prefs.getBool('seen') ?? false);
 
     if (_seen) {
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new AuthpagePage()));
+      Navigator.of(context).pushReplacement(new MaterialPageRoute(
+          builder: (context) => new WelcomePageTreinador()));
     } else {
       prefs.setBool('seen', true);
     }

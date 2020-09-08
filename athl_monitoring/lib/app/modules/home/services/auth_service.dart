@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/user_repository_interface.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -135,13 +134,11 @@ class AuthService implements IBaseAuth {
   @override
   Stream<List<UserModel>> get() {
     return userRepository.get();
-  }  
+  }
 
   @override
-  Future<UserModel> getUserModel() async{
+  Future<UserModel> getUserModel() async {
     FirebaseUser x = await _auth.currentUser();
     return userRepository.index(x);
   }
-
-  
 }

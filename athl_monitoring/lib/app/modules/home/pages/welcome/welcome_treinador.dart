@@ -123,12 +123,8 @@ class _WelcomePageTreinadorState extends State<WelcomePageTreinador> {
                       width: double.infinity,
                       child: RaisedButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) {
-                              return AtletaPage();
+                          Navigator.of(context).pushNamed('/atletas');
                             },
-                          ));
-                        },
                         elevation: 5.0,
                         padding: EdgeInsets.all(15.0),
                         shape: RoundedRectangleBorder(
