@@ -1,3 +1,4 @@
+import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -63,10 +64,18 @@ class _RegisterAtletaFormState
                         ),
                       ),
                       SizedBox(height: 30.0),
-                      _buildEmailAtletaTF(),
-                      _buildCodEquipe(),
-                      SizedBox(
-                        height: 10.0,
+                      FormPadrao(
+                        formTitle: "E-mail do Atleta",
+                        formHint: "Digite o e-mail do Atleta",
+                        formIcon: Icons.email,
+                        formEditingController: emailAtletaController,
+                      ),
+                      SizedBox(height: 10.0),
+                      FormPadrao(
+                        formEditingController: codEquipeController,
+                        formIcon: Icons.people,
+                        formHint: "Digite o código da Equipe",
+                        formTitle: "Código da Equipe",
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,114 +89,6 @@ class _RegisterAtletaFormState
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildEmailAtletaTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Email do atleta',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xFF673AB7),
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 6.0,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          height: 60.0,
-          child: TextFormField(
-            controller: emailAtletaController,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.white,
-              ),
-              hintText: 'Digite o email do Atleta',
-              hintStyle: TextStyle(
-                color: Colors.white54,
-                fontFamily: 'OpenSans',
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCodEquipe() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'Código da equipe',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Container(
-            alignment: Alignment.centerLeft,
-            decoration: BoxDecoration(
-              color: Color(0xFF673AB7),
-              borderRadius: BorderRadius.circular(10.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 6.0,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            height: 60.0,
-            child: TextFormField(
-              controller: codEquipeController,
-              keyboardType: TextInputType.number,
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'OpenSans',
-              ),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14.0),
-                prefixIcon: Icon(
-                  Icons.people,
-                  color: Colors.white,
-                ),
-                hintText: 'Digite o código da equipe',
-                hintStyle: TextStyle(
-                  color: Colors.white54,
-                  fontFamily: 'OpenSans',
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
