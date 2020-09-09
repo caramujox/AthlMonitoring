@@ -74,7 +74,7 @@ mixin _$UserController on _UserControllerBase, Store {
   final _$_UserControllerBaseActionController =
       ActionController(name: '_UserControllerBase');
 
-
+  @override
   dynamic signOut() {
     final _$actionInfo = _$_UserControllerBaseActionController.startAction(
         name: '_UserControllerBase.signOut');
@@ -91,7 +91,6 @@ mixin _$UserController on _UserControllerBase, Store {
         name: '_UserControllerBase.isEmailVerified');
     try {
       return super.isEmailVerified();
-
     } finally {
       _$_UserControllerBaseActionController.endAction(_$actionInfo);
     }
