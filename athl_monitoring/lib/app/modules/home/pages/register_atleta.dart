@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RegisterAtletaForm extends StatefulWidget {
   @override
@@ -15,6 +18,8 @@ class _RegisterAtletaFormState
     extends ModularState<RegisterAtletaForm, UserController> {
   final TextEditingController emailAtletaController = TextEditingController();
   final TextEditingController codEquipeController = TextEditingController();
+  File _image;
+  String _uploadedFileUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +50,7 @@ class _RegisterAtletaFormState
               Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 40.0,
                     vertical: 120.0,
@@ -63,7 +68,29 @@ class _RegisterAtletaFormState
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 30.0),
+                      SizedBox(height: 20.0),
+                      //ImageBox
+                      Container(
+                        alignment: Alignment.center,
+                        child: GestureDetector(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(width: 1.5, color: Colors.white),
+                              color: Colors.transparent,
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 60.0,
+                              backgroundImage: AssetImage(
+                                  "assets/images/account_circle_grey.png"),
+                            ),
+                          ),
+                          onTap: () {},
+                        ),
+                      ),
+                      //Email
                       FormPadrao(
                         formTitle: "E-mail do Atleta",
                         formHint: "Digite o e-mail do Atleta",
@@ -71,12 +98,23 @@ class _RegisterAtletaFormState
                         formEditingController: emailAtletaController,
                       ),
                       SizedBox(height: 10.0),
+                      //CodEquipe
                       FormPadrao(
                         formEditingController: codEquipeController,
                         formIcon: Icons.people,
                         formHint: "Digite o código da Equipe",
                         formTitle: "Código da Equipe",
                       ),
+                      SizedBox(height: 10.0),
+                      //Numero
+                      FormPadrao(
+                        formEditingController: codEquipeController,
+                        formIcon: Icons.assignment_ind,
+                        formHint: "Digite o Número do Atleta",
+                        formTitle: "Número do Atleta",
+                      ),
+                      SizedBox(height: 10.0),
+                      //
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[],
