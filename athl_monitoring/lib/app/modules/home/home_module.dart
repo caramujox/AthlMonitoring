@@ -1,4 +1,5 @@
 
+import 'package:athl_monitoring/app/modules/home/pages/gridequipe/gridEquipe_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/image_caputre/image_caputre_page.dart';
 
 import 'pages/image_caputre/image_caputre_controller.dart';
@@ -50,13 +51,14 @@ class HomeModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => ImageCaputrePage()),
+        Router(Modular.initialRoute, child: (_, args) => WelcomePageTreinador()),
         Router('/home', child: (_, args) => WelcomePageTreinador()),
         Router('/atletas', child: (_, args) => AtletaPage()),
         Router('/authpage', child: (_, args) => AuthpagePage()),
         Router('/register', child: (_, args) => RegisterForm()),
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
+        Router('/equipes', child: (_, args) => GridEquipePage()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();
