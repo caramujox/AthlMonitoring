@@ -1,9 +1,9 @@
-
 import 'package:athl_monitoring/app/modules/home/pages/image_caputre/image_caputre_page.dart';
 
 import 'pages/image_caputre/image_caputre_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
 import 'package:athl_monitoring/app/modules/home/pages/atletas_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/pre_game_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/authpage/register_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/register_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_screen.dart';
@@ -44,19 +44,20 @@ class HomeModule extends ChildModule {
         Bind<IUserRepository>(
             (i) => UserRepository(firestore: Firestore.instance)),
         Bind((i) => UserController(auth: i.get())),
-
         Bind((i) => ImageCaputreController())
       ];
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => ImageCaputrePage()),
+        Router(Modular.initialRoute,
+            child: (_, args) => WelcomePageTreinador()),
         Router('/home', child: (_, args) => WelcomePageTreinador()),
         Router('/atletas', child: (_, args) => AtletaPage()),
         Router('/authpage', child: (_, args) => AuthpagePage()),
         Router('/register', child: (_, args) => RegisterForm()),
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
+        Router('/pregame', child: (_, args) => PreGamePage()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();
