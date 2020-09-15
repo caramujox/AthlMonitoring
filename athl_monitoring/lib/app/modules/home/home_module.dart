@@ -1,6 +1,7 @@
 
 import 'package:athl_monitoring/app/modules/home/pages/gridequipe/gridEquipe_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/image_caputre/image_caputre_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/register_equipe.dart';
 
 import 'pages/image_caputre/image_caputre_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
@@ -33,14 +34,17 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => WrapperController()),
+
         Bind<IAtletaService>((i) => AtletaService(atletaRepository: i.get())),
         Bind<IAtletaRepository>(
             (i) => AtletaRepository(firestore: Firestore.instance)),
         Bind((i) => AtletaController(atletaService: i.get())),
-        Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
+
         Bind<IEquipeRepository>(
             (i) => EquipeRepository(firestore: Firestore.instance)),
+        Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
         Bind((i) => EquipeController(equipeService: i.get())),
+
         Bind<IBaseAuth>((i) => AuthService(userRepository: i.get())),
         Bind<IUserRepository>(
             (i) => UserRepository(firestore: Firestore.instance)),
@@ -59,6 +63,7 @@ class HomeModule extends ChildModule {
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
         Router('/equipes', child: (_, args) => GridEquipePage()),
+        Router('/regEquipes', child: (_, args) => RegisterEquipeForm()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();

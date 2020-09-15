@@ -19,7 +19,6 @@ abstract class _EquipeControllerBase with Store {
   getList(){
     equipeList = equipeService.get().asObservable();
   }
-
   
   @action
   save(EquipeModel model){

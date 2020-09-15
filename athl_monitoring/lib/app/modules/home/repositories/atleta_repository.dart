@@ -3,7 +3,6 @@ import 'package:athl_monitoring/app/modules/home/repositories/interfaces/atleta_
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:dio/native_imp.dart';
 
 class AtletaRepository extends Disposable implements IAtletaRepository{
  final Firestore firestore;

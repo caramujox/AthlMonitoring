@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:mobx/mobx.dart';
 
 class GridEquipePage extends StatefulWidget {
-  const GridEquipePage({Key key}):super(key:key);
+  final String title;
+  const GridEquipePage({Key key, this.title = "Equipes Page"}) : super(key: key);
   @override
   _GridEquipePageState createState() => _GridEquipePageState();
 }
@@ -44,6 +44,7 @@ class _GridEquipePageState
                         return IconButton(
                           icon: Icon(Icons.add),
                           onPressed: () {
+                            Navigator.of(context).pushNamed('/regEquipes');
                             print("ADD");
                           },
                         );
