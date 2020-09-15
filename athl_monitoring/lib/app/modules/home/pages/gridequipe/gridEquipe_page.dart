@@ -13,8 +13,7 @@ class GridEquipePage extends StatefulWidget {
   _GridEquipePageState createState() => _GridEquipePageState();
 }
 
-class _GridEquipePageState
-    extends ModularState<GridEquipePage, EquipeController> {
+class _GridEquipePageState extends ModularState<GridEquipePage, EquipeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +44,6 @@ class _GridEquipePageState
                           icon: Icon(Icons.add),
                           onPressed: () {
                             Navigator.of(context).pushNamed('/regEquipes');
-                            print("ADD");
                           },
                         );
                       }
