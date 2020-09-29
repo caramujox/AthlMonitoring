@@ -20,4 +20,9 @@ class UploadFileRepository extends Disposable implements IUploadFileRepository{
   StorageUploadTask startUpload(String filePath, File file) {
     return storage.ref().child(filePath).putFile(file);
   }
+
+  @override
+  Future<dynamic> loadImage(String image) async {
+    storage.ref().child(image).getDownloadURL();
+  }
 }

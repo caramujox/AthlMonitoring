@@ -6,7 +6,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-
 class AtletaPage extends StatefulWidget {
   final String title;
   const AtletaPage({Key key, this.title = "Home"}) : super(key: key);

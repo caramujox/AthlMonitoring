@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/atleta_service_interface.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/upload_service_interface.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 part 'atleta_controller.g.dart';
@@ -44,5 +45,15 @@ abstract class _AtletaControllerBase with Store {
     final _picker = ImagePicker();
     PickedFile selected = await _picker.getImage(source: source);
     return selected;
+  }
+
+  Future<Image> loadImage(String image) async{
+    Image imageFile;
+    await uploadService.loadImage(image).then((downloadURL) {
+      imageFile = Image.network(downloadURL.toString(),
+      fit: BoxFit.scaleDown,);
+    });
+    
+    return imageFile;
   }
 }

@@ -167,7 +167,7 @@ class _RegisterAtletaFormState
       width: double.infinity,
       child: Observer(builder: (_) {
         return RaisedButton(
-          onPressed: () async {
+          onPressed: () async {            
             controller.uploadPicture('${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png', File(_image.path));
             var model = AtletaModel(email: emailAtletaController.text, nome: nomeAtletaController.text, number: int.parse(numeroAtletaController.text),);
             controller.save(model);
