@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class AtletaRepository extends Disposable implements IAtletaRepository{
- final Firestore firestore;
+class AtletaRepository extends Disposable implements IAtletaRepository {
+  final Firestore firestore;
 
   AtletaRepository({@required this.firestore});
 
@@ -16,21 +16,20 @@ class AtletaRepository extends Disposable implements IAtletaRepository{
 
   @override
   Stream<List<AtletaModel>> get() {
-    return firestore.collection('atletas').snapshots().map(
-            (query) =>
-            query.documents.map((doc) => AtletaModel.fromDocument(doc)).toList()
-                );
+    return firestore.collection('atletas').snapshots().map((query) =>
+        query.documents.map((doc) => AtletaModel.fromDocument(doc)).toList());
   }
 
   @override
   Future save(AtletaModel model) async {
-
     if (model.reference == null) {
       model.reference = await Firestore.instance.collection('atletas').add({
         'nome': model.nome,
         'email': model.email,
         'uid': model.uid,
         'urlPhoto': model.urlPhoto,
+        'numero': model.number,
+        'modalidade': model.modalidade
       });
     } else {
       model.reference.updateData({
@@ -38,14 +37,21 @@ class AtletaRepository extends Disposable implements IAtletaRepository{
         'email': model.email,
         'uid': model.uid,
         'urlPhoto': model.urlPhoto,
+        'numero': model.number,
+        'modalidade': model.modalidade
       });
     }
   }
 
   @override
-  Future<AtletaModel> index(AtletaModel model) async{   
-      return Firestore.instance.collection('atletas').document(model.uid).get().then((doc) => AtletaModel.fromDocument(doc));
+  Future<AtletaModel> index(AtletaModel model) async {
+    return Firestore.instance
+        .collection('atletas')
+        .document(model.uid)
+        .get()
+        .then((doc) => AtletaModel.fromDocument(doc));
   }
+
   //dispose will be called automatically
   @override
   void dispose() {}

@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
+import 'package:athl_monitoring/app/modules/home/util/const_utils.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +11,7 @@ import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dar
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterAtletaForm extends StatefulWidget {
   @override
@@ -15,9 +19,11 @@ class RegisterAtletaForm extends StatefulWidget {
 }
 
 class _RegisterAtletaFormState
-    extends ModularState<RegisterAtletaForm, UserController> {
+    extends ModularState<RegisterAtletaForm, AtletaController> {
   final TextEditingController emailAtletaController = TextEditingController();
   final TextEditingController codEquipeController = TextEditingController();
+  final TextEditingController numeroAtletaController = TextEditingController();
+  final TextEditingController nomeAtletaController = TextEditingController();
   File _image;
   String _uploadedFileUrl;
 
@@ -53,7 +59,7 @@ class _RegisterAtletaFormState
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 40.0,
-                    vertical: 120.0,
+                    vertical: 40.0,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,15 +88,38 @@ class _RegisterAtletaFormState
                             ),
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
-                              radius: 60.0,
-                              backgroundImage: AssetImage(
-                                  "assets/images/account_circle_grey.png"),
+                              radius: 70.0,
+                              backgroundImage: _image != null
+                                  ? FileImage(
+                                      File(
+                                        _image.path,
+                                      ),
+                                    )
+                                  : AssetImage(
+                                      "assets/images/account_circle_grey.png"),
                             ),
                           ),
-                          onTap: (){
-                            
+                          onTap: () async {
+                            var pickimage =
+                                await controller.pickImage(ImageSource.gallery);
+                            setState(() {
+                              _image = File(pickimage.path);
+                            });
                           },
                         ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      //Nome
+                      FormPadrao(
+                        formTitle: "Nome do Atleta",
+                        formHint: "Digite o nome do Atleta",
+                        formIcon: Icons.person,
+                        formEditingController: nomeAtletaController,
+                      ),
+                      SizedBox(
+                        height: 20.0,
                       ),
                       //Email
                       FormPadrao(
@@ -110,7 +139,7 @@ class _RegisterAtletaFormState
                       SizedBox(height: 10.0),
                       //Numero
                       FormPadrao(
-                        formEditingController: codEquipeController,
+                        formEditingController: numeroAtletaController,
                         formIcon: Icons.assignment_ind,
                         formHint: "Digite o Número do Atleta",
                         formTitle: "Número do Atleta",
@@ -140,9 +169,16 @@ class _RegisterAtletaFormState
       child: Observer(builder: (_) {
         return RaisedButton(
           onPressed: () async {
-            FirebaseUser fbUser = await controller.getUser();
-            print(controller.getUserInfo());
-            Navigator.pop(context);
+            controller.uploadPicture(
+                '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png',
+                File(_image.path));
+            var model = AtletaModel(
+                email: emailAtletaController.text,
+                nome: nomeAtletaController.text,
+                number: int.parse(numeroAtletaController.text),
+                urlPhoto: '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
+            controller.save(model);
+            Navigator.of(context).pop();
           },
           elevation: 5.0,
           padding: EdgeInsets.all(15.0),

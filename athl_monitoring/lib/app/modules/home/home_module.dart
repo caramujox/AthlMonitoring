@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 
 import 'package:athl_monitoring/app/modules/home/pages/gridequipe/gridEquipe_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/image_caputre/image_caputre_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/visdados/vis_atl_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/register_equipe.dart';
+=======
+import 'package:athl_monitoring/app/modules/home/pages/gridequipe/gridEquipe_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/image_caputre/image_caputre_page.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/interfaces/upload_file_interface.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/upload_file_repository.dart';
+import 'package:athl_monitoring/app/modules/home/services/interfaces/upload_service_interface.dart';
+import 'package:athl_monitoring/app/modules/home/services/upload_file_service.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+>>>>>>> caioUploadPhoto
 
 import 'pages/image_caputre/image_caputre_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
@@ -37,10 +47,21 @@ class HomeModule extends ChildModule {
         Bind((i) => WrapperController()),
 
         Bind<IAtletaService>((i) => AtletaService(atletaRepository: i.get())),
+        Bind<IUploadFIleService>(
+            (i) => UploadFileService(uploadFileRepository: i.get())),
         Bind<IAtletaRepository>(
             (i) => AtletaRepository(firestore: Firestore.instance)),
+<<<<<<< HEAD
         Bind((i) => AtletaController(atletaService: i.get())),
 
+=======
+        Bind<IUploadFileRepository>((i) => UploadFileRepository(
+            storage: FirebaseStorage(
+                storageBucket: "gs://athlmonitoring-62273.appspot.com"))),
+        Bind((i) =>
+            AtletaController(atletaService: i.get(), uploadService: i.get())),
+        Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
+>>>>>>> caioUploadPhoto
         Bind<IEquipeRepository>(
             (i) => EquipeRepository(firestore: Firestore.instance)),
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
@@ -50,13 +71,17 @@ class HomeModule extends ChildModule {
         Bind<IUserRepository>(
             (i) => UserRepository(firestore: Firestore.instance)),
         Bind((i) => UserController(auth: i.get())),
-
         Bind((i) => ImageCaputreController())
       ];
 
   @override
   List<Router> get routers => [
+<<<<<<< HEAD
         Router(Modular.initialRoute, child: (_, args) => GridEquipePage()),
+=======
+        Router(Modular.initialRoute,
+            child: (_, args) => WelcomePageTreinador()),
+>>>>>>> caioUploadPhoto
         Router('/home', child: (_, args) => WelcomePageTreinador()),
         Router('/atletas', child: (_, args) => AtletaPage()),
         Router('/authpage', child: (_, args) => AuthpagePage()),
@@ -64,7 +89,10 @@ class HomeModule extends ChildModule {
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
         Router('/equipes', child: (_, args) => GridEquipePage()),
+<<<<<<< HEAD
         Router('/regEquipes', child: (_, args) => RegisterEquipeForm()),
+=======
+>>>>>>> caioUploadPhoto
       ];
 
   static Inject get to => Inject<HomeModule>.of();
