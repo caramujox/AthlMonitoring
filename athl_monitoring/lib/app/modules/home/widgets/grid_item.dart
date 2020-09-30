@@ -22,13 +22,6 @@ class GridItem extends StatelessWidget {
           padding: const EdgeInsets.all(2.0),
           child: Stack(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  nome == null ? 'sem nome' : nome,
-                  style: TextStyle(fontSize: 22),
-                ),
-              ),
               Align(
                 alignment: Alignment.center,
                 child: photoUrl == null
@@ -37,7 +30,7 @@ class GridItem extends StatelessWidget {
                         future: _getImage(photoUrl),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.done)
-                            return Container(
+                            return SizedBox.expand(
                               child: snapshot.data,
                             );
                           if (snapshot.connectionState ==
@@ -52,26 +45,42 @@ class GridItem extends StatelessWidget {
                         },
                       ),
               ),
-              // child: CachedNetworkImage(
-              //   height: 100,
-              //   width: 100,
-              //   placeholder: (context, url) => new Container(
-              //     color: Colors.transparent,
-              //   ),
-              //   imageUrl:
-              //       photoUrl != null? photoUrl:"",
-              //   imageBuilder: (context, imageProvider) => Container(
-              //     decoration: BoxDecoration(image: DecorationImage(image: )),
-              //   ),
-              // ),
-              //),
               Align(
-                  alignment: Alignment.bottomRight,
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: ConstColors.ccBlueVioletWheel,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Text(
+                        nome == null ? 'sem nome' : nome,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: ConstColors.ccMagnolia,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                  alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      num != null ? num : "",
-                      style: TextStyle(fontSize: 32),
+                    padding: const EdgeInsets.all(0.1),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: ConstColors.ccBlueVioletWheel,
+                          borderRadius:
+                              BorderRadius.only(bottomRight: Radius.circular(10))),
+                      child: Text(
+                        num != null ? num : "",
+                        style: TextStyle(
+                            fontSize: 22, color: ConstColors.ccMagnolia),
+                      ),
                     ),
                   )),
             ],
@@ -91,7 +100,7 @@ class GridItem extends StatelessWidget {
         .then((downloadURL) {
       m = Image.network(
         downloadURL.toString(),
-        fit: BoxFit.scaleDown,
+        fit: BoxFit.cover,
       );
     });
     return m;

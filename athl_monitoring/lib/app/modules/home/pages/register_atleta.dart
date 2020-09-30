@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
+import 'package:athl_monitoring/app/modules/home/util/const_utils.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -167,9 +168,15 @@ class _RegisterAtletaFormState
       width: double.infinity,
       child: Observer(builder: (_) {
         return RaisedButton(
-          onPressed: () async {            
-            controller.uploadPicture('${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png', File(_image.path));
-            var model = AtletaModel(email: emailAtletaController.text, nome: nomeAtletaController.text, number: int.parse(numeroAtletaController.text),);
+          onPressed: () async {
+            controller.uploadPicture(
+                '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png',
+                File(_image.path));
+            var model = AtletaModel(
+                email: emailAtletaController.text,
+                nome: nomeAtletaController.text,
+                number: int.parse(numeroAtletaController.text),
+                urlPhoto: '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
             controller.save(model);
             Navigator.of(context).pop();
           },
