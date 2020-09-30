@@ -37,12 +37,14 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
         'nome': equipeModel.nome,
         'codEquipe': equipeModel.codEquipe,
         'modalidade': equipeModel.modalidade,
+        'urlPhoto': equipeModel.urlPhoto
       });
     } else {
       equipeModel.reference.updateData({
         'nome': equipeModel.nome,
         'codEquipe': equipeModel.codEquipe,
         'modalidade': equipeModel.modalidade,
+        'urlPhoto': equipeModel.urlPhoto
       });
     }
   }

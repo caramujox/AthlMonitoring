@@ -25,7 +25,7 @@ class GridItem extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: photoUrl == null
-                    ? AssetImage("assets/images/account_circle_grey.png")
+                    ? Image.asset("assets/images/account_circle_grey.png")
                     : FutureBuilder<Widget>(
                         future: _getImage(photoUrl),
                         builder: (context, snapshot) {

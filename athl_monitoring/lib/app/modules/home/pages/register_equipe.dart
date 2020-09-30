@@ -2,19 +2,22 @@ import 'dart:io';
 
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterEquipeForm extends StatefulWidget {
   @override
   _RegisterEquipeFormState createState() => _RegisterEquipeFormState();
 }
 
-class _RegisterEquipeFormState extends ModularState<RegisterEquipeForm, UserController> {
+class _RegisterEquipeFormState
+    extends ModularState<RegisterEquipeForm, EquipeController> {
   final TextEditingController nomeEquipeController = TextEditingController();
   final TextEditingController codEquipeController = TextEditingController();
   final TextEditingController modalidadeController = TextEditingController();
@@ -82,13 +85,23 @@ class _RegisterEquipeFormState extends ModularState<RegisterEquipeForm, UserCont
                             ),
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
-                              radius: 60.0,
-                              backgroundImage: AssetImage(
-                                  "assets/images/account_circle_grey.png"),
+                              radius: 70.0,
+                              backgroundImage: _image != null
+                                  ? FileImage(
+                                      File(
+                                        _image.path,
+                                      ),
+                                    )
+                                  : AssetImage(
+                                      "assets/images/account_circle_grey.png"),
                             ),
                           ),
-                          onTap: (){
-                            
+                          onTap: () async {
+                            var pickimage =
+                                await controller.pickImage(ImageSource.gallery);
+                            setState(() {
+                              _image = File(pickimage.path);
+                            });
                           },
                         ),
                       ),
@@ -117,6 +130,7 @@ class _RegisterEquipeFormState extends ModularState<RegisterEquipeForm, UserCont
                       ),
                       SizedBox(height: 10.0),
                       //
+                      _buildRegisterBtn(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[],
@@ -133,35 +147,42 @@ class _RegisterEquipeFormState extends ModularState<RegisterEquipeForm, UserCont
     );
   }
 
-  // Widget _buildRegisterBtn() {
-  //   return Container(
-  //     padding: EdgeInsets.symmetric(vertical: 25.0),
-  //     width: double.infinity,
-  //     child: Observer(builder: (_) {
-  //       return RaisedButton(
-  //         onPressed: () async {
-  //           FirebaseUser fbUser = await controller.getUser();
-  //           print(controller.getUserInfo());
-  //           Navigator.pop(context);
-  //         },
-  //         elevation: 5.0,
-  //         padding: EdgeInsets.all(15.0),
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(30.0),
-  //         ),
-  //         color: Colors.white,
-  //         child: Text(
-  //           'Adicionar',
-  //           style: TextStyle(
-  //             color: Color(0xFF673AB7),
-  //             letterSpacing: 1.5,
-  //             fontSize: 18.0,
-  //             fontWeight: FontWeight.bold,
-  //             fontFamily: 'OpenSans',
-  //           ),
-  //         ),
-  //       );
-  //     }),
-  //   );
-  // }
+  Widget _buildRegisterBtn() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: Observer(builder: (_) {
+        return RaisedButton(
+          onPressed: () async {
+            controller.uploadPicture(
+                '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png',
+                File(_image.path));
+            var model = EquipeModel(
+                nome: nomeEquipeController.text,
+                modalidade: modalidadeController.text,
+                urlPhoto:
+                    '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png');
+            controller.save(model);
+            Navigator.of(context).pop();
+          },
+          elevation: 5.0,
+          padding: EdgeInsets.all(15.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          color: Colors.white,
+          child: Text(
+            'Adicionar',
+            style: TextStyle(
+              color: Color(0xFF673AB7),
+              letterSpacing: 1.5,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+            ),
+          ),
+        );
+      }),
+    );
+  }
 }

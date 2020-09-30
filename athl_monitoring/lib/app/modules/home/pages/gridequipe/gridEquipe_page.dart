@@ -72,6 +72,7 @@ class _GridEquipePageState
                               child: GridItem(
                                 index: index,
                                 nome: list[index - 1].nome,
+                                photoUrl: list[index -1].urlPhoto,
                               ),
                               onTap: () {
                                 print("SUCESSO IRMAOS");
