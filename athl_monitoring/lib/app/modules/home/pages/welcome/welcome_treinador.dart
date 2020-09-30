@@ -158,7 +158,9 @@ class _WelcomePageTreinadorState extends State<WelcomePageTreinador> {
                       padding: EdgeInsets.all(15.0),
                       width: double.infinity,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/equipes');
+                        },
                         elevation: 5.0,
                         padding: EdgeInsets.all(15.0),
                         shape: RoundedRectangleBorder(

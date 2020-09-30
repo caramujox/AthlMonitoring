@@ -1,29 +1,26 @@
 import 'dart:io';
 
-import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
-import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
-import 'package:athl_monitoring/app/modules/home/util/const_utils.dart';
+import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
+import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-class RegisterAtletaForm extends StatefulWidget {
+class RegisterEquipeForm extends StatefulWidget {
   @override
-  _RegisterAtletaFormState createState() => _RegisterAtletaFormState();
+  _RegisterEquipeFormState createState() => _RegisterEquipeFormState();
 }
 
-class _RegisterAtletaFormState
-    extends ModularState<RegisterAtletaForm, AtletaController> {
-  final TextEditingController emailAtletaController = TextEditingController();
+class _RegisterEquipeFormState
+    extends ModularState<RegisterEquipeForm, EquipeController> {
+  final TextEditingController nomeEquipeController = TextEditingController();
   final TextEditingController codEquipeController = TextEditingController();
-  final TextEditingController numeroAtletaController = TextEditingController();
-  final TextEditingController nomeAtletaController = TextEditingController();
+  final TextEditingController modalidadeController = TextEditingController();
   File _image;
   String _uploadedFileUrl;
 
@@ -44,10 +41,10 @@ class _RegisterAtletaFormState
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
+                      Color(0xFFddd0f5),
+                      Color(0xFFd8c9f2),
+                      Color(0xFFbeaae3),
                       Color(0xFFB39DDB),
-                      Color(0xFF9575CD),
-                      Color(0xFF7E57C2),
-                      Color(0xFF673AB7),
                     ],
                     stops: [0.1, 0.4, 0.7, 0.9],
                   ),
@@ -59,14 +56,14 @@ class _RegisterAtletaFormState
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 40.0,
-                    vertical: 40.0,
+                    vertical: 120.0,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Adicione o atleta',
+                        'Adicione a equipe',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OpenSans',
@@ -108,25 +105,12 @@ class _RegisterAtletaFormState
                           },
                         ),
                       ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      //Nome
-                      FormPadrao(
-                        formTitle: "Nome do Atleta",
-                        formHint: "Digite o nome do Atleta",
-                        formIcon: Icons.person,
-                        formEditingController: nomeAtletaController,
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
                       //Email
                       FormPadrao(
-                        formTitle: "E-mail do Atleta",
-                        formHint: "Digite o e-mail do Atleta",
+                        formTitle: "Nome da equipe",
+                        formHint: "Digite o nome da equipe",
                         formIcon: Icons.email,
-                        formEditingController: emailAtletaController,
+                        formEditingController: nomeEquipeController,
                       ),
                       SizedBox(height: 10.0),
                       //CodEquipe
@@ -139,18 +123,19 @@ class _RegisterAtletaFormState
                       SizedBox(height: 10.0),
                       //Numero
                       FormPadrao(
-                        formEditingController: numeroAtletaController,
+                        formEditingController: modalidadeController,
                         formIcon: Icons.assignment_ind,
-                        formHint: "Digite o Número do Atleta",
-                        formTitle: "Número do Atleta",
+                        formHint: "Exemplo: Volêi, Futsal, etc",
+                        formTitle: "Modalidade",
                       ),
                       SizedBox(height: 10.0),
                       //
+                      _buildRegisterBtn(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[],
                       ),
-                      _buildRegisterBtn(),
+                      // _buildRegisterBtn(),
                     ],
                   ),
                 ),
@@ -170,13 +155,13 @@ class _RegisterAtletaFormState
         return RaisedButton(
           onPressed: () async {
             controller.uploadPicture(
-                '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png',
+                '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png',
                 File(_image.path));
-            var model = AtletaModel(
-                email: emailAtletaController.text,
-                nome: nomeAtletaController.text,
-                number: int.parse(numeroAtletaController.text),
-                urlPhoto: '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
+            var model = EquipeModel(
+                nome: nomeEquipeController.text,
+                modalidade: modalidadeController.text,
+                urlPhoto:
+                    '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png');
             controller.save(model);
             Navigator.of(context).pop();
           },

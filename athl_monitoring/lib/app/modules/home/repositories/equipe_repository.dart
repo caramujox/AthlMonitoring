@@ -1,5 +1,3 @@
-//crude
-
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/equipe_repository_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,12 +37,14 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
         'nome': equipeModel.nome,
         'codEquipe': equipeModel.codEquipe,
         'modalidade': equipeModel.modalidade,
+        'urlPhoto': equipeModel.urlPhoto
       });
     } else {
       equipeModel.reference.updateData({
         'nome': equipeModel.nome,
         'codEquipe': equipeModel.codEquipe,
         'modalidade': equipeModel.modalidade,
+        'urlPhoto': equipeModel.urlPhoto
       });
     }
   }

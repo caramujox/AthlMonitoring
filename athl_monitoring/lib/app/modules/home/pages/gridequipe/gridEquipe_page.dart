@@ -1,14 +1,16 @@
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
+import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:mobx/mobx.dart';
 
 class GridEquipePage extends StatefulWidget {
-  const GridEquipePage({Key key}):super(key:key);
+  final String title;
+  const GridEquipePage({Key key, this.title = "Equipes Page"})
+      : super(key: key);
   @override
   _GridEquipePageState createState() => _GridEquipePageState();
 }
@@ -41,11 +43,24 @@ class _GridEquipePageState
                     itemCount: list.length + 1,
                     itemBuilder: (context, index) {
                       if (index == 0) {
-                        return IconButton(
-                          icon: Icon(Icons.add),
-                          onPressed: () {
-                            print("ADD");
-                          },
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                border:
+                                    Border.all(color: Colors.purple.shade200)),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                size: 40,
+                                color: ConstColors.ccBlueVioletWheel,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed('/regEquipes');
+                              },
+                            ),
+                          ),
                         );
                       }
                       return AnimationConfiguration.staggeredGrid(
@@ -57,6 +72,7 @@ class _GridEquipePageState
                               child: GridItem(
                                 index: index,
                                 nome: list[index - 1].nome,
+                                photoUrl: list[index -1].urlPhoto,
                               ),
                               onTap: () {
                                 print("SUCESSO IRMAOS");

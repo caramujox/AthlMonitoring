@@ -1,13 +1,14 @@
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class EquipeModel extends UserModel {
+class EquipeModel {
   final String modalidade;
   final String codEquipe;
   final String nome;
+  final String urlPhoto;
   DocumentReference reference;
 
-  EquipeModel({this.modalidade, this.codEquipe, this.nome});
+  EquipeModel({this.modalidade, this.codEquipe, this.nome, this.urlPhoto});
 
 
   factory EquipeModel.fromDocument(DocumentSnapshot doc) {
@@ -15,6 +16,7 @@ class EquipeModel extends UserModel {
       codEquipe: doc['codEquipe'],
       nome: doc['nome'],
       modalidade: doc['modalidade'],
+      urlPhoto: doc['urlPhoto']
     );
   }
 }

@@ -43,7 +43,7 @@ class _ImageCaputrePageState
       body: ListView(
         children: <Widget>[
           if (_imageFile != null) ...[
-            Image.file(File(_imageFile.path)),
+            Image.file(File(_imageFile.path,), height: MediaQuery.of(context).size.height/2.5,),
             FlatButton(
               child: Icon(Icons.refresh),
               onPressed: _clearImg,
