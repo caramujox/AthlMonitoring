@@ -1,4 +1,7 @@
 
+import 'package:athl_monitoring/app/modules/home/pages/image_caputre/image_caputre_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/selec_atletas_pages.dart';
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/gridequipe/gridEquipe_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/image_caputre/image_caputre_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/visdados/vis_atl_atleta.dart';
@@ -11,9 +14,11 @@ import 'package:athl_monitoring/app/modules/home/services/interfaces/upload_serv
 import 'package:athl_monitoring/app/modules/home/services/upload_file_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+
 import 'pages/image_caputre/image_caputre_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
 import 'package:athl_monitoring/app/modules/home/pages/atletas_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/pre_game_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/authpage/register_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/register_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_screen.dart';
@@ -68,15 +73,17 @@ class HomeModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute,
-            child: (_, args) => WelcomePageTreinador()),
+        Router(Modular.initialRoute, child: (_, args) => WelcomeScreen()),
         Router('/home', child: (_, args) => WelcomePageTreinador()),
+        Router('/welcomeAtleta', child: (_, args) => WelcomePageAtleta()),
         Router('/atletas', child: (_, args) => AtletaPage()),
         Router('/authpage', child: (_, args) => AuthpagePage()),
         Router('/register', child: (_, args) => RegisterForm()),
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
         Router('/regEquipes', child: (_,args) => RegisterEquipeForm()),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
+        Router('/pregame', child: (_, args) => PreGamePage()),
+        Router('/selecAtleta', child: (_, args) => SelecAtleta()),
         Router('/equipes', child: (_, args) => GridEquipePage()),
       ];
 

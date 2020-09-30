@@ -66,7 +66,9 @@ class _WelcomePageTreinadorState extends State<WelcomePageTreinador> {
               padding: const EdgeInsets.all(15.0),
               width: double.infinity,
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/pregame');
+                },
                 elevation: 5.0,
                 padding: EdgeInsets.all(15.0),
                 shape: RoundedRectangleBorder(
@@ -124,7 +126,7 @@ class _WelcomePageTreinadorState extends State<WelcomePageTreinador> {
                       child: RaisedButton(
                         onPressed: () {
                           Navigator.of(context).pushNamed('/atletas');
-                            },
+                        },
                         elevation: 5.0,
                         padding: EdgeInsets.all(15.0),
                         shape: RoundedRectangleBorder(
