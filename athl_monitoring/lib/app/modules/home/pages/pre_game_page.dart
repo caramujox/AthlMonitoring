@@ -1,7 +1,4 @@
-import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PreGamePage extends StatefulWidget {
   @override
@@ -13,7 +10,7 @@ class _PreGamePageState extends State<PreGamePage> {
 
   final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
 
-  List<bool> _selecionado = List.generate(5, (_) => false);
+  List<bool> _selecionado = List.generate(6, (_) => false);
 
   List<String> _equipeList = <String>[
     'Equipe1',
@@ -40,7 +37,34 @@ class _PreGamePageState extends State<PreGamePage> {
       child: new ListView(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         children: <Widget>[
-          SizedBox(height: 120.0),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 7.0, top: 45.0),
+                  child: Text(
+                    'Nova sessão',
+                    style: TextStyle(
+                        color: Color(0xff230a42),
+                        fontFamily: 'Google',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32),
+                  ),
+                )
+              ],
+            ),
+            height: 90,
+            //color: Colors.red,
+          ),
+          const Divider(
+            color: Color(0xFFb6a5c4),
+            height: 20,
+            thickness: 1.5,
+            indent: 0,
+            endIndent: 0,
+          ),
+          SizedBox(height: 15.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -49,7 +73,7 @@ class _PreGamePageState extends State<PreGamePage> {
                     .map((value) => DropdownMenuItem(
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.purple),
+                            style: TextStyle(color: Colors.purple.shade500),
                           ),
                           value: value,
                         ))
@@ -64,7 +88,7 @@ class _PreGamePageState extends State<PreGamePage> {
                 isExpanded: false,
                 hint: Text(
                   'Selecione a equipe',
-                  style: TextStyle(color: Colors.purple),
+                  style: TextStyle(color: Colors.purple.shade500),
                 ),
               )
             ],
@@ -78,7 +102,7 @@ class _PreGamePageState extends State<PreGamePage> {
                     .map((value) => DropdownMenuItem(
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.purple),
+                            style: TextStyle(color: Colors.purple.shade500),
                           ),
                           value: value,
                         ))
@@ -93,7 +117,7 @@ class _PreGamePageState extends State<PreGamePage> {
                 isExpanded: false,
                 hint: Text(
                   'Selecione a equipe adversária',
-                  style: TextStyle(color: Colors.purple),
+                  style: TextStyle(color: Colors.purple.shade500),
                 ),
               )
             ],
@@ -106,7 +130,7 @@ class _PreGamePageState extends State<PreGamePage> {
                     .map((value) => DropdownMenuItem(
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.purple),
+                            style: TextStyle(color: Colors.purple.shade500),
                           ),
                           value: value,
                         ))
@@ -121,7 +145,7 @@ class _PreGamePageState extends State<PreGamePage> {
                 isExpanded: false,
                 hint: Text(
                   'Campeonato',
-                  style: TextStyle(color: Colors.purple),
+                  style: TextStyle(color: Colors.purple.shade500),
                 ),
               )
             ],
@@ -133,13 +157,14 @@ class _PreGamePageState extends State<PreGamePage> {
               ToggleButtons(
                 selectedColor: Colors.white,
                 borderRadius: BorderRadius.circular(5),
-                fillColor: Colors.purple.shade300,
+                fillColor: Colors.purple.shade500,
                 children: <Widget>[
                   Text("P1"),
                   Text("P2"),
                   Text("P3"),
                   Text("P4"),
-                  Text("P5")
+                  Text("P5"),
+                  Text("P6")
                 ],
                 onPressed: (int index) {
                   setState(() {
@@ -163,7 +188,7 @@ class _PreGamePageState extends State<PreGamePage> {
             children: <Widget>[
               SizedBox(height: 20.0),
               RaisedButton(
-                  color: Colors.purple,
+                  color: Colors.purple.shade500,
                   textColor: Colors.white,
                   child: Padding(
                       padding: EdgeInsets.all(10.0),
@@ -173,7 +198,9 @@ class _PreGamePageState extends State<PreGamePage> {
                           Text("Submit", style: TextStyle(fontSize: 24.0)),
                         ],
                       )),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/selecAtleta');
+                  },
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),
             ],
