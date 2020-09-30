@@ -6,7 +6,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-
 class AtletaPage extends StatefulWidget {
   final String title;
   const AtletaPage({Key key, this.title = "Home"}) : super(key: key);
@@ -28,9 +27,9 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
       } else if (controller.atletaList.hasError) {
         return Center(
             child: RaisedButton(
-              onPressed: controller.getList,
-              child: Text('Error'),
-            ));
+          onPressed: controller.getList,
+          child: Text('Error'),
+        ));
       } else {
         List<AtletaModel> list = controller.atletaList.data;
         return Stack(children: <Widget>[
@@ -46,10 +45,8 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
                         return Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
-                              border: Border.all(
-                                  color: Colors.purple.shade200
-                              )
-                          ),
+                              border:
+                                  Border.all(color: Colors.purple.shade200)),
                           child: IconButton(
                             icon: Icon(Icons.add),
                             onPressed: () {
@@ -66,9 +63,9 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
                             child: GestureDetector(
                               child: GridItem(
                                 index: index,
-                                nome: list[index-1].nome,
-                                num: list[index-1].number.toString(),
-                                photoUrl: list[index-1].urlPhoto,
+                                nome: list[index - 1].nome,
+                                num: list[index - 1].number.toString(),
+                                photoUrl: list[index - 1].urlPhoto,
                               ),
                               onTap: () {
                                 print("topper");
@@ -76,7 +73,8 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
                             ),
                           ));
                     });
-              },),
+              },
+            ),
           )
         ]);
       }
