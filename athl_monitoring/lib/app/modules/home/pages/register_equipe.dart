@@ -1,9 +1,12 @@
 import 'dart:io';
 
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
+import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RegisterEquipeForm extends StatefulWidget {
@@ -11,7 +14,7 @@ class RegisterEquipeForm extends StatefulWidget {
   _RegisterEquipeFormState createState() => _RegisterEquipeFormState();
 }
 
-class _RegisterEquipeFormState extends ModularState<RegisterEquipeForm, EquipeController> {
+class _RegisterEquipeFormState extends ModularState<RegisterEquipeForm, UserController> {
   final TextEditingController nomeEquipeController = TextEditingController();
   final TextEditingController codEquipeController = TextEditingController();
   final TextEditingController modalidadeController = TextEditingController();
