@@ -1,11 +1,8 @@
 
 import 'package:athl_monitoring/app/modules/home/pages/gridequipe/gridEquipe_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/image_caputre/image_caputre_page.dart';
-<<<<<<< HEAD
 import 'package:athl_monitoring/app/modules/home/pages/visdados/vis_atl_atleta.dart';
-=======
 import 'package:athl_monitoring/app/modules/home/pages/register_equipe.dart';
->>>>>>> eff4c68aaa0ad5d19d59cbef52aa0682a8366cf6
 
 import 'pages/image_caputre/image_caputre_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
@@ -59,7 +56,7 @@ class HomeModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => DadosPageAtletaAtleta()),
+        Router(Modular.initialRoute, child: (_, args) => GridEquipePage()),
         Router('/home', child: (_, args) => WelcomePageTreinador()),
         Router('/atletas', child: (_, args) => AtletaPage()),
         Router('/authpage', child: (_, args) => AuthpagePage()),

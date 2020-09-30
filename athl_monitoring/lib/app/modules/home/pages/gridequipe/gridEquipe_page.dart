@@ -1,5 +1,6 @@
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
+import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -8,12 +9,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class GridEquipePage extends StatefulWidget {
   final String title;
-  const GridEquipePage({Key key, this.title = "Equipes Page"}) : super(key: key);
+  const GridEquipePage({Key key, this.title = "Equipes Page"})
+      : super(key: key);
   @override
   _GridEquipePageState createState() => _GridEquipePageState();
 }
 
-class _GridEquipePageState extends ModularState<GridEquipePage, EquipeController> {
+class _GridEquipePageState
+    extends ModularState<GridEquipePage, EquipeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,11 +43,24 @@ class _GridEquipePageState extends ModularState<GridEquipePage, EquipeController
                     itemCount: list.length + 1,
                     itemBuilder: (context, index) {
                       if (index == 0) {
-                        return IconButton(
-                          icon: Icon(Icons.add),
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('/regEquipes');
-                          },
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                border:
+                                    Border.all(color: Colors.purple.shade200)),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                size: 40,
+                                color: ConstColors.ccBlueVioletWheel,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed('/regEquipes');
+                              },
+                            ),
+                          ),
                         );
                       }
                       return AnimationConfiguration.staggeredGrid(
