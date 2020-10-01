@@ -169,16 +169,18 @@ class _RegisterAtletaFormState
       child: Observer(builder: (_) {
         return RaisedButton(
           onPressed: () async {
-            controller.uploadPicture(
+            while ((controller.uploadPicture(
                 '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png',
-                File(_image.path));
-            var model = AtletaModel(
-                email: emailAtletaController.text,
-                nome: nomeAtletaController.text,
-                number: int.parse(numeroAtletaController.text),
-                urlPhoto: '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
-            controller.save(model);
-            Navigator.of(context).pop();
+                File(_image.path)))) {
+              var model = AtletaModel(
+                  email: emailAtletaController.text,
+                  nome: nomeAtletaController.text,
+                  number: int.parse(numeroAtletaController.text),
+                  urlPhoto:
+                      '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
+              await controller.save(model);
+              Navigator.of(context).pop();
+            }
           },
           elevation: 5.0,
           padding: EdgeInsets.all(15.0),

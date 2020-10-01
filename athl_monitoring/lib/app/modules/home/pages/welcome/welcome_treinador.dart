@@ -1,4 +1,3 @@
-import 'package:athl_monitoring/app/modules/home/pages/atletas_page.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -55,8 +54,8 @@ class _WelcomePageTreinadorState extends State<WelcomePageTreinador> {
             color: Color(0xFFb6a5c4),
             height: 20,
             thickness: 1.5,
-            indent: 0,
-            endIndent: 0,
+            indent: 20,
+            endIndent: 20,
           ),
           SizedBox(height: 40),
           //botões

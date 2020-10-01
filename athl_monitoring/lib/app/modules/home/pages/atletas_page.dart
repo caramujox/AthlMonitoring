@@ -2,6 +2,7 @@ import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.d
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/grid_item.dart';
+import 'package:athl_monitoring/app/modules/home/widgets/header_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -26,7 +27,7 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
         child: Column(
           children: <Widget>[
             // SizedBox(height: 15.0,),
-            _titlePage(),
+            TitlePage(titulo: "Atletas",),
             const Divider(
               color: Color(0xFFb6a5c4),
               height: 20,
@@ -118,6 +119,7 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
       children: [
         Container(
           height: MediaQuery.of(context).padding.top,
+          color: Colors.red,
         ),
 
         SizedBox(height: 40),

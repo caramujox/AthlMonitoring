@@ -1,9 +1,5 @@
 import 'dart:async';
-
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
-import 'package:athl_monitoring/app/modules/home/home_page.dart';
-import 'package:athl_monitoring/app/modules/home/pages/atletas_page.dart';
-import 'package:athl_monitoring/app/modules/home/pages/authpage/authpage_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_treinador.dart';
 import 'package:athl_monitoring/app/modules/home/util/items.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/slide_item.dart';
@@ -43,14 +39,14 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
   @override
   void initState() {
     super.initState();
-    new Timer(new Duration(milliseconds: 50), () {
+    new Timer(new Duration(milliseconds: 0), () {
       checkFirstSeen();
-    });
+     });
   }
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    //bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
+    // bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
     bool _seen = (prefs.getBool('seen') ?? false);
 
     if (_seen) {

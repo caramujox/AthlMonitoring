@@ -37,8 +37,8 @@ abstract class _AtletaControllerBase with Store {
   }
 
   @action
-  uploadPicture(String filePath, File file){
-    uploadService.startUpload(filePath, file);
+  bool uploadPicture(String filePath, File file){
+    return uploadService.startUpload(filePath, file);
   }
 
   Future<PickedFile> pickImage(ImageSource source) async {

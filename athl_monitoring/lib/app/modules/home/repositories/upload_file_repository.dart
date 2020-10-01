@@ -25,4 +25,8 @@ class UploadFileRepository extends Disposable implements IUploadFileRepository{
   Future<dynamic> loadImage(String image) async {
     storage.ref().child(image).getDownloadURL();
   }
+
+  _uploadProgress(String filePath, File file){
+    
+  }
 }

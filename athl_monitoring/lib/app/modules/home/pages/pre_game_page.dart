@@ -1,3 +1,4 @@
+import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:flutter/material.dart';
 
 class PreGamePage extends StatefulWidget {
@@ -73,7 +74,8 @@ class _PreGamePageState extends State<PreGamePage> {
                     .map((value) => DropdownMenuItem(
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.purple.shade500),
+                            style:
+                                TextStyle(color: ConstColors.ccBlueVioletWheel),
                           ),
                           value: value,
                         ))
@@ -88,7 +90,7 @@ class _PreGamePageState extends State<PreGamePage> {
                 isExpanded: false,
                 hint: Text(
                   'Selecione a equipe',
-                  style: TextStyle(color: Colors.purple.shade500),
+                  style: TextStyle(color: ConstColors.ccBlueVioletWheel),
                 ),
               )
             ],
@@ -102,7 +104,8 @@ class _PreGamePageState extends State<PreGamePage> {
                     .map((value) => DropdownMenuItem(
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.purple.shade500),
+                            style:
+                                TextStyle(color: ConstColors.ccBlueVioletWheel),
                           ),
                           value: value,
                         ))
@@ -117,7 +120,7 @@ class _PreGamePageState extends State<PreGamePage> {
                 isExpanded: false,
                 hint: Text(
                   'Selecione a equipe adversária',
-                  style: TextStyle(color: Colors.purple.shade500),
+                  style: TextStyle(color: ConstColors.ccBlueVioletWheel),
                 ),
               )
             ],
@@ -130,7 +133,8 @@ class _PreGamePageState extends State<PreGamePage> {
                     .map((value) => DropdownMenuItem(
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.purple.shade500),
+                            style:
+                                TextStyle(color: ConstColors.ccBlueVioletWheel),
                           ),
                           value: value,
                         ))
@@ -145,7 +149,7 @@ class _PreGamePageState extends State<PreGamePage> {
                 isExpanded: false,
                 hint: Text(
                   'Campeonato',
-                  style: TextStyle(color: Colors.purple.shade500),
+                  style: TextStyle(color: ConstColors.ccBlueVioletWheel),
                 ),
               )
             ],
@@ -157,7 +161,7 @@ class _PreGamePageState extends State<PreGamePage> {
               ToggleButtons(
                 selectedColor: Colors.white,
                 borderRadius: BorderRadius.circular(5),
-                fillColor: Colors.purple.shade500,
+                fillColor: ConstColors.ccBlueVioletWheel,
                 children: <Widget>[
                   Text("P1"),
                   Text("P2"),
@@ -188,7 +192,7 @@ class _PreGamePageState extends State<PreGamePage> {
             children: <Widget>[
               SizedBox(height: 20.0),
               RaisedButton(
-                  color: Colors.purple.shade500,
+                  color: ConstColors.ccBlueVioletWheel,
                   textColor: Colors.white,
                   child: Padding(
                       padding: EdgeInsets.all(10.0),

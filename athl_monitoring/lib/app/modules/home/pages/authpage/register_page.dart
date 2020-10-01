@@ -190,7 +190,7 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
           controller.signUp(
               emailController.text, passController.text, nomeController.text);
           controller.signIn(emailController.text, passController.text);
-          Navigator.of(context).pushNamed('/welcome');
+          Navigator.of(context).pushNamed('/welcomeTreinador');
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

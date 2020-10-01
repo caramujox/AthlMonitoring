@@ -53,8 +53,8 @@ class _WelcomePageAtletaState extends State<WelcomePageAtleta> {
             color: Color(0xFFb6a5c4),
             height: 20,
             thickness: 1.5,
-            indent: 0,
-            endIndent: 0,
+            indent: 20,
+            endIndent: 20,
           ),
           SizedBox(height: 40),
           Padding(
