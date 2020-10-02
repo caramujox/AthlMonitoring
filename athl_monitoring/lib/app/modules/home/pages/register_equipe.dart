@@ -154,9 +154,11 @@ class _RegisterEquipeFormState
       child: Observer(builder: (_) {
         return RaisedButton(
           onPressed: () async {
-            controller.uploadPicture(
-                '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png',
-                File(_image.path));
+            await controller
+                .uploadPicture(
+                    '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png',
+                    File(_image.path))
+                .onComplete;
             var model = EquipeModel(
                 nome: nomeEquipeController.text,
                 modalidade: modalidadeController.text,
