@@ -37,7 +37,7 @@ abstract class _AtletaControllerBase with Store {
   }
 
   @action
-  bool uploadPicture(String filePath, File file){
+  uploadPicture(String filePath, File file){
     return uploadService.startUpload(filePath, file);
   }
 

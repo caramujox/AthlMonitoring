@@ -17,8 +17,8 @@ class UploadFileService extends Disposable implements IUploadFIleService{
   }
 
   @override
-  bool startUpload(String filePath, File file) {
-   return uploadFileRepository.startUpload(filePath, file).isComplete;
+  startUpload(String filePath, File file) {
+   return uploadFileRepository.startUpload(filePath, file);
   }
 
   loadImage(String image){

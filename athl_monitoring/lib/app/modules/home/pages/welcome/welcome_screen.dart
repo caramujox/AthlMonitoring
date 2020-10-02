@@ -46,8 +46,8 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
-    bool _seen = (prefs.getBool('seen') ?? false);
+    bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
+    // bool _seen = (prefs.getBool('seen') ?? false);
 
     if (_seen) {
       Navigator.of(context).pushReplacement(new MaterialPageRoute(
