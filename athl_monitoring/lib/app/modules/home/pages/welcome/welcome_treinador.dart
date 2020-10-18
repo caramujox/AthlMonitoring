@@ -1,5 +1,7 @@
+import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class WelcomePageTreinador extends StatefulWidget {
   WelcomePageTreinador({Key key}) : super(key: key);
@@ -8,7 +10,8 @@ class WelcomePageTreinador extends StatefulWidget {
   _WelcomePageTreinadorState createState() => _WelcomePageTreinadorState();
 }
 
-class _WelcomePageTreinadorState extends State<WelcomePageTreinador> {
+class _WelcomePageTreinadorState
+    extends ModularState<WelcomePageTreinador, UserController> {
   @override
   Widget build(BuildContext context) {
     return _constroiWelcomeTreinador();
@@ -17,6 +20,11 @@ class _WelcomePageTreinadorState extends State<WelcomePageTreinador> {
   _constroiWelcomeTreinador() {
     return Scaffold(
       body: _welcomeBodyTreinador(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {controller.signOut();
+        Navigator.pushNamedAndRemoveUntil(context, '/authpage', (route) => false);},
+        backgroundColor: Colors.blue,
+      ),
     );
   }
 

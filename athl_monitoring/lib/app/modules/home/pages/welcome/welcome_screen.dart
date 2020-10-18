@@ -45,11 +45,14 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
   }
 
   Future checkFirstSeen() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
+    SharedPreferences prefs = await SharedPreferences.getInstance();    
     // bool _seen = (prefs.getBool('seen') ?? false);
+    
+    bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
 
     if (_seen) {
+      //Se tiver na lista de atletas -> WelcomePageAtletas
+      //Else -> WelcomePageTreinador
       Navigator.of(context).pushReplacement(new MaterialPageRoute(
           builder: (context) => new WelcomePageTreinador()));
     } else {

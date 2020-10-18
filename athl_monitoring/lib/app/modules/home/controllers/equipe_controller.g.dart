@@ -61,6 +61,17 @@ mixin _$EquipeController on _EquipeControllerBase, Store {
   }
 
   @override
+  dynamic uploadPicture(String filePath, File file) {
+    final _$actionInfo = _$_EquipeControllerBaseActionController.startAction(
+        name: '_EquipeControllerBase.uploadPicture');
+    try {
+      return super.uploadPicture(filePath, file);
+    } finally {
+      _$_EquipeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 equipeList: ${equipeList}

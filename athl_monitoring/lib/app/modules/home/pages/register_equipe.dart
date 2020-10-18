@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 class RegisterEquipeForm extends StatefulWidget {
   @override
@@ -154,12 +155,14 @@ class _RegisterEquipeFormState
       child: Observer(builder: (_) {
         return RaisedButton(
           onPressed: () async {
+            var uuid = Uuid();
             await controller
                 .uploadPicture(
                     '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png',
                     File(_image.path))
                 .onComplete;
             var model = EquipeModel(
+                codEquipe: uuid.v1(),
                 nome: nomeEquipeController.text,
                 modalidade: modalidadeController.text,
                 urlPhoto:

@@ -39,7 +39,7 @@ abstract class _EquipeControllerBase with Store {
 
   @action
   uploadPicture(String filePath, File file) {
-    uploadService.startUpload(filePath, file);
+    return uploadService.startUpload(filePath, file);
   }
 
   Future<PickedFile> pickImage(ImageSource source) async {

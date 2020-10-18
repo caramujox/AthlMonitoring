@@ -324,14 +324,9 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
         child: OutlineButton(
           splashColor: Colors.grey,
           onPressed: () {
-            // widget.authService.singInFacebook().then((retUser) {
-            //   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            //     return HomeScreen(
-            //       authService: new AuthService(),
-            //       user: retUser,
-            //     );
-            //   }));
-            // });
+            controller.signInFacebook().then((retUser){
+              Navigator.of(context).pushNamed('/welcome');
+            });
           },
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),

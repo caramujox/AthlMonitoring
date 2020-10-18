@@ -61,6 +61,17 @@ mixin _$AtletaController on _AtletaControllerBase, Store {
   }
 
   @override
+  dynamic uploadPicture(String filePath, File file) {
+    final _$actionInfo = _$_AtletaControllerBaseActionController.startAction(
+        name: '_AtletaControllerBase.uploadPicture');
+    try {
+      return super.uploadPicture(filePath, file);
+    } finally {
+      _$_AtletaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 atletaList: ${atletaList}
