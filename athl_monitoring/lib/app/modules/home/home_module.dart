@@ -1,3 +1,4 @@
+import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_treinador.dart';
 import 'package:athl_monitoring/app/modules/home/pages/wrapper/wrapper_page.dart';
@@ -85,6 +86,7 @@ class HomeModule extends ChildModule {
             child: (_, args) => welcomeRegisterAtleta()),
         Router('/welcomeRegisterTreinador',
             child: (_, args) => welcomeRegisterTreinador()),
+        Router('/volleyballGame', child: (_, args) => volleyballGame()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();
