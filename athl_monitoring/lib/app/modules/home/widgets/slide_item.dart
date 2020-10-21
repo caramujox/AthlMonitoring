@@ -1,5 +1,7 @@
 import 'package:athl_monitoring/app/modules/home/pages/authpage/register_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/register_atleta.dart';
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_atleta.dart';
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_treinador.dart';
 import 'package:flutter/material.dart';
 
 class SlideItem extends StatelessWidget {
@@ -84,7 +86,7 @@ class SlideItem extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return RegisterAtletaForm();
+                            return welcomeRegisterAtleta();
                           },
                         ));
                       },
@@ -107,7 +109,7 @@ class SlideItem extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return RegisterForm();
+                            return welcomeRegisterTreinador();
                           },
                         ));
                       },

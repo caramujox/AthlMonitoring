@@ -1,3 +1,5 @@
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_atleta.dart';
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_treinador.dart';
 import 'package:athl_monitoring/app/modules/home/pages/wrapper/wrapper_page.dart';
 
 import 'package:athl_monitoring/app/modules/home/pages/selec_atletas_pages.dart';
@@ -39,7 +41,6 @@ import 'services/atleta_service.dart';
 import 'repositories/atleta_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
@@ -80,6 +81,10 @@ class HomeModule extends ChildModule {
         Router('/pregame', child: (_, args) => PreGamePage()),
         Router('/selecAtleta', child: (_, args) => SelecAtleta()),
         Router('/equipes', child: (_, args) => GridEquipePage()),
+        Router('/welcomeRegisterAtleta',
+            child: (_, args) => welcomeRegisterAtleta()),
+        Router('/welcomeRegisterTreinador',
+            child: (_, args) => welcomeRegisterTreinador()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();

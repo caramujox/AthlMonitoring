@@ -7,19 +7,18 @@ import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-class RegisterAtletaForm extends StatefulWidget {
+class welcomeRegisterTreinador extends StatefulWidget {
   @override
-  _RegisterAtletaFormState createState() => _RegisterAtletaFormState();
+  _welcomeRegisterTreinadorState createState() =>
+      _welcomeRegisterTreinadorState();
 }
 
-class _RegisterAtletaFormState
-    extends ModularState<RegisterAtletaForm, AtletaController> {
+class _welcomeRegisterTreinadorState
+    extends ModularState<welcomeRegisterTreinador, AtletaController> {
   final TextEditingController emailAtletaController = TextEditingController();
   final TextEditingController codEquipeController = TextEditingController();
   final TextEditingController numeroAtletaController = TextEditingController();
@@ -65,8 +64,9 @@ class _RegisterAtletaFormState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      SizedBox(height: 20.0),
                       Text(
-                        'Adicione o atleta',
+                        'Adicione uma foto',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OpenSans',
@@ -112,41 +112,6 @@ class _RegisterAtletaFormState
                       SizedBox(
                         height: 20.0,
                       ),
-                      //Nome
-                      FormPadrao(
-                        formTitle: "Nome do Atleta",
-                        formHint: "Digite o nome do Atleta",
-                        formIcon: Icons.person,
-                        formEditingController: nomeAtletaController,
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      //Email
-                      FormPadrao(
-                        formTitle: "E-mail do Atleta",
-                        formHint: "Digite o e-mail do Atleta",
-                        formIcon: Icons.email,
-                        formEditingController: emailAtletaController,
-                      ),
-                      SizedBox(height: 10.0),
-                      //CodEquipe
-                      FormPadrao(
-                        formEditingController: codEquipeController,
-                        formIcon: Icons.people,
-                        formHint: "Digite o código da Equipe",
-                        formTitle: "Código da Equipe",
-                      ),
-                      SizedBox(height: 10.0),
-                      //Numero
-                      FormPadrao(
-                        formEditingController: numeroAtletaController,
-                        formIcon: Icons.assignment_ind,
-                        formHint: "Digite o Número do Atleta",
-                        formTitle: "Número do Atleta",
-                      ),
-                      SizedBox(height: 10.0),
-                      //
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[],

@@ -1,3 +1,4 @@
+import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class FormPadrao extends StatelessWidget {
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFF673AB7),
+            color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
@@ -53,11 +54,11 @@ class FormPadrao extends StatelessWidget {
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 formIcon,
-                color: Colors.white,
+                color: ConstColors.ccBlueVioletWheel,
               ),
               hintText: formHint,
               hintStyle: TextStyle(
-                color: Colors.white54,
+                color: ConstColors.ccBlueVioletWheel,
                 fontFamily: 'OpenSans',
               ),
             ),
