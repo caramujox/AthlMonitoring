@@ -11,11 +11,14 @@ abstract class _UserControllerBase with Store {
   final IBaseAuth auth;
 
   _UserControllerBase({@required this.auth}) {
-   // getUser();
+   getUserInfo();
   }
 
   @observable
   ObservableFuture<FirebaseUser> user;
+
+  @observable
+  ObservableFuture<UserModel> userModel;
 
   @observable
   ObservableStream<List<UserModel>> userList;
@@ -57,7 +60,8 @@ abstract class _UserControllerBase with Store {
 
   @action
   getUserInfo() {
-    return auth.getUserModel();
+    userModel = auth.getUserModel().asObservable();
+    return  userModel;
     }
 
   @action

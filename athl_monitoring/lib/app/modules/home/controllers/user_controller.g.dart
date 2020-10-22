@@ -24,6 +24,21 @@ mixin _$UserController on _UserControllerBase, Store {
     });
   }
 
+  final _$userModelAtom = Atom(name: '_UserControllerBase.userModel');
+
+  @override
+  ObservableFuture<UserModel> get userModel {
+    _$userModelAtom.reportRead();
+    return super.userModel;
+  }
+
+  @override
+  set userModel(ObservableFuture<UserModel> value) {
+    _$userModelAtom.reportWrite(value, super.userModel, () {
+      super.userModel = value;
+    });
+  }
+
   final _$userListAtom = Atom(name: '_UserControllerBase.userList');
 
   @override
@@ -133,6 +148,7 @@ mixin _$UserController on _UserControllerBase, Store {
   String toString() {
     return '''
 user: ${user},
+userModel: ${userModel},
 userList: ${userList}
     ''';
   }

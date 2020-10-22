@@ -1,6 +1,6 @@
 import 'app_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Router;
 import 'package:athl_monitoring/app/app_widget.dart';
 import 'package:athl_monitoring/app/modules/home/home_module.dart';
 

@@ -3,6 +3,7 @@ import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game.dart
 import 'package:athl_monitoring/app/modules/home/pages/register_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_treinador.dart';
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_treinador.dart';
 import 'package:flutter/material.dart';
 
 class SlideItem extends StatelessWidget {
@@ -110,7 +111,7 @@ class SlideItem extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return welcomeRegisterTreinador();
+                            return WelcomePageTreinador();
                           },
                         ));
                       },

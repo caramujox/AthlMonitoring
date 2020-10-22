@@ -1,6 +1,9 @@
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class WelcomePageTreinador extends StatefulWidget {
@@ -12,6 +15,8 @@ class WelcomePageTreinador extends StatefulWidget {
 
 class _WelcomePageTreinadorState
     extends ModularState<WelcomePageTreinador, UserController> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return _constroiWelcomeTreinador();
@@ -19,11 +24,85 @@ class _WelcomePageTreinadorState
 
   _constroiWelcomeTreinador() {
     return Scaffold(
+      key: _scaffoldKey,
       body: _welcomeBodyTreinador(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {controller.signOut();
-        Navigator.pushNamedAndRemoveUntil(context, '/authpage', (route) => false);},
+        onPressed: () {
+          // controller.signOut();
+          // Navigator.pushNamedAndRemoveUntil(
+          //     context, '/authpage', (route) => false);
+          _scaffoldKey.currentState.openDrawer();
+        },
         backgroundColor: Colors.blue,
+      ),
+      drawer: _welcomeTreinadorDrawer(),
+    );
+  }
+
+  _welcomeTreinadorDrawer() {
+    UserModel user = controller.userModel.result;
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Center(
+              child: Container(
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  radius: 60.0,
+                  backgroundImage: user.urlPhoto == null
+                      ? AssetImage("assets/images/account_circle_grey.png")
+                      : NetworkImage(user.urlPhoto),
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1.5, color: Colors.white),
+                  color: Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+                padding: EdgeInsets.all(1.5),
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: ConstColors.ccBlueVioletWheel,
+            ),
+          ),
+          ListTile(
+            title: Text(
+              'Configurações da conta',
+              style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
+            ),
+            onTap: () {
+              // Update the state of the app
+              // ...
+              // Then close the drawer
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text(
+              user.nome == null ? "Visitante" : user.nome,
+              style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+              title: Text('Logout',
+                  style: TextStyle(
+                      color: Colors.grey, fontStyle: FontStyle.italic)),
+              onTap: () {
+                controller.signOut();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/authpage', (route) => false);
+              }),
+          Divider(
+            color: Colors.grey,
+            height: 15,
+            thickness: 1.5,
+            indent: 20,
+            endIndent: 20,
+          ),
+        ],
       ),
     );
   }
@@ -89,7 +168,7 @@ class _WelcomePageTreinadorState
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
                 ),
-                color: ConstColors.ccMagnolia,
+                color: Colors.white,
               ),
             ),
           ),
@@ -114,7 +193,7 @@ class _WelcomePageTreinadorState
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
                 ),
-                color: ConstColors.ccMagnolia,
+                color: Colors.white,
               ),
             ),
           ),
@@ -156,7 +235,7 @@ class _WelcomePageTreinadorState
                             )
                           ],
                         ),
-                        color: ConstColors.ccMagnolia,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -190,7 +269,7 @@ class _WelcomePageTreinadorState
                             )
                           ],
                         ),
-                        color: ConstColors.ccMagnolia,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -200,7 +279,7 @@ class _WelcomePageTreinadorState
           ),
         ],
       ),
-      color: ConstColors.ccMagnolia,
+      color: Colors.white,
     );
   }
 }
