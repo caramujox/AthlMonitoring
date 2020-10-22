@@ -26,15 +26,6 @@ class _WelcomePageTreinadorState
     return Scaffold(
       key: _scaffoldKey,
       body: _welcomeBodyTreinador(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // controller.signOut();
-          // Navigator.pushNamedAndRemoveUntil(
-          //     context, '/authpage', (route) => false);
-          _scaffoldKey.currentState.openDrawer();
-        },
-        backgroundColor: Colors.blue,
-      ),
       drawer: _welcomeTreinadorDrawer(),
     );
   }
@@ -49,16 +40,15 @@ class _WelcomePageTreinadorState
             child: Center(
               child: Container(
                 child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: 60.0,
-                  backgroundImage: user.urlPhoto == null
-                      ? AssetImage("assets/images/account_circle_grey.png")
-                      : NetworkImage(user.urlPhoto),
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1.5, color: Colors.white),
-                  color: Colors.transparent,
-                  shape: BoxShape.circle,
+                  backgroundColor: Colors.yellow,
+                  radius: 65,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    radius: 60.0,
+                    backgroundImage: user.urlPhoto == null
+                        ? AssetImage("assets/images/account_circle_white.png")
+                        : NetworkImage(user.urlPhoto),
+                  ),
                 ),
                 padding: EdgeInsets.all(1.5),
               ),
@@ -68,9 +58,16 @@ class _WelcomePageTreinadorState
             ),
           ),
           ListTile(
+            leading: Icon(
+              Icons.settings,
+              color: ConstColors.ccBlueVioletWheel,
+            ),
             title: Text(
               'Configurações da conta',
-              style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
+              style: TextStyle(
+                  color: ConstColors.ccBlueVioletWheel,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 20),
             ),
             onTap: () {
               // Update the state of the app
@@ -80,16 +77,54 @@ class _WelcomePageTreinadorState
             },
           ),
           ListTile(
+            leading: Icon(Icons.person, color: ConstColors.ccBlueVioletWheel),
             title: Text(
               user.nome == null ? "Visitante" : user.nome,
-              style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
+              style: TextStyle(
+                  color: ConstColors.ccBlueVioletWheel,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 20),
             ),
             onTap: () {},
           ),
+          ListTile(),
+          ListTile(),
+          ListTile(),
+          ListTile(),
+          ListTile(),
+          ListTile(),
+          ListTile(),
+          ListTile(),
+          ListTile(),
           ListTile(
-              title: Text('Logout',
-                  style: TextStyle(
-                      color: Colors.grey, fontStyle: FontStyle.italic)),
+              leading: Icon(
+                Icons.live_help,
+                color: ConstColors.ccBlueVioletWheel,
+              ),
+              title: Text(
+                'Sobre nós',
+                style: TextStyle(
+                    color: ConstColors.ccBlueVioletWheel,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 20),
+              ),
+              onTap: () {
+                controller.signOut();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/authpage', (route) => false);
+              }),
+          ListTile(
+              leading: Icon(
+                Icons.exit_to_app,
+                color: ConstColors.ccBlueVioletWheel,
+              ),
+              title: Text(
+                'Logout',
+                style: TextStyle(
+                    color: ConstColors.ccBlueVioletWheel,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 20),
+              ),
               onTap: () {
                 controller.signOut();
                 Navigator.pushNamedAndRemoveUntil(
@@ -108,13 +143,39 @@ class _WelcomePageTreinadorState
   }
 
   _welcomeBodyTreinador() {
+    UserModel user = controller.userModel.result;
     return Container(
       //padding: EdgeInsets.all(30),
       child: Column(
         children: <Widget>[
-          //status
           Container(
-            height: MediaQuery.of(context).padding.top,
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0, left: 10.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    },
+                    // color: ConstColors.ccBlueVioletWheel,
+                    // alignment: Alignment.centerLeft,
+                    // icon: Icon(Icons.menu, size: 40,),
+                    child: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: ConstColors.ccBlueVioletWheel,
+                      child: CircleAvatar(
+                        backgroundImage: user.urlPhoto == null
+                            ? AssetImage(
+                                "assets/images/account_circle_white.png")
+                            : NetworkImage(user.urlPhoto),
+                        radius: 20,
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           //"app bar"
           Container(
@@ -122,7 +183,7 @@ class _WelcomePageTreinadorState
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left: 7.0, top: 45.0),
+                  padding: const EdgeInsets.only(left: 30.0, top: 45.0),
                   child: Text(
                     'Bem vindo, treinador!',
                     style: TextStyle(
@@ -146,133 +207,146 @@ class _WelcomePageTreinadorState
           ),
           SizedBox(height: 40),
           //botões
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-            child: Container(
-              padding: const EdgeInsets.all(15.0),
-              width: double.infinity,
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/pregame');
-                },
-                elevation: 5.0,
-                padding: EdgeInsets.all(15.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+              child: Container(
+                padding: const EdgeInsets.all(15.0),
+                width: double.infinity,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/pregame');
+                  },
+                  elevation: 5.0,
+                  padding: EdgeInsets.all(15.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Text(
+                    'NOVA PARTIDA',
+                    style: TextStyle(
+                        color: ConstColors.ccBlueVioletWheel,
+                        fontFamily: 'Google',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22),
+                  ),
+                  color: Colors.white,
                 ),
-                child: Text(
-                  'NOVA PARTIDA',
-                  style: TextStyle(
-                      color: ConstColors.ccBlueVioletWheel,
-                      fontFamily: 'Google',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22),
-                ),
-                color: Colors.white,
               ),
             ),
           ),
           //SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-            child: Container(
-              padding: const EdgeInsets.all(15.0),
-              width: double.infinity,
-              child: RaisedButton(
-                onPressed: () {},
-                elevation: 5.0,
-                padding: EdgeInsets.all(15.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+              child: Container(
+                padding: const EdgeInsets.all(15.0),
+                width: double.infinity,
+                child: RaisedButton(
+                  onPressed: () {},
+                  elevation: 5.0,
+                  padding: EdgeInsets.all(15.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Text(
+                    'NOVO TREINO',
+                    style: TextStyle(
+                        color: ConstColors.ccBlueVioletWheel,
+                        fontFamily: 'Google',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22),
+                  ),
+                  color: Colors.white,
                 ),
-                child: Text(
-                  'NOVO TREINO',
-                  style: TextStyle(
-                      color: ConstColors.ccBlueVioletWheel,
-                      fontFamily: 'Google',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22),
-                ),
-                color: Colors.white,
               ),
             ),
           ),
           SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-            child: Container(
-              width: double.infinity,
+          Container(
+            // color: Colors.red,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.all(15.0),
-                      width: double.infinity,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/atletas');
-                        },
-                        elevation: 5.0,
-                        padding: EdgeInsets.all(15.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            Icon(
-                              Icons.person,
-                              size: 50,
-                              color: ConstColors.ccBlueVioletWheel,
-                            ),
-                            Text(
-                              'ATLETAS',
-                              style: TextStyle(
-                                  color: ConstColors.ccBlueVioletWheel,
-                                  fontFamily: 'Google',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12),
-                            )
-                          ],
-                        ),
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.all(15.0),
-                      width: double.infinity,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/equipes');
-                        },
-                        elevation: 5.0,
-                        padding: EdgeInsets.all(15.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            Icon(
-                              Icons.people,
-                              size: 50,
-                              color: ConstColors.ccBlueVioletWheel,
-                            ),
-                            Text(
-                              'EQUIPES',
-                              style: TextStyle(
-                                  color: ConstColors.ccBlueVioletWheel,
-                                  fontFamily: 'Google',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12),
-                            )
-                          ],
-                        ),
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                  _botaoComFoto("assets/images/atleta.png", "ATLETAS",
+                      "/atletas", Icons.person),
+                  _botaoComFoto("assets/images/equipe.png", "EQUIPES",
+                      "/equipes", Icons.people),
+                  // Expanded(
+                  //   child: Container(
+                  //     padding: EdgeInsets.all(15.0),
+                  //     width: double.infinity,
+                  //     child: SizedBox(
+                  //       child: RaisedButton(
+                  //         onPressed: () {
+                  //           Navigator.of(context).pushNamed('/atletas');
+                  //         },
+                  //         elevation: 5.0,
+                  //         padding: EdgeInsets.all(15.0),
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(8.0),
+                  //         ),
+                  //         child: Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.center,
+                  //           mainAxisAlignment: MainAxisAlignment.center,
+                  //           children: <Widget>[
+                  //             Icon(
+                  //               Icons.person,
+                  //               size: 50,
+                  //               color: ConstColors.ccBlueVioletWheel,
+                  //             ),
+                  //             Text(
+                  //               'ATLETAS',
+                  //               style: TextStyle(
+                  //                   color: ConstColors.ccBlueVioletWheel,
+                  //                   fontFamily: 'Google',
+                  //                   fontWeight: FontWeight.bold,
+                  //                   fontSize: 12),
+                  //             )
+                  //           ],
+                  //         ),
+                  //         color: Colors.white,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Expanded(
+                  //   child: Container(
+                  //     padding: EdgeInsets.all(15.0),
+                  //     width: double.infinity,
+                  //     child: RaisedButton(
+                  //       onPressed: () {
+                  //         Navigator.of(context).pushNamed('/equipes');
+                  //       },
+                  //       elevation: 5.0,
+                  //       padding: EdgeInsets.all(15.0),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(8.0),
+                  //       ),
+                  //       child: Column(
+                  //         children: <Widget>[
+                  //           Icon(
+                  //             Icons.people,
+                  //             size: 50,
+                  //             color: ConstColors.ccBlueVioletWheel,
+                  //           ),
+                  //           Text(
+                  //             'EQUIPES',
+                  //             style: TextStyle(
+                  //                 color: ConstColors.ccBlueVioletWheel,
+                  //                 fontFamily: 'Google',
+                  //                 fontWeight: FontWeight.bold,
+                  //                 fontSize: 12),
+                  //           )
+                  //         ],
+                  //       ),
+                  //       color: Colors.white,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -280,6 +354,71 @@ class _WelcomePageTreinadorState
         ],
       ),
       color: Colors.white,
+    );
+  }
+
+  _botaoComFoto(String assetPath, btnText, route, IconData icon) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed(route);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height / 3.5,
+                decoration: BoxDecoration(
+                  // color: Colors.yellow,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  image: DecorationImage(
+                      image: AssetImage(assetPath), fit: BoxFit.fill),
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 3.5,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Colors.white,
+                    gradient: LinearGradient(
+                        begin: FractionalOffset.topRight,
+                        end: FractionalOffset.bottomLeft,
+                        colors: [
+                          Colors.white.withOpacity(0.35),
+                          Colors.white,
+                        ],
+                        stops: [
+                          0.0,
+                          1.0
+                        ])),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(
+                      icon,
+                      size: 50,
+                      color: ConstColors.ccBlueVioletWheel,
+                    ),
+                    Text(
+                      btnText,
+                      style: TextStyle(
+                          color: ConstColors.ccBlueVioletWheel,
+                          fontFamily: 'Google',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

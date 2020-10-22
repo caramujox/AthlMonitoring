@@ -51,7 +51,7 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
   _showLogo() {
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 70.0, 0, 0),
-      child: Image.asset('assets/images/gaspar_vetorizado.png',
+      child: Image.asset('assets/images/logoalvoaaabm_400x400.jpg',
           height: 250, width: 250),
     );
   }

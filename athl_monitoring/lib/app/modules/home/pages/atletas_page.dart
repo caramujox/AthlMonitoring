@@ -27,7 +27,9 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
         child: Column(
           children: <Widget>[
             // SizedBox(height: 15.0,),
-            TitlePage(titulo: "Atletas",),
+            TitlePage(
+              titulo: "Atletas",
+            ),
             const Divider(
               color: Color(0xFFb6a5c4),
               height: 20,
@@ -35,79 +37,82 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
               indent: 20,
               endIndent: 20,
             ),
-            Observer(builder: (_) {
-              if (controller.atletaList.data == null) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (controller.atletaList.hasError) {
-                return Center(
-                    child: RaisedButton(
-                  onPressed: controller.getList,
-                  child: Text('Error'),
-                ));
-              } else {
-                List<AtletaModel> list = controller.atletaList.data;
-                return Stack(children: <Widget>[
-                  Container(
-                    child: FutureBuilder(
-                      builder: (BuildContext context,
-                          AsyncSnapshot<dynamic> snapshot) {
-                        return GridView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            gridDelegate:
-                                new SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3),
-                            itemCount: list.length + 1,
-                            itemBuilder: (context, index) {
-                              if (index == 0) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        border: Border.all(
-                                            color: Colors.purple.shade200)),
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.add,
-                                        size: 40,
-                                        color: ConstColors.ccBlueVioletWheel,
+            Expanded(
+              child: Observer(builder: (_) {
+                if (controller.atletaList.data == null) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (controller.atletaList.hasError) {
+                  return Center(
+                      child: RaisedButton(
+                    onPressed: controller.getList,
+                    child: Text('Error'),
+                  ));
+                } else {
+                  List<AtletaModel> list = controller.atletaList.data;
+                  return Stack(children: <Widget>[
+                    Container(
+                      child: FutureBuilder(
+                        builder: (BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot) {
+                          return GridView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  new SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3),
+                              itemCount: list.length + 1,
+                              itemBuilder: (context, index) {
+                                if (index == 0) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          border: Border.all(
+                                              color: Colors.purple.shade200)),
+                                      child: IconButton(
+                                        icon: Icon(
+                                          Icons.add,
+                                          size: 40,
+                                          color: ConstColors.ccBlueVioletWheel,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .pushNamed('/regAtleta');
+                                        },
                                       ),
-                                      onPressed: () {
-                                        Navigator.of(context)
-                                            .pushNamed('/regAtleta');
-                                      },
                                     ),
-                                  ),
-                                );
-                              }
-                              return AnimationConfiguration.staggeredGrid(
-                                  position: index,
-                                  columnCount: 3,
-                                  duration: const Duration(microseconds: 375),
-                                  child: ScaleAnimation(
-                                    child: GestureDetector(
-                                      child: GridItem(
-                                        index: index,
-                                        nome: list[index - 1].nome,
-                                        num: list[index - 1].number.toString(),
-                                        photoUrl: list[index - 1].urlPhoto,
+                                  );
+                                }
+                                return AnimationConfiguration.staggeredGrid(
+                                    position: index,
+                                    columnCount: 3,
+                                    duration: const Duration(microseconds: 375),
+                                    child: ScaleAnimation(
+                                      child: GestureDetector(
+                                        child: GridItem(
+                                          index: index,
+                                          nome: list[index - 1].nome,
+                                          num:
+                                              list[index - 1].number.toString(),
+                                          photoUrl: list[index - 1].urlPhoto,
+                                        ),
+                                        onTap: () {
+                                          print("topper");
+                                        },
                                       ),
-                                      onTap: () {
-                                        print("topper");
-                                      },
-                                    ),
-                                  ));
-                            });
-                      },
-                    ),
-                  )
-                ]);
-              }
-            }),
+                                    ));
+                              });
+                        },
+                      ),
+                    )
+                  ]);
+                }
+              }),
+            ),
           ],
         ),
       ),

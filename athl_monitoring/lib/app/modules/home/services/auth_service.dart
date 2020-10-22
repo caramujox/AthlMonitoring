@@ -125,8 +125,8 @@ class AuthService implements IBaseAuth {
     FirebaseUser user = await _auth.currentUser();
 
     userRepository.save(new UserModel(
-        nome: user.displayName,
-        urlPhoto: user.photoUrl,
+        nome: user.displayName, 
+        urlPhoto: user.photoUrl == null ? "" : user.photoUrl,
         email: user.email,
         uid: user.uid));
 
