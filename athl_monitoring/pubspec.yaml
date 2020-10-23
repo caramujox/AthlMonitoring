@@ -41,6 +41,7 @@ dependencies:
   firebase_core: ^0.4.0+8
   firebase_analytics: ^5.0.6
   uuid: ^2.2.2
+  auto_size_text: ^2.1.0
      
 
   flutter:
@@ -75,7 +76,13 @@ flutter:
   - assets/images/welcome4.png
   - assets/images/logoalvoaaabm_400x400.jpg
   - assets/images/equipe.png
+  - assets/images/equipe2.png
+  - assets/images/equipe3.png
+  - assets/images/equipe4.png
   - assets/images/atleta.png
+  - assets/images/atleta2.png
+  - assets/images/atleta3.png
+  - assets/images/atleta4.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

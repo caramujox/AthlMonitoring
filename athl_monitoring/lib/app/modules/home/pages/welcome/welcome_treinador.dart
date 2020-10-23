@@ -1,6 +1,7 @@
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -87,55 +88,56 @@ class _WelcomePageTreinadorState
             ),
             onTap: () {},
           ),
-          ListTile(),
-          ListTile(),
-          ListTile(),
-          ListTile(),
-          ListTile(),
-          ListTile(),
-          ListTile(),
-          ListTile(),
-          ListTile(),
-          ListTile(
-              leading: Icon(
-                Icons.live_help,
-                color: ConstColors.ccBlueVioletWheel,
-              ),
-              title: Text(
-                'Sobre nós',
-                style: TextStyle(
-                    color: ConstColors.ccBlueVioletWheel,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 20),
-              ),
-              onTap: () {
-                controller.signOut();
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/authpage', (route) => false);
-              }),
-          ListTile(
-              leading: Icon(
-                Icons.exit_to_app,
-                color: ConstColors.ccBlueVioletWheel,
-              ),
-              title: Text(
-                'Logout',
-                style: TextStyle(
-                    color: ConstColors.ccBlueVioletWheel,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 20),
-              ),
-              onTap: () {
-                controller.signOut();
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/authpage', (route) => false);
-              }),
           Divider(
             color: Colors.grey,
             height: 15,
             thickness: 1.5,
             indent: 20,
             endIndent: 20,
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: ListTile(
+                  leading: Icon(
+                    Icons.live_help,
+                    color: ConstColors.ccBlueVioletWheel,
+                  ),
+                  title: Text(
+                    'Sobre nós',
+                    style: TextStyle(
+                        color: ConstColors.ccBlueVioletWheel,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 20),
+                  ),
+                  onTap: () {
+                    controller.signOut();
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/authpage', (route) => false);
+                  }),
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: ListTile(
+                  leading: Icon(
+                    Icons.exit_to_app,
+                    color: ConstColors.ccBlueVioletWheel,
+                  ),
+                  title: Text(
+                    'Logout',
+                    style: TextStyle(
+                        color: ConstColors.ccBlueVioletWheel,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 20),
+                  ),
+                  onTap: () {
+                    controller.signOut();
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/authpage', (route) => false);
+                  }),
+            ),
           ),
         ],
       ),
@@ -148,18 +150,17 @@ class _WelcomePageTreinadorState
       //padding: EdgeInsets.all(30),
       child: Column(
         children: <Widget>[
+          //"app bar"
           Container(
             child: Row(
-              children: [
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0, left: 10.0),
                   child: GestureDetector(
                     onTap: () {
                       _scaffoldKey.currentState.openDrawer();
                     },
-                    // color: ConstColors.ccBlueVioletWheel,
-                    // alignment: Alignment.centerLeft,
-                    // icon: Icon(Icons.menu, size: 40,),
                     child: CircleAvatar(
                       radius: 25,
                       backgroundColor: ConstColors.ccBlueVioletWheel,
@@ -168,29 +169,25 @@ class _WelcomePageTreinadorState
                             ? AssetImage(
                                 "assets/images/account_circle_white.png")
                             : NetworkImage(user.urlPhoto),
-                        radius: 20,
+                        radius: 23,
                         backgroundColor: Colors.transparent,
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
-          //"app bar"
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 30.0, top: 45.0),
-                  child: Text(
-                    'Bem vindo, treinador!',
-                    style: TextStyle(
-                        color: Color(0xff230a42),
-                        fontFamily: 'Google',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 32),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 13.0, top: 45.0, bottom: 10.0),
+                    child: AutoSizeText(
+                      'Bem vindo, treinador!',
+                      maxLines: 1,
+                      style: TextStyle(
+                          color: Color(0xff230a42),
+                          fontFamily: 'Google',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 64),
+                    ),
                   ),
                 )
               ],
@@ -271,82 +268,10 @@ class _WelcomePageTreinadorState
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  _botaoComFoto("assets/images/atleta.png", "ATLETAS",
+                  _botaoComFoto("assets/images/atleta4.png", "ATLETAS",
                       "/atletas", Icons.person),
                   _botaoComFoto("assets/images/equipe.png", "EQUIPES",
                       "/equipes", Icons.people),
-                  // Expanded(
-                  //   child: Container(
-                  //     padding: EdgeInsets.all(15.0),
-                  //     width: double.infinity,
-                  //     child: SizedBox(
-                  //       child: RaisedButton(
-                  //         onPressed: () {
-                  //           Navigator.of(context).pushNamed('/atletas');
-                  //         },
-                  //         elevation: 5.0,
-                  //         padding: EdgeInsets.all(15.0),
-                  //         shape: RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(8.0),
-                  //         ),
-                  //         child: Column(
-                  //           crossAxisAlignment: CrossAxisAlignment.center,
-                  //           mainAxisAlignment: MainAxisAlignment.center,
-                  //           children: <Widget>[
-                  //             Icon(
-                  //               Icons.person,
-                  //               size: 50,
-                  //               color: ConstColors.ccBlueVioletWheel,
-                  //             ),
-                  //             Text(
-                  //               'ATLETAS',
-                  //               style: TextStyle(
-                  //                   color: ConstColors.ccBlueVioletWheel,
-                  //                   fontFamily: 'Google',
-                  //                   fontWeight: FontWeight.bold,
-                  //                   fontSize: 12),
-                  //             )
-                  //           ],
-                  //         ),
-                  //         color: Colors.white,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // Expanded(
-                  //   child: Container(
-                  //     padding: EdgeInsets.all(15.0),
-                  //     width: double.infinity,
-                  //     child: RaisedButton(
-                  //       onPressed: () {
-                  //         Navigator.of(context).pushNamed('/equipes');
-                  //       },
-                  //       elevation: 5.0,
-                  //       padding: EdgeInsets.all(15.0),
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(8.0),
-                  //       ),
-                  //       child: Column(
-                  //         children: <Widget>[
-                  //           Icon(
-                  //             Icons.people,
-                  //             size: 50,
-                  //             color: ConstColors.ccBlueVioletWheel,
-                  //           ),
-                  //           Text(
-                  //             'EQUIPES',
-                  //             style: TextStyle(
-                  //                 color: ConstColors.ccBlueVioletWheel,
-                  //                 fontFamily: 'Google',
-                  //                 fontWeight: FontWeight.bold,
-                  //                 fontSize: 12),
-                  //           )
-                  //         ],
-                  //       ),
-                  //       color: Colors.white,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -374,7 +299,7 @@ class _WelcomePageTreinadorState
                   // color: Colors.yellow,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   image: DecorationImage(
-                      image: AssetImage(assetPath), fit: BoxFit.fill),
+                      image: AssetImage(assetPath), fit: BoxFit.cover),
                 ),
               ),
               Container(
@@ -396,21 +321,27 @@ class _WelcomePageTreinadorState
               ),
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  alignment: WrapAlignment.center,
+                  direction: Axis.horizontal,
                   children: [
-                    Icon(
-                      icon,
-                      size: 50,
-                      color: ConstColors.ccBlueVioletWheel,
+                    Flexible(
+                      child: Icon(
+                        icon,
+                        size: 50,
+                        color: ConstColors.ccBlueVioletWheel,
+                      ),
                     ),
-                    Text(
-                      btnText,
-                      style: TextStyle(
-                          color: ConstColors.ccBlueVioletWheel,
-                          fontFamily: 'Google',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24),
+                    Flexible(
+                      child: Text(
+                        btnText,
+                        style: TextStyle(
+                            color: ConstColors.ccBlueVioletWheel,
+                            fontFamily: 'Google',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
                     ),
                   ],
                 ),

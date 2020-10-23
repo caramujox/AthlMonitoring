@@ -1,4 +1,5 @@
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class volleyballGame extends StatefulWidget {
@@ -31,17 +32,18 @@ class _volleyballGameState extends State<volleyballGame> {
             children: [
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(10.0),
                   width: double.infinity,
                   child: RaisedButton(
                     elevation: 5.0,
                     padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
-                    color: Colors.blue.shade400,
-                    child: Text("Ponto de Saque",
+                    color: ConstColors.ccBlueVioletWheel,
+                    child: AutoSizeText("Ponto de Saque",
+                        maxLines: 1,
                         style: TextStyle(
                           color: Colors.white,
                           letterSpacing: 1.5,
-                          fontSize: 18.0,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
@@ -51,61 +53,18 @@ class _volleyballGameState extends State<volleyballGame> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(10.0),
                   width: double.infinity,
                   child: RaisedButton(
                     elevation: 5.0,
                     padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
-                    color: Colors.red.shade400,
-                    child: Text("Erro de Saque",
+                    color: Colors.yellow.shade600,
+                    child: AutoSizeText("Erro de Saque",
+                        maxLines: 1,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: ConstColors.ccBlueVioletWheel,
                           letterSpacing: 1.5,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        )),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(15.0),
-                  width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 5.0,
-                    padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
-                    color: Colors.blue.shade400,
-                    child: Text("Ponto de Ataque",
-                        style: TextStyle(
-                          color: Colors.white,
-                          letterSpacing: 1.5,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        )),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(15.0),
-                  width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 5.0,
-                    padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
-                    color: Colors.red.shade400,
-                    child: Text("Ataque Bloqueado",
-                        style: TextStyle(
-                          color: Colors.white,
-                          letterSpacing: 1.5,
-                          fontSize: 15.0,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
@@ -119,17 +78,18 @@ class _volleyballGameState extends State<volleyballGame> {
             children: [
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(10.0),
                   width: double.infinity,
                   child: RaisedButton(
                     elevation: 5.0,
                     padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
-                    color: Colors.blue.shade400,
-                    child: Text("Ponto de Bloqueio",
+                    color: ConstColors.ccBlueVioletWheel,
+                    child: AutoSizeText("Ponto de Ataque",
+                        maxLines: 1,
                         style: TextStyle(
                           color: Colors.white,
                           letterSpacing: 1.5,
-                          fontSize: 15.0,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
@@ -139,61 +99,18 @@ class _volleyballGameState extends State<volleyballGame> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(10.0),
                   width: double.infinity,
                   child: RaisedButton(
                     elevation: 5.0,
                     padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
-                    color: Colors.red.shade400,
-                    child: Text("Erro de Ataque",
+                    color: Colors.yellow.shade600,
+                    child: AutoSizeText("Ataque Bloqueado",
+                        maxLines: 1,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: ConstColors.ccBlueVioletWheel,
                           letterSpacing: 1.5,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        )),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(15.0),
-                  width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 5.0,
-                    padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
-                    color: Colors.blue.shade400,
-                    child: Text("Erro do Oponente",
-                        style: TextStyle(
-                          color: Colors.white,
-                          letterSpacing: 1.5,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        )),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(15.0),
-                  width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 5.0,
-                    padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
-                    color: Colors.red.shade400,
-                    child: Text("Erro Genérico",
-                        style: TextStyle(
-                          color: Colors.white,
-                          letterSpacing: 1.5,
-                          fontSize: 15.0,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
@@ -207,17 +124,110 @@ class _volleyballGameState extends State<volleyballGame> {
             children: [
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(10.0),
                   width: double.infinity,
                   child: RaisedButton(
                     elevation: 5.0,
                     padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
-                    color: Colors.red.shade400,
-                    child: Text("Ponto do Oponente",
+                    color: ConstColors.ccBlueVioletWheel,
+                    child: AutoSizeText("Ponto de Bloqueio",
+                        maxLines: 1,
                         style: TextStyle(
                           color: Colors.white,
                           letterSpacing: 1.5,
-                          fontSize: 18.0,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        )),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  width: double.infinity,
+                  child: RaisedButton(
+                    elevation: 5.0,
+                    padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
+                    color: Colors.yellow.shade600,
+                    child: AutoSizeText("Erro de Ataque",
+                    maxLines: 1,
+                        style: TextStyle(
+                          color: ConstColors.ccBlueVioletWheel,
+                          letterSpacing: 1.5,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        )),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  width: double.infinity,
+                  child: RaisedButton(
+                    elevation: 5.0,
+                    padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
+                    color: ConstColors.ccBlueVioletWheel,
+                    child: AutoSizeText("Erro do Oponente",
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 1.5,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        )),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  width: double.infinity,
+                  child: RaisedButton(
+                    elevation: 5.0,
+                    padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
+                    color: Colors.yellow.shade600,
+                    child: AutoSizeText("Erro Genérico",
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: ConstColors.ccBlueVioletWheel,
+                          letterSpacing: 1.5,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        )),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  width: double.infinity,
+                  child: RaisedButton(
+                    elevation: 5.0,
+                    padding: EdgeInsets.only(top: 45.0, bottom: 45.0),
+                    color: Colors.yellow.shade600,
+                    child: AutoSizeText("Ponto do Oponente",
+                    maxLines: 1,
+                        style: TextStyle(
+                          color: ConstColors.ccBlueVioletWheel,
+                          letterSpacing: 1.5,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),

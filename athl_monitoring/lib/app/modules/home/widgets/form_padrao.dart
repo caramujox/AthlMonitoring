@@ -46,7 +46,7 @@ class FormPadrao extends StatelessWidget {
           child: TextFormField(
             controller: formEditingController,
             style: TextStyle(
-              color: Colors.white,
+              color: ConstColors.ccBlueVioletWheel,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(

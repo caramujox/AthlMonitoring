@@ -1,5 +1,6 @@
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:athl_monitoring/app/modules/home/services/auth_service.dart';
+import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -80,7 +81,7 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
           Text(
             'Email',
             style: TextStyle(
-              color: Colors.white,
+              color: ConstColors.ccBlueVioletWheel,
               fontWeight: FontWeight.bold,
               fontFamily: 'OpenSans',
             ),
