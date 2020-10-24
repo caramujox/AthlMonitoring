@@ -212,7 +212,7 @@ class _WelcomePageTreinadorState
                 width: double.infinity,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/pregame');
+                    Navigator.of(context).pushNamed('/volleyballGame');
                   },
                   elevation: 5.0,
                   padding: EdgeInsets.all(15.0),

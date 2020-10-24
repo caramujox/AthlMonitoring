@@ -28,35 +28,54 @@ class _volleyballGameState extends State<volleyballGame> {
 
   _volleyGame() {
     return Container(
+      color: ConstColors.ccMagnolia,
       child: ListView(
         padding: EdgeInsets.only(top: 25.0),
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height / 20,
             child: (Container(
-              color: Colors.blue,
+              color: ConstColors.ccMagnolia,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
                     child: AutoSizeText(
-                      'Nome da Equipe',
+                      'Vôlei Mauá',
                       maxLines: 1,
-                      style: TextStyle(fontSize: 40.0),
+                      style: TextStyle(
+                          color: ConstColors.ccBlueVioletWheel,
+                          letterSpacing: 1.5,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                          fontStyle: FontStyle.italic),
                     ),
                   ),
                   Flexible(
                     child: AutoSizeText(
-                      'Nome da Competição',
+                      'NDU',
                       maxLines: 1,
-                      style: TextStyle(fontSize: 40.0),
+                      style: TextStyle(
+                          color: ConstColors.ccBlueVioletWheel,
+                          letterSpacing: 1.5,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                          fontStyle: FontStyle.italic),
                     ),
                   ),
                   Flexible(
                     child: AutoSizeText(
                       _currentDate(),
                       maxLines: 1,
-                      style: TextStyle(fontSize: 40.0),
+                      style: TextStyle(
+                          color: ConstColors.ccBlueVioletWheel,
+                          letterSpacing: 1.5,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                          fontStyle: FontStyle.italic),
                     ),
                   ),
                 ],
@@ -123,17 +142,21 @@ class _volleyballGameState extends State<volleyballGame> {
               ),
             ),
           ),
-          const Divider(
-            color: Color(0xFFb6a5c4),
-            height: 20,
-            thickness: 1.5,
-            indent: 20,
-            endIndent: 20,
+          Container(
+            color: ConstColors.ccMagnolia,
+            child: const Divider(
+              color: Color(0xFFb6a5c4),
+              height: 20,
+              thickness: 1.5,
+              indent: 20,
+              endIndent: 20,
+            ),
           ),
           Row(
             children: [
               Expanded(
                 child: Container(
+                  color: ConstColors.ccMagnolia,
                   padding: EdgeInsets.all(10.0),
                   width: double.infinity,
                   child: RaisedButton(

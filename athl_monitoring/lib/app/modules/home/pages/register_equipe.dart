@@ -94,7 +94,7 @@ class _RegisterEquipeFormState
                                       ),
                                     )
                                   : AssetImage(
-                                      "assets/images/account_circle_grey.png"),
+                                      "assets/images/account_circle_white.png"),
                             ),
                           ),
                           onTap: () async {
