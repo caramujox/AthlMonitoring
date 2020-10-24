@@ -56,7 +56,7 @@ class _RegisterAtletaFormState
               Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 40.0,
                     vertical: 40.0,
@@ -144,13 +144,7 @@ class _RegisterAtletaFormState
                         formIcon: Icons.assignment_ind,
                         formHint: "Digite o Número do Atleta",
                         formTitle: "Número do Atleta",
-                      ),
-                      SizedBox(height: 10.0),
-                      //
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[],
-                      ),
+                      ),                
                       _buildRegisterBtn(),
                     ],
                   ),
@@ -160,6 +154,8 @@ class _RegisterAtletaFormState
           ),
         ),
       ),
+    
+    resizeToAvoidBottomInset: true,
     );
   }
 

@@ -54,7 +54,7 @@ class _RegisterEquipeFormState
               Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 40.0,
                     vertical: 120.0,
@@ -145,6 +145,7 @@ class _RegisterEquipeFormState
           ),
         ),
       ),
+      resizeToAvoidBottomInset: true,
     );
   }
 
