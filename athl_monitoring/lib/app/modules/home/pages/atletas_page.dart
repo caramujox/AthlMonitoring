@@ -90,7 +90,7 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
                                 return AnimationConfiguration.staggeredGrid(
                                     position: index,
                                     columnCount: 3,
-                                    duration: const Duration(microseconds: 375),
+                                    duration: const Duration(microseconds: 575),
                                     child: ScaleAnimation(
                                       child: GestureDetector(
                                         child: GridItem(

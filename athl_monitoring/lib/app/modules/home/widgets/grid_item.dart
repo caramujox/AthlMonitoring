@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -25,7 +27,7 @@ class GridItem extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: photoUrl == null
-                    ? Image.asset("assets/images/account_circle_grey.png")
+                    ? Image.asset("assets/images/account_circle_white.png")
                     : FutureBuilder<Widget>(
                         future: _getImage(photoUrl),
                         builder: (context, snapshot) {
@@ -52,12 +54,12 @@ class GridItem extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                         color: ConstColors.ccBlueVioletWheel,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10))),
+                        borderRadius:
+                            BorderRadius.only(topLeft: Radius.circular(10))),
                     child: Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: Text(
-                        nome == null ? 'sem nome' : nome,
+                        nome == null ? 'Sem Nome' : nome,
                         style: TextStyle(
                           fontSize: 18,
                           color: ConstColors.ccMagnolia,
@@ -74,8 +76,8 @@ class GridItem extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           color: ConstColors.ccBlueVioletWheel,
-                          borderRadius:
-                              BorderRadius.only(bottomRight: Radius.circular(10))),
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(10))),
                       child: Text(
                         num != null ? num : "",
                         style: TextStyle(
@@ -92,6 +94,7 @@ class GridItem extends StatelessWidget {
 
   Future<Widget> _getImage(String image) async {
     Image m;
+    CachedNetworkImage n;
 
     await FirebaseStorage.instance
         .ref()
@@ -102,7 +105,13 @@ class GridItem extends StatelessWidget {
         downloadURL.toString(),
         fit: BoxFit.cover,
       );
+      n = CachedNetworkImage(
+        placeholder: (context, url) => new Container(
+          color: Colors.transparent,
+        ),
+        imageUrl: image,
+      );
     });
-    return m;
+    return n;
   }
 }
