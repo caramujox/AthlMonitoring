@@ -1,5 +1,3 @@
-import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
-import 'package:athl_monitoring/app/modules/home/util/custom_color_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 

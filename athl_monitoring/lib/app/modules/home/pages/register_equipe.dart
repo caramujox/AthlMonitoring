@@ -134,7 +134,9 @@ class _RegisterEquipeFormState
                       _buildRegisterBtn(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[],
+                        children: <Widget>[
+                          
+                        ],
                       ),
                       // _buildRegisterBtn(),
                     ],

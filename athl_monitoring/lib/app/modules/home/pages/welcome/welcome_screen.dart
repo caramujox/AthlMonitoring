@@ -41,13 +41,13 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
     super.initState();
     new Timer(new Duration(milliseconds: 0), () {
       checkFirstSeen();
-     });
+    });
   }
 
   Future checkFirstSeen() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();    
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     // bool _seen = (prefs.getBool('seen') ?? false);
-    
+
     bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
 
     if (_seen) {
@@ -62,6 +62,11 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        controller.signOut();
+        print('vazari');
+        Navigator.of(context).pushNamed('/authpage');
+      }),
       body: Container(
         color: Colors.white,
         child: Stack(

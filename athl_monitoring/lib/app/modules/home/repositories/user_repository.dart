@@ -24,9 +24,11 @@ class UserRepository extends IUserRepository {
   Future<UserModel> index(FirebaseUser model) {
     return firestore
         .collection('users')
-        .document(model.uid)
-        .get()
-        .then((doc) => UserModel.fromDocument(doc));
+        .where('firebaseId', isEqualTo: model.uid)
+        .getDocuments()
+        .then((querySnapshot) {
+      return UserModel.fromDocument(querySnapshot.documents.first);
+    });
   }
 
   @override
@@ -43,6 +45,7 @@ class UserRepository extends IUserRepository {
         'email': model.email,
         'uid': model.uid,
         'urlPhoto': model.urlPhoto,
+        'firebaseId': model.firebaseId
       });
     }
   }

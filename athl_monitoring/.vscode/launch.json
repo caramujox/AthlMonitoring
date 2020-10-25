@@ -8,13 +8,13 @@
           "name": "Phone",
           "request": "launch",
           "type": "dart",
-          "deviceId": "emulator-5556"
+          "deviceId": "emulator-5554"
         },
         {
           "name": "Tablet",
           "request": "launch",
           "type": "dart",
-          "deviceId": "emulator-5554"
+          "deviceId": "emulator-5556"
         }
       ],
       "compounds": [

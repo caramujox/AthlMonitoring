@@ -11,7 +11,7 @@ abstract class _UserControllerBase with Store {
   final IBaseAuth auth;
 
   _UserControllerBase({@required this.auth}) {
-   getUserInfo();
+  getUserInfo();
   }
 
   @observable

@@ -2,7 +2,6 @@ import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dar
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -26,8 +25,8 @@ class _WelcomePageTreinadorState
   _constroiWelcomeTreinador() {
     return Scaffold(
       key: _scaffoldKey,
-      body: _welcomeBodyTreinador(),
       drawer: _welcomeTreinadorDrawer(),
+      body: _welcomeBodyTreinador(),      
     );
   }
 
@@ -145,12 +144,10 @@ class _WelcomePageTreinadorState
   }
 
   _welcomeBodyTreinador() {
-    UserModel user = controller.userModel.result;
+    UserModel user = controller.userModel.result;      
     return Container(
-      //padding: EdgeInsets.all(30),
       child: Column(
         children: <Widget>[
-          //"app bar"
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,

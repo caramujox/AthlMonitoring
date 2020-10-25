@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/user_repository_interface.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -15,6 +16,7 @@ class AuthService implements IBaseAuth {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin facebookLogin = new FacebookLogin();
   final IUserRepository userRepository;
+  var uuid = Uuid();
 
   AuthService({@required this.userRepository});
 
@@ -59,14 +61,14 @@ class AuthService implements IBaseAuth {
     );
 
     FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-    user.updateProfile(info);
-    var uuid = Uuid();
+    user.updateProfile(info);   
 
-    userRepository.save(new UserModel(
-        nome: user.displayName,
-        urlPhoto: user.photoUrl,
-        email: user.email,
-        uid: uuid.v1()));
+    _cadastrarUserFirebase(user);
+    // userRepository.save(new UserModel(
+    //     nome: user.displayName,
+    //     urlPhoto: user.photoUrl,
+    //     email: user.email,
+    //     uid: uuid.v1()));
 
     return user;
   }
@@ -142,5 +144,25 @@ class AuthService implements IBaseAuth {
   Future<UserModel> getUserModel() async {
     FirebaseUser x = await _auth.currentUser();
     return userRepository.index(x);
+  }
+
+
+    _cadastrarUserFirebase(FirebaseUser user) async {
+    final firestoreRef = Firestore.instance.collection("users");
+    String fbid = '';
+
+    _auth.currentUser().then((value) => fbid = value.uid);
+
+    if ((await firestoreRef.document(user.uid.toString()).get()).exists)
+      return;
+    else {
+      userRepository.save(new UserModel(
+        nome: user.displayName,
+        urlPhoto: user.photoUrl,
+        email: user.email,
+        firebaseId: fbid,
+        uid: uuid.v1()));
+        
+    }
   }
 }
