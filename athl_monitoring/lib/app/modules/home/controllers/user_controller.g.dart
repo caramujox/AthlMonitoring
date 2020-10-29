@@ -27,13 +27,13 @@ mixin _$UserController on _UserControllerBase, Store {
   final _$userModelAtom = Atom(name: '_UserControllerBase.userModel');
 
   @override
-  ObservableFuture<UserModel> get userModel {
+  ObservableFuture<dynamic> get userModel {
     _$userModelAtom.reportRead();
     return super.userModel;
   }
 
   @override
-  set userModel(ObservableFuture<UserModel> value) {
+  set userModel(ObservableFuture<dynamic> value) {
     _$userModelAtom.reportWrite(value, super.userModel, () {
       super.userModel = value;
     });

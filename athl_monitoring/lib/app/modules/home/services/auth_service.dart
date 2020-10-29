@@ -64,11 +64,7 @@ class AuthService implements IBaseAuth {
     user.updateProfile(info);   
 
     _cadastrarUserFirebase(user);
-    // userRepository.save(new UserModel(
-    //     nome: user.displayName,
-    //     urlPhoto: user.photoUrl,
-    //     email: user.email,
-    //     uid: uuid.v1()));
+
 
     return user;
   }
@@ -141,20 +137,26 @@ class AuthService implements IBaseAuth {
   }
 
   @override
-  Future<UserModel> getUserModel() async {
+  Future<dynamic> getUserModel() async {
     FirebaseUser x = await _auth.currentUser();
-    return userRepository.index(x);
+
+    if (x == null)
+      return;
+    else{
+      var ret = await userRepository.index(x);
+    return ret;
+    }
   }
 
 
     _cadastrarUserFirebase(FirebaseUser user) async {
     final firestoreRef = Firestore.instance.collection("users");
     String fbid = '';
-
     _auth.currentUser().then((value) => fbid = value.uid);
 
+
     if ((await firestoreRef.document(user.uid.toString()).get()).exists)
-      return;
+      return await firestoreRef.document(user.uid.toString()).get();
     else {
       userRepository.save(new UserModel(
         nome: user.displayName,

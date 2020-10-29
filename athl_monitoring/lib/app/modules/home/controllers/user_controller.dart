@@ -18,7 +18,7 @@ abstract class _UserControllerBase with Store {
   ObservableFuture<FirebaseUser> user;
 
   @observable
-  ObservableFuture<UserModel> userModel;
+  ObservableFuture<dynamic> userModel;
 
   @observable
   ObservableStream<List<UserModel>> userList;

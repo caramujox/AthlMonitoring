@@ -21,5 +21,5 @@ abstract class IBaseAuth {
 
   Stream<List<UserModel>> get();
 
-  Future<UserModel> getUserModel();
+  Future<dynamic> getUserModel();
 }

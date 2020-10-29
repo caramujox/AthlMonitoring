@@ -21,16 +21,19 @@ class _WrapperPageState extends ModularState<WrapperPage, UserController> {
   FirebaseUser _user;
 
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() {    
     super.initState();
     controller.getUser().then((user) {
       setState(() {
         if (user != null) {
           _user = user;
+          authStatus = AuthStatus.LOGGED_IN;
         }
-        authStatus =
-            user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
+        else {
+          authStatus = AuthStatus.NOT_LOGGED_IN;
+        }
+        // authStatus =
+        //     _user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
       });
     });
   }

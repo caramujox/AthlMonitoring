@@ -112,7 +112,7 @@ class _WelcomePageTreinadorState
                   onTap: () {
                     controller.signOut();
                     Navigator.pushNamedAndRemoveUntil(
-                        context, '/authpage', (route) => false);
+                        context, '/', (route) => false);
                   }),
             ),
           ),
@@ -134,7 +134,7 @@ class _WelcomePageTreinadorState
                   onTap: () {
                     controller.signOut();
                     Navigator.pushNamedAndRemoveUntil(
-                        context, '/authpage', (route) => false);
+                        context, '/', (route) => false);
                   }),
             ),
           ),
