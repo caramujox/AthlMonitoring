@@ -1,5 +1,4 @@
-import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game.dart';
-import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_treinador.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SlideItem extends StatelessWidget {
@@ -82,11 +81,7 @@ class SlideItem extends StatelessWidget {
                             fontFamily: 'OpenSans',
                           )),
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return volleyballGame();
-                          },
-                        ));
+                        Navigator.of(context).pushNamed('/welcomeRegisterAtleta');
                       },
                     ),
                     RaisedButton(

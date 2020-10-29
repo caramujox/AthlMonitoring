@@ -9,6 +9,21 @@ part of 'atleta_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AtletaController on _AtletaControllerBase, Store {
+  final _$userAtom = Atom(name: '_AtletaControllerBase.user');
+
+  @override
+  ObservableFuture<dynamic> get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(ObservableFuture<dynamic> value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
   final _$atletaListAtom = Atom(name: '_AtletaControllerBase.atletaList');
 
   @override
@@ -50,6 +65,17 @@ mixin _$AtletaController on _AtletaControllerBase, Store {
   }
 
   @override
+  dynamic register(AtletaModel model, UserModel firebaseUser) {
+    final _$actionInfo = _$_AtletaControllerBaseActionController.startAction(
+        name: '_AtletaControllerBase.register');
+    try {
+      return super.register(model, firebaseUser);
+    } finally {
+      _$_AtletaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic delete(AtletaModel model) {
     final _$actionInfo = _$_AtletaControllerBaseActionController.startAction(
         name: '_AtletaControllerBase.delete');
@@ -72,8 +98,20 @@ mixin _$AtletaController on _AtletaControllerBase, Store {
   }
 
   @override
+  dynamic getUser() {
+    final _$actionInfo = _$_AtletaControllerBaseActionController.startAction(
+        name: '_AtletaControllerBase.getUser');
+    try {
+      return super.getUser();
+    } finally {
+      _$_AtletaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+user: ${user},
 atletaList: ${atletaList}
     ''';
   }

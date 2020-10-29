@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/atleta_service_interface.dart';
+import 'package:athl_monitoring/app/modules/home/services/interfaces/base_auth_interface.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/upload_service_interface.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -13,11 +16,16 @@ class AtletaController = _AtletaControllerBase with _$AtletaController;
 abstract class _AtletaControllerBase with Store {
   final IAtletaService atletaService;
   final IUploadFIleService uploadService;
+  final IBaseAuth auth;
 
-  _AtletaControllerBase( {IAtletaService this.atletaService, this.uploadService,}) {
-    getList();
+  _AtletaControllerBase( {this.atletaService, this.uploadService, this.auth,}) {
+    // getList();
+    getUser();
   }
 
+  @observable
+  ObservableFuture<dynamic> user;
+  
   @observable
   ObservableStream<List<AtletaModel>> atletaList;
 
@@ -32,6 +40,11 @@ abstract class _AtletaControllerBase with Store {
   }
 
   @action
+  register(AtletaModel model, UserModel firebaseUser) {
+    atletaService.register(model, firebaseUser);
+  }
+
+  @action
   delete(AtletaModel model) {
     atletaService.delete(model);
   }
@@ -39,6 +52,12 @@ abstract class _AtletaControllerBase with Store {
   @action
   uploadPicture(String filePath, File file){
     return uploadService.startUpload(filePath, file);
+  }
+
+    @action
+  getUser() {    
+    user = auth.getUserModel().asObservable();
+    return user;
   }
 
   Future<PickedFile> pickImage(ImageSource source) async {
@@ -52,8 +71,7 @@ abstract class _AtletaControllerBase with Store {
     await uploadService.loadImage(image).then((downloadURL) {
       imageFile = Image.network(downloadURL.toString(),
       fit: BoxFit.scaleDown,);
-    });
-    
+    });    
     return imageFile;
   }
 }

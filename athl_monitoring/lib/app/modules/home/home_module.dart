@@ -45,6 +45,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
+
+        
+        //AtletasPage
         Bind<IAtletaService>((i) => AtletaService(atletaRepository: i.get())),
         Bind<IUploadFIleService>(
             (i) => UploadFileService(uploadFileRepository: i.get())),
@@ -54,17 +57,23 @@ class HomeModule extends ChildModule {
             storage: FirebaseStorage(
                 storageBucket: "gs://athlmonitoring-62273.appspot.com"))),
         Bind((i) =>
-            AtletaController(atletaService: i.get(), uploadService: i.get())),
+            AtletaController(atletaService: i.get(), uploadService: i.get(), auth: i.get())),
+
+        //EquipesPages
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
         Bind<IEquipeRepository>(
             (i) => EquipeRepository(firestore: Firestore.instance)),
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
         Bind((i) =>
             EquipeController(equipeService: i.get(), uploadService: i.get())),
+        
+        //Auth and Users
         Bind<IBaseAuth>((i) => AuthService(userRepository: i.get())),
         Bind<IUserRepository>(
             (i) => UserRepository(firestore: Firestore.instance)),
         Bind((i) => UserController(auth: i.get())),
+
+        //Captures
         Bind((i) => ImageCaputreController())
       ];
 
@@ -83,9 +92,9 @@ class HomeModule extends ChildModule {
         Router('/selecAtleta', child: (_, args) => SelecAtleta()),
         Router('/equipes', child: (_, args) => GridEquipePage()),
         Router('/welcomeRegisterAtleta',
-            child: (_, args) => welcomeRegisterAtleta()),
+            child: (_, args) => WelcomeRegisterAtleta()),
         Router('/welcomeRegisterTreinador',
-            child: (_, args) => welcomeRegisterTreinador()),
+            child: (_, args) => WelcomeRegisterTreinador()),
         Router('/volleyballGame', child: (_, args) => volleyballGame()),
       ];
 

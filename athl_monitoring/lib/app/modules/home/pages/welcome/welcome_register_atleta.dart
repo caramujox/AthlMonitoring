@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_utils.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,13 +12,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 
-class welcomeRegisterAtleta extends StatefulWidget {
+class WelcomeRegisterAtleta extends StatefulWidget {
   @override
-  _welcomeRegisterAtletaState createState() => _welcomeRegisterAtletaState();
+  _WelcomeRegisterAtletaState createState() => _WelcomeRegisterAtletaState();
 }
 
-class _welcomeRegisterAtletaState
-    extends ModularState<welcomeRegisterAtleta, AtletaController> {
+class _WelcomeRegisterAtletaState
+    extends ModularState<WelcomeRegisterAtleta, AtletaController> {
   final TextEditingController emailAtletaController = TextEditingController();
   final TextEditingController codEquipeController = TextEditingController();
   final TextEditingController numeroAtletaController = TextEditingController();
@@ -156,14 +157,15 @@ class _welcomeRegisterAtletaState
                 .uploadPicture(
                     '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png',
                     File(_image.path))
-                .onComplete;
+                .onComplete;                            
             AtletaModel model = AtletaModel(
-                email: emailAtletaController.text,
-                nome: nomeAtletaController.text,
-                number: int.parse(numeroAtletaController.text),
+                codEquipe: codEquipeController.text,
+                number: int.parse(numeroAtletaController.text),  
+                email: controller.user.value.email,
+                nome: controller.user.name,                           
                 urlPhoto:
                     '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
-            controller.save(model);
+            controller.register(model, controller.user.value);
             Navigator.of(context).pop();
           },
           elevation: 5.0,

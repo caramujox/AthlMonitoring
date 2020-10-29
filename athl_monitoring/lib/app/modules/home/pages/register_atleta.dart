@@ -175,6 +175,7 @@ class _RegisterAtletaFormState
                 email: emailAtletaController.text,
                 nome: nomeAtletaController.text,
                 number: int.parse(numeroAtletaController.text),
+                codEquipe: codEquipeController.text,
                 urlPhoto:
                     '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
             controller.save(model);

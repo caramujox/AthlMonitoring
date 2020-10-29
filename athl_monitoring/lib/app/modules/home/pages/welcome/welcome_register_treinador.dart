@@ -2,23 +2,20 @@ import 'dart:io';
 
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
-import 'package:athl_monitoring/app/modules/home/util/const_utils.dart';
-import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 
-class welcomeRegisterTreinador extends StatefulWidget {
+class WelcomeRegisterTreinador extends StatefulWidget {
   @override
-  _welcomeRegisterTreinadorState createState() =>
-      _welcomeRegisterTreinadorState();
+  _WelcomeRegisterTreinadorState createState() =>
+      _WelcomeRegisterTreinadorState();
 }
 
-class _welcomeRegisterTreinadorState
-    extends ModularState<welcomeRegisterTreinador, AtletaController> {
+class _WelcomeRegisterTreinadorState
+    extends ModularState<WelcomeRegisterTreinador, AtletaController> {
   final TextEditingController emailAtletaController = TextEditingController();
   final TextEditingController codEquipeController = TextEditingController();
   final TextEditingController numeroAtletaController = TextEditingController();
