@@ -166,7 +166,7 @@ class _WelcomeRegisterAtletaState
                 urlPhoto:
                     '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
             controller.register(model, controller.user.value);
-            Navigator.of(context).pop();
+            Navigator.of(context).pushNamedAndRemoveUntil('/welcomeAtleta', (route) => false);
           },
           elevation: 5.0,
           padding: EdgeInsets.all(15.0),

@@ -65,7 +65,13 @@ class AtletaRepository extends Disposable implements IAtletaRepository {
 
   @override
   Future register(AtletaModel model, UserModel fbuser) async {
-    if (model.reference == null) {
+    DocumentReference docRef = Firestore.instance
+        .collection('users')
+        .document(fbuser.uid)
+        .collection('atleta')
+        .document(fbuser.uid);
+
+    if (docRef.get() != null) {
       await Firestore.instance
           .collection('users')
           .document(fbuser.uid)

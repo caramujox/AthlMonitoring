@@ -21,14 +21,24 @@ class UserRepository extends IUserRepository {
   }
 
   @override
-  Future<UserModel> index(FirebaseUser model) {
-    return firestore
-        .collection('users')
-        .where('firebaseId', isEqualTo: model.uid)
-        .getDocuments()
-        .then((querySnapshot) {
-      return UserModel.fromDocument(querySnapshot.documents.first);
-    });
+  Future<UserModel> index(FirebaseUser model) async {
+   QuerySnapshot qsnp = await Firestore.instance.collection('users').where('firebaseId', isEqualTo: model.uid).getDocuments();
+   DocumentSnapshot doc = qsnp.documents.first;
+   UserModel teste = UserModel.fromDocument(doc);
+   if (teste == null){
+     print ("algo deu errado");
+     return null;
+   }
+   else
+    return teste;
+
+    // return firestore
+    //     .collection('users')
+    //     .where('firebaseId', isEqualTo: model.uid)
+    //     .getDocuments()
+    //     .then((querySnapshot) {
+    //   return UserModel.fromDocument(querySnapshot.documents.first);
+    // });
   }
 
   @override

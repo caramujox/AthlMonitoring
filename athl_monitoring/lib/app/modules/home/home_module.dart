@@ -1,4 +1,5 @@
 import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game.dart';
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_atleta_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_treinador.dart';
 import 'package:athl_monitoring/app/modules/home/pages/wrapper/wrapper_page.dart';
@@ -46,7 +47,7 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
 
-        
+
         //AtletasPage
         Bind<IAtletaService>((i) => AtletaService(atletaRepository: i.get())),
         Bind<IUploadFIleService>(
@@ -56,8 +57,8 @@ class HomeModule extends ChildModule {
         Bind<IUploadFileRepository>((i) => UploadFileRepository(
             storage: FirebaseStorage(
                 storageBucket: "gs://athlmonitoring-62273.appspot.com"))),
-        Bind((i) =>
-            AtletaController(atletaService: i.get(), uploadService: i.get(), auth: i.get())),
+        Bind((i) => AtletaController(
+            atletaService: i.get(), uploadService: i.get(), auth: i.get())),
 
         //EquipesPages
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
@@ -66,7 +67,7 @@ class HomeModule extends ChildModule {
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
         Bind((i) =>
             EquipeController(equipeService: i.get(), uploadService: i.get())),
-        
+
         //Auth and Users
         Bind<IBaseAuth>((i) => AuthService(userRepository: i.get())),
         Bind<IUserRepository>(
@@ -81,7 +82,7 @@ class HomeModule extends ChildModule {
   List<Router> get routers => [
         Router(Modular.initialRoute, child: (_, args) => WrapperPage()),
         Router('/welcomeTreinador', child: (_, args) => WelcomePageTreinador()),
-        Router('/welcomeAtleta', child: (_, args) => WelcomePageAtleta()),
+        Router('/welcomeAtleta', child: (_, args) => WelcomeAtletaPage()),
         Router('/atletas', child: (_, args) => AtletaPage()),
         Router('/authpage', child: (_, args) => AuthpagePage()),
         Router('/register', child: (_, args) => RegisterForm()),

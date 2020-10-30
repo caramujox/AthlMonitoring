@@ -15,10 +15,10 @@ abstract class _UserControllerBase with Store {
   }
 
   @observable
-  ObservableFuture<FirebaseUser> user;
+  FirebaseUser user;
 
   @observable
-  ObservableFuture<dynamic> userModel;
+  dynamic userModel;
 
   @observable
   ObservableStream<List<UserModel>> userList;
@@ -45,7 +45,7 @@ abstract class _UserControllerBase with Store {
 
   @action
   signOut() {
-    auth.signOut();
+   return auth.signOut();
   }
 
   @action
@@ -60,13 +60,13 @@ abstract class _UserControllerBase with Store {
 
   @action
   getUserInfo() {
-    userModel = auth.getUserModel().asObservable();
+    userModel = auth.getUserModel();
     return  userModel;
     }
 
   @action
-  getUser() {
-    user = auth.getCurrentUser().asObservable();
+  getUser() async{
+    user = await auth.getCurrentUser();
     return user;
   }
 }

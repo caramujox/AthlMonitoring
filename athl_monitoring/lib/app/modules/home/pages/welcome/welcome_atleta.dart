@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +21,7 @@ class _WelcomePageAtletaState extends State<WelcomePageAtleta> {
       //key: _scaffoldKey,
       //appBar: _welcomeAppBar(),
       body: _welcomeBodyAtleta(),
+      floatingActionButton: FloatingActionButton(onPressed: (){},),
     );
   }
 

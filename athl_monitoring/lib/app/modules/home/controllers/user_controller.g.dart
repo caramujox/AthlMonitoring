@@ -12,13 +12,13 @@ mixin _$UserController on _UserControllerBase, Store {
   final _$userAtom = Atom(name: '_UserControllerBase.user');
 
   @override
-  ObservableFuture<FirebaseUser> get user {
+  FirebaseUser get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(ObservableFuture<FirebaseUser> value) {
+  set user(FirebaseUser value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
@@ -27,13 +27,13 @@ mixin _$UserController on _UserControllerBase, Store {
   final _$userModelAtom = Atom(name: '_UserControllerBase.userModel');
 
   @override
-  ObservableFuture<dynamic> get userModel {
+  dynamic get userModel {
     _$userModelAtom.reportRead();
     return super.userModel;
   }
 
   @override
-  set userModel(ObservableFuture<dynamic> value) {
+  set userModel(dynamic value) {
     _$userModelAtom.reportWrite(value, super.userModel, () {
       super.userModel = value;
     });
@@ -86,6 +86,13 @@ mixin _$UserController on _UserControllerBase, Store {
         .run(() => super.sendEmailVerification());
   }
 
+  final _$getUserAsyncAction = AsyncAction('_UserControllerBase.getUser');
+
+  @override
+  Future getUser() {
+    return _$getUserAsyncAction.run(() => super.getUser());
+  }
+
   final _$_UserControllerBaseActionController =
       ActionController(name: '_UserControllerBase');
 
@@ -128,17 +135,6 @@ mixin _$UserController on _UserControllerBase, Store {
         name: '_UserControllerBase.getUserInfo');
     try {
       return super.getUserInfo();
-    } finally {
-      _$_UserControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic getUser() {
-    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
-        name: '_UserControllerBase.getUser');
-    try {
-      return super.getUser();
     } finally {
       _$_UserControllerBaseActionController.endAction(_$actionInfo);
     }

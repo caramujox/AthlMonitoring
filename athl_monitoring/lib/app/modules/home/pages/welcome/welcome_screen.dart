@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
+
 }
 
 class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
@@ -39,22 +40,20 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
   @override
   void initState() {
     super.initState();
-    new Timer(new Duration(milliseconds: 0), () {
-      checkFirstSeen();
-    });
+    checkFirstSeen();
   }
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // bool _seen = (prefs.getBool('seen') ?? false);
 
-    bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
+    bool _seen = true; //SE QUISER TESTAR SEM O ONE TIME INTRO
 
     if (_seen) {
       //Se tiver na lista de atletas -> WelcomePageAtletas
       //Else -> WelcomePageTreinador
-      Navigator.of(context).pushReplacement(new MaterialPageRoute(
-          builder: (context) => new WelcomePageTreinador()));
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('welcomeTreinador', (route) => false);
     } else {
       prefs.setBool('seen', true);
     }
