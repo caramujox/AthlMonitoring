@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/equipe_service_interface.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/upload_service_interface.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,11 @@ abstract class _EquipeControllerBase with Store {
   uploadPicture(String filePath, File file) {
     return uploadService.startUpload(filePath, file);
   }
+
+  @action
+  startGame(GameModel model){
+    equipeService.startGame(model);
+  }  
 
   Future<PickedFile> pickImage(ImageSource source) async {
     final _picker = ImagePicker();

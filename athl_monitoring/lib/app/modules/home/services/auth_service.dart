@@ -141,7 +141,7 @@ class AuthService implements IBaseAuth {
     FirebaseUser x = await _auth.currentUser();
 
     if (x == null)
-      return;
+      return ;
     else{
       var ret = await userRepository.index(x);
     return ret;

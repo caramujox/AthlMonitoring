@@ -1,3 +1,7 @@
+import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game/volleyball_game_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/pre_game_page/pre_game_page.dart';
+
+import 'controllers/volleyball_game_controller.dart';
 import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_atleta_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_atleta.dart';
@@ -20,7 +24,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'pages/image_caputre/image_caputre_controller.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
 import 'package:athl_monitoring/app/modules/home/pages/atletas_page.dart';
-import 'package:athl_monitoring/app/modules/home/pages/pre_game_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/authpage/register_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/register_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_screen.dart';
@@ -89,14 +92,14 @@ class HomeModule extends ChildModule {
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
         Router('/regEquipes', child: (_, args) => RegisterEquipeForm()),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
-        Router('/pregame', child: (_, args) => PreGamePage()),
+        Router('/pregame', child: (_, args) => PreGamePagePage()),
         Router('/selecAtleta', child: (_, args) => SelecAtleta()),
         Router('/equipes', child: (_, args) => GridEquipePage()),
         Router('/welcomeRegisterAtleta',
             child: (_, args) => WelcomeRegisterAtleta()),
         Router('/welcomeRegisterTreinador',
             child: (_, args) => WelcomeRegisterTreinador()),
-        Router('/volleyballGame', child: (_, args) => volleyballGame()),
+        Router('/volleyballGame', child: (_, args) => VolleyballGamePage()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();

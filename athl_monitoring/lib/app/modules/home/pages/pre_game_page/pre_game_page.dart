@@ -1,33 +1,32 @@
+import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
+import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-class PreGamePage extends StatefulWidget {
+class PreGamePagePage extends StatefulWidget {
+  final String title;
+  const PreGamePagePage({Key key, this.title = "PreGamePage"})
+      : super(key: key);
+
   @override
-  _PreGamePageState createState() => _PreGamePageState();
+  _PreGamePagePageState createState() => _PreGamePagePageState();
 }
 
-class _PreGamePageState extends State<PreGamePage> {
-  var selectedCurrency, selectedType;
+class _PreGamePagePageState
+    extends ModularState<PreGamePagePage, EquipeController> {
+  //use 'controller' variable to access controller
+  EquipeModel selectedType;
+  final TextEditingController equipeAdvController = TextEditingController();
+  final TextEditingController campeonatoController = TextEditingController();
 
   final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
 
   List<bool> _selecionado = List.generate(6, (_) => false);
-
-  List<String> _equipeList = <String>[
-    'Equipe1',
-    'Equipe2',
-    'Equipe3',
-    'Equipe4'
-  ];
-
-  List<String> _equipeAdvList = <String>[
-    'Equipeadv1',
-    'Equipeadv2',
-    'Equipeadv3',
-    'Equipeadv4'
-  ];
-
-  List<String> _campeonatoList = <String>['camp1', 'camp2', 'camp3', 'camp4'];
 
   @override
   Widget build(BuildContext context) {
@@ -69,90 +68,60 @@ class _PreGamePageState extends State<PreGamePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              DropdownButton(
-                items: _equipeList
-                    .map((value) => DropdownMenuItem(
-                          child: Text(
-                            value,
+              Observer(builder: (_) {
+                if (controller.equipeList.data == null) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (controller.equipeList.hasError) {
+                  return Center(
+                      child: RaisedButton(
+                    onPressed: controller.getList,
+                    child: Text('Error'),
+                  ));
+                } else {
+                  List<EquipeModel> list = controller.equipeList.data;
+                  return FutureBuilder(builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    return DropdownButton(
+                      onChanged: (equipeSelecionada) {
+                        print('$equipeSelecionada');
+                        setState(() {
+                          selectedType = equipeSelecionada;
+                        });
+                      },
+                      value: selectedType,
+                      isExpanded: false,
+                      hint: Text(
+                        'Selecione a equipe',
+                        style: TextStyle(color: ConstColors.ccBlueVioletWheel),
+                      ),
+                      
+                      items: list.map((e) => DropdownMenuItem(
+                              child: AutoSizeText(
+                            e.nome,
                             style:
                                 TextStyle(color: ConstColors.ccBlueVioletWheel),
                           ),
-                          value: value,
-                        ))
-                    .toList(),
-                onChanged: (equipeSelecionada) {
-                  print('$equipeSelecionada');
-                  setState(() {
-                    selectedType = equipeSelecionada;
+                          value: e,),
+                          ).toList());
+                    
                   });
-                },
-                value: selectedType,
-                isExpanded: false,
-                hint: Text(
-                  'Selecione a equipe',
-                  style: TextStyle(color: ConstColors.ccBlueVioletWheel),
-                ),
-              )
+                }
+              }),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 120.0),
-              DropdownButton(
-                items: _equipeAdvList
-                    .map((value) => DropdownMenuItem(
-                          child: Text(
-                            value,
-                            style:
-                                TextStyle(color: ConstColors.ccBlueVioletWheel),
-                          ),
-                          value: value,
-                        ))
-                    .toList(),
-                onChanged: (_equipeAdvSelecionada) {
-                  print('$_equipeAdvSelecionada');
-                  setState(() {
-                    selectedType = _equipeAdvSelecionada;
-                  });
-                },
-                value: selectedType,
-                isExpanded: false,
-                hint: Text(
-                  'Selecione a equipe adversária',
-                  style: TextStyle(color: ConstColors.ccBlueVioletWheel),
-                ),
-              )
-            ],
+          FormPadrao(
+            formTitle: "Equipe Adversária",
+            formHint: "Insira o nome da Equipe adversária...",
+            formIcon: Icons.people,
+            formEditingController: equipeAdvController,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              DropdownButton(
-                items: _campeonatoList
-                    .map((value) => DropdownMenuItem(
-                          child: Text(
-                            value,
-                            style:
-                                TextStyle(color: ConstColors.ccBlueVioletWheel),
-                          ),
-                          value: value,
-                        ))
-                    .toList(),
-                onChanged: (_campeonatoSelecionado) {
-                  print('$_campeonatoSelecionado');
-                  setState(() {
-                    selectedType = _campeonatoSelecionado;
-                  });
-                },
-                value: selectedType,
-                isExpanded: false,
-                hint: Text(
-                  'Campeonato',
-                  style: TextStyle(color: ConstColors.ccBlueVioletWheel),
-                ),
-              )
-            ],
+          FormPadrao(
+            formTitle: "Campeonato",
+            formHint: "Insira o nome da competição...",
+            formIcon: Icons.equalizer,
+            formEditingController: campeonatoController,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -199,10 +168,12 @@ class _PreGamePageState extends State<PreGamePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Text("Submit", style: TextStyle(fontSize: 24.0)),
+                          Text("INICIAR PARTIDA", style: TextStyle(fontSize: 24.0)),
                         ],
                       )),
                   onPressed: () {
+                    
+                    controller.startGame(new GameModel(equipeId: selectedType.codEquipe, equipeAdv: equipeAdvController.text, nomeCompeticao: campeonatoController.text, dataGame: DateTime.now()));
                     Navigator.of(context).pushNamed('/selecAtleta');
                   },
                   shape: new RoundedRectangleBorder(

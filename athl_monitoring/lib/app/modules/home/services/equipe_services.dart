@@ -1,4 +1,5 @@
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/equipe_repository.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/equipe_repository_interface.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/equipe_service_interface.dart';
@@ -31,5 +32,10 @@ class EquipeService extends Disposable implements IEquipeService {
   @override
   Future save(EquipeModel model) {
     return equipeRepository.save(model);
+  }
+
+  @override
+  Future startGame(GameModel model) {
+    return equipeRepository.startGame(model);
   }
 }

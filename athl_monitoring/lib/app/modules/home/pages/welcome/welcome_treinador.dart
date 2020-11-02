@@ -16,10 +16,13 @@ class _WelcomePageTreinadorState
     extends ModularState<WelcomePageTreinador, UserController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
+
   @override
   Widget build(BuildContext context) {
     return _constroiWelcomeTreinador();
   }
+
+  
 
   _constroiWelcomeTreinador() {
     return Scaffold(
@@ -29,8 +32,8 @@ class _WelcomePageTreinadorState
     );
   }
 
-  _welcomeTreinadorDrawer() {
-    UserModel user = controller.userModel.result;
+  _welcomeTreinadorDrawer()  {
+    dynamic user = controller.userModel;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -143,7 +146,7 @@ class _WelcomePageTreinadorState
   }
 
   _welcomeBodyTreinador() {
-    UserModel user = controller.userModel.result;      
+    UserModel user = controller.userModel;      
     return Container(
       child: Column(
         children: <Widget>[
@@ -208,7 +211,7 @@ class _WelcomePageTreinadorState
                 width: double.infinity,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/volleyballGame');
+                    Navigator.of(context).pushNamed('/pregame');
                   },
                   elevation: 5.0,
                   padding: EdgeInsets.all(15.0),

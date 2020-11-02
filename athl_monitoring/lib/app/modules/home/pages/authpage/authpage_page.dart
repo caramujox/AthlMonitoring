@@ -281,9 +281,13 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
         child: OutlineButton(
           splashColor: Colors.grey,
           onPressed: () {
+            if (controller.user == null) {
             controller.signInGoogle().then((retUser) {
               Navigator.of(context).pushNamed('/welcome');
-            });
+            });}
+            else {
+              print ('dapsojkbduaiso');
+            }
           },
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
@@ -324,9 +328,13 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
         child: OutlineButton(
           splashColor: Colors.grey,
           onPressed: () {
+            if (controller.user != null)
             controller.signInFacebook().then((retUser){
               Navigator.of(context).pushNamed('/welcome');
             });
+            else {
+              print('achei cuzão');
+            }
           },
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),

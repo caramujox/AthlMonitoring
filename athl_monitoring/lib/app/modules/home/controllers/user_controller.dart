@@ -11,7 +11,7 @@ abstract class _UserControllerBase with Store {
   final IBaseAuth auth;
 
   _UserControllerBase({@required this.auth}) {
-  getUserInfo();
+    startUp();
   }
 
   @observable
@@ -59,8 +59,8 @@ abstract class _UserControllerBase with Store {
   }
 
   @action
-  getUserInfo() {
-    userModel = auth.getUserModel();
+  getUserInfo() async{
+    userModel =  await auth.getUserModel();
     return  userModel;
     }
 
@@ -68,5 +68,11 @@ abstract class _UserControllerBase with Store {
   getUser() async{
     user = await auth.getCurrentUser();
     return user;
+  }
+
+  @action
+  startUp() async {
+    user = await auth.getCurrentUser();
+    userModel = await auth.getUserModel();
   }
 }

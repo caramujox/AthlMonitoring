@@ -86,11 +86,26 @@ mixin _$UserController on _UserControllerBase, Store {
         .run(() => super.sendEmailVerification());
   }
 
+  final _$getUserInfoAsyncAction =
+      AsyncAction('_UserControllerBase.getUserInfo');
+
+  @override
+  Future getUserInfo() {
+    return _$getUserInfoAsyncAction.run(() => super.getUserInfo());
+  }
+
   final _$getUserAsyncAction = AsyncAction('_UserControllerBase.getUser');
 
   @override
   Future getUser() {
     return _$getUserAsyncAction.run(() => super.getUser());
+  }
+
+  final _$startUpAsyncAction = AsyncAction('_UserControllerBase.startUp');
+
+  @override
+  Future startUp() {
+    return _$startUpAsyncAction.run(() => super.startUp());
   }
 
   final _$_UserControllerBaseActionController =
@@ -124,17 +139,6 @@ mixin _$UserController on _UserControllerBase, Store {
         name: '_UserControllerBase.signUp');
     try {
       return super.signUp(email, password, name);
-    } finally {
-      _$_UserControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic getUserInfo() {
-    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
-        name: '_UserControllerBase.getUserInfo');
-    try {
-      return super.getUserInfo();
     } finally {
       _$_UserControllerBaseActionController.endAction(_$actionInfo);
     }
