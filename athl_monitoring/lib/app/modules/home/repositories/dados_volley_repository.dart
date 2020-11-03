@@ -15,19 +15,13 @@ class DadosVolleyRepository extends Disposable
   void dispose() {}
 
   @override
-  Future save(DadosVolleyModel dadosVolleyModel) async {
-    if (dadosVolleyModel.reference == null) {
-      await Firestore.instance.collection('jogosVolley').document().setData({
-        'tipo': dadosVolleyModel.tipo,
-        'jogador': dadosVolleyModel.jogador,
-        'ponto': dadosVolleyModel.ponto
-      });
+  Future save(DadosVolleyModel model) async {
+    if (model.reference == null) {
+      await Firestore.instance.collection('jogosVolley').document().setData(
+          {'tipo': model.tipo, 'jogador': model.jogador, 'ponto': model.ponto});
     } else {
-      dadosVolleyModel.reference.updateData({
-        'tipo': dadosVolleyModel.tipo,
-        'jogador': dadosVolleyModel.jogador,
-        'ponto': dadosVolleyModel.ponto
-      });
+      model.reference.updateData(
+          {'tipo': model.tipo, 'jogador': model.jogador, 'ponto': model.ponto});
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:athl_monitoring/app/modules/home/controllers/volleyball_game_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/dadosVolley_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -185,7 +186,12 @@ class _VolleyballGameState
                           fontFamily: 'OpenSans',
                         )),
                     onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'ponto de saque',
+                          jogador: 'pedro',
+                          ponto: 'pro');
                       _incrementProPoint();
+                      controller.save(modelo);
                     },
                   ),
                 ),
