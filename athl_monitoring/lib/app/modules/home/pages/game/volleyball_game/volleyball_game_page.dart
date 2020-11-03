@@ -1,24 +1,23 @@
+import 'package:athl_monitoring/app/modules/home/controllers/volleyball_game_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import '../../../controllers/volleyball_game_controller.dart';
 
-class VolleyballGamePage extends StatefulWidget {
+class VolleyballGame extends StatefulWidget {
   final String title;
-  const VolleyballGamePage({Key key, this.title = "VolleyballGame"})
+  final GameModel gameModel;
+  const VolleyballGame({Key key, this.title = "VolleyballGame", this.gameModel})
       : super(key: key);
 
   @override
-  _VolleyballGamePageState createState() => _VolleyballGamePageState();
+  _VolleyballGameState createState() => _VolleyballGameState();
 }
 
-class _VolleyballGamePageState
-    extends ModularState<VolleyballGamePage, VolleyballGameController> {
-  //use 'controller' variable to access controller
-
-  @override
+class _VolleyballGameState
+    extends ModularState<VolleyballGame, VolleyballGameController> {
   int _pontoPro = 0;
   int _pontoCon = 0;
   @override
@@ -49,7 +48,9 @@ class _VolleyballGamePageState
                 children: [
                   Flexible(
                     child: AutoSizeText(
-                      'Vôlei Mauá',
+                      widget.gameModel == null
+                          ? 'Minha Equipe'
+                          : widget.gameModel.equipeId,
                       maxLines: 1,
                       style: TextStyle(
                           color: ConstColors.ccBlueVioletWheel,

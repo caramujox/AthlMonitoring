@@ -1,8 +1,12 @@
 import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game/volleyball_game_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/pre_game_page/pre_game_page.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/dados_volley_repository.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/interfaces/dados_volley_repository_interface.dart';
+import 'package:athl_monitoring/app/modules/home/services/dadosVolley_service.dart';
+import 'package:athl_monitoring/app/modules/home/services/interfaces/dadosVolley_service_interface.dart';
 
 import 'controllers/volleyball_game_controller.dart';
-import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game.dart';
+
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_atleta_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_treinador.dart';
@@ -49,8 +53,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-
-
         //AtletasPage
         Bind<IAtletaService>((i) => AtletaService(atletaRepository: i.get())),
         Bind<IUploadFIleService>(
@@ -78,12 +80,19 @@ class HomeModule extends ChildModule {
         Bind((i) => UserController(auth: i.get())),
 
         //Captures
-        Bind((i) => ImageCaputreController())
+        Bind((i) => ImageCaputreController()),
+
+        //Dados Volley
+        Bind<IDadosVolleyService>(
+            (i) => DadosVolleyService(dadosVolleyRepository: i.get())),
+        Bind<IDadosVolleyRepository>(
+            (i) => DadosVolleyRepository(firestore: Firestore.instance)),
+        Bind((i) => VolleyballGameController(dadosVolleyService: i.get())),
       ];
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => WrapperPage()),
+        Router(Modular.initialRoute, child: (_, args) => VolleyballGame()),
         Router('/welcomeTreinador', child: (_, args) => WelcomePageTreinador()),
         Router('/welcomeAtleta', child: (_, args) => WelcomeAtletaPage()),
         Router('/atletas', child: (_, args) => AtletaPage()),
@@ -99,7 +108,7 @@ class HomeModule extends ChildModule {
             child: (_, args) => WelcomeRegisterAtleta()),
         Router('/welcomeRegisterTreinador',
             child: (_, args) => WelcomeRegisterTreinador()),
-        Router('/volleyballGame', child: (_, args) => VolleyballGamePage()),
+        Router('/volleyballGame', child: (_, args) => VolleyballGame()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();

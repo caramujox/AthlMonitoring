@@ -84,28 +84,31 @@ class _PreGamePagePageState
                   return FutureBuilder(builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     return DropdownButton(
-                      onChanged: (equipeSelecionada) {
-                        print('$equipeSelecionada');
-                        setState(() {
-                          selectedType = equipeSelecionada;
-                        });
-                      },
-                      value: selectedType,
-                      isExpanded: false,
-                      hint: Text(
-                        'Selecione a equipe',
-                        style: TextStyle(color: ConstColors.ccBlueVioletWheel),
-                      ),
-                      
-                      items: list.map((e) => DropdownMenuItem(
-                              child: AutoSizeText(
-                            e.nome,
-                            style:
-                                TextStyle(color: ConstColors.ccBlueVioletWheel),
-                          ),
-                          value: e,),
-                          ).toList());
-                    
+                        onChanged: (equipeSelecionada) {
+                          print('$equipeSelecionada');
+                          setState(() {
+                            selectedType = equipeSelecionada;
+                          });
+                        },
+                        value: selectedType,
+                        isExpanded: false,
+                        hint: Text(
+                          'Selecione a equipe',
+                          style:
+                              TextStyle(color: ConstColors.ccBlueVioletWheel),
+                        ),
+                        items: list
+                            .map(
+                              (e) => DropdownMenuItem(
+                                child: AutoSizeText(
+                                  e.nome,
+                                  style: TextStyle(
+                                      color: ConstColors.ccBlueVioletWheel),
+                                ),
+                                value: e,
+                              ),
+                            )
+                            .toList());
                   });
                 }
               }),
@@ -168,13 +171,19 @@ class _PreGamePagePageState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Text("INICIAR PARTIDA", style: TextStyle(fontSize: 24.0)),
+                          Text("INICIAR PARTIDA",
+                              style: TextStyle(fontSize: 24.0)),
                         ],
                       )),
                   onPressed: () {
-                    
-                    controller.startGame(new GameModel(equipeId: selectedType.codEquipe, equipeAdv: equipeAdvController.text, nomeCompeticao: campeonatoController.text, dataGame: DateTime.now()));
-                    Navigator.of(context).pushNamed('/selecAtleta');
+                    GameModel x = new GameModel(
+                        equipeId: selectedType.codEquipe,
+                        equipeAdv: equipeAdvController.text,
+                        nomeCompeticao: campeonatoController.text,
+                        dataGame: DateTime.now());
+                    controller.startGame(x);
+                    Navigator.of(context)
+                        .pushNamed('/volleyballGame', arguments: x);
                   },
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),

@@ -72,6 +72,17 @@ mixin _$EquipeController on _EquipeControllerBase, Store {
   }
 
   @override
+  dynamic startGame(GameModel model) {
+    final _$actionInfo = _$_EquipeControllerBaseActionController.startAction(
+        name: '_EquipeControllerBase.startGame');
+    try {
+      return super.startGame(model);
+    } finally {
+      _$_EquipeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 equipeList: ${equipeList}
