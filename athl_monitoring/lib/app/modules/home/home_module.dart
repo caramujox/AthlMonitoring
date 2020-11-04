@@ -92,7 +92,7 @@ class HomeModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => VolleyballGame()),
+        Router(Modular.initialRoute, child: (_, args) => PreGamePagePage()),
         Router('/welcomeTreinador', child: (_, args) => WelcomePageTreinador()),
         Router('/welcomeAtleta', child: (_, args) => WelcomeAtletaPage()),
         Router('/atletas', child: (_, args) => AtletaPage()),
@@ -108,7 +108,8 @@ class HomeModule extends ChildModule {
             child: (_, args) => WelcomeRegisterAtleta()),
         Router('/welcomeRegisterTreinador',
             child: (_, args) => WelcomeRegisterTreinador()),
-        Router('/volleyballGame', child: (_, args) => VolleyballGame()),
+        Router('/volleyballGame',
+            child: (_, args) => VolleyballGame(gameModel: args.data)),
       ];
 
   static Inject get to => Inject<HomeModule>.of();

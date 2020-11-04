@@ -184,6 +184,8 @@ class _PreGamePagePageState
                     controller.startGame(x);
                     Navigator.of(context)
                         .pushNamed('/volleyballGame', arguments: x);
+                    // Modular.to.pushNamed('volleyballGame',
+                    // arguments: {'gameModel': x});
                   },
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),

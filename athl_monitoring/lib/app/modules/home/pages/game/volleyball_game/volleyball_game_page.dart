@@ -190,8 +190,8 @@ class _VolleyballGameState
                           tipo: 'ponto de saque',
                           jogador: 'pedro',
                           ponto: 'pro');
+                      controller.save(modelo, widget.gameModel);
                       _incrementProPoint();
-                      controller.save(modelo);
                     },
                   ),
                 ),
@@ -217,6 +217,11 @@ class _VolleyballGameState
                           fontFamily: 'OpenSans',
                         )),
                     onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'erro de saque',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
                       _incrementConPoint();
                     },
                   ),
@@ -246,7 +251,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'ponto de ataque',
+                          jogador: 'pedro',
+                          ponto: 'pro');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementProPoint();
+                    },
                   ),
                 ),
               ),
@@ -270,7 +282,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'ataque bloqueado',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementConPoint();
+                    },
                   ),
                 ),
               ),
@@ -298,7 +317,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'ponto de bloqueio',
+                          jogador: 'pedro',
+                          ponto: 'pro');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementProPoint();
+                    },
                   ),
                 ),
               ),
@@ -322,7 +348,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'erro de ataque',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementConPoint();
+                    },
                   ),
                 ),
               ),
@@ -350,7 +383,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'erro do oponente',
+                          jogador: 'pedro',
+                          ponto: 'pro');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementProPoint();
+                    },
                   ),
                 ),
               ),
@@ -374,7 +414,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'erro generico',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementConPoint();
+                    },
                   ),
                 ),
               ),
@@ -402,7 +449,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'ponto do oponente',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementConPoint();
+                    },
                   ),
                 ),
               ),

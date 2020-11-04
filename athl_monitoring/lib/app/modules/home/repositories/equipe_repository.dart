@@ -60,8 +60,8 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
   @override
   Future startGame(GameModel gameModel) async {
     await Firestore.instance
-        .collection('jogo')
-        .document('${gameModel.equipeId}')
+        .collection('jogosVolley')
+        .document('${gameModel.equipeId} + ${gameModel.dataGame}')
         .setData({
       'equipeId': gameModel.equipeId,
       'equipeAdv': gameModel.equipeAdv,
