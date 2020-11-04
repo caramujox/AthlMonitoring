@@ -17,4 +17,9 @@ class DadosVolleyService extends Disposable implements IDadosVolleyService {
   Future save(DadosVolleyModel model) {
     return dadosVolleyRepository.save(model);
   }
+
+  @override
+  Stream<List<DadosVolleyModel>> get() {
+    return dadosVolleyRepository.get();
+  }
 }

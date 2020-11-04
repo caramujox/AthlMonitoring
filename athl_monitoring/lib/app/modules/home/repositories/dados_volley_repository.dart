@@ -24,4 +24,10 @@ class DadosVolleyRepository extends Disposable
           {'tipo': model.tipo, 'jogador': model.jogador, 'ponto': model.ponto});
     }
   }
+
+  @override
+  Stream<List<DadosVolleyModel>> get() {
+    return firestore.collection('dados').snapshots().map((query) =>
+        query.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  }
 }

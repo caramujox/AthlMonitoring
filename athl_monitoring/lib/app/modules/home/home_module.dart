@@ -1,4 +1,5 @@
 import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game/volleyball_game_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/graficos/graficos_volei.dart';
 import 'package:athl_monitoring/app/modules/home/pages/pre_game_page/pre_game_page.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/dados_volley_repository.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/dados_volley_repository_interface.dart';
@@ -92,7 +93,7 @@ class HomeModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => VolleyballGame()),
+        Router(Modular.initialRoute, child: (_, args) => GrafVolei()),
         Router('/welcomeTreinador', child: (_, args) => WelcomePageTreinador()),
         Router('/welcomeAtleta', child: (_, args) => WelcomeAtletaPage()),
         Router('/atletas', child: (_, args) => AtletaPage()),

@@ -1,5 +1,6 @@
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
+import 'package:athl_monitoring/app/modules/home/pages/graficos/graficos_volei.dart';
 import 'package:athl_monitoring/app/modules/home/pages/teste2.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/grid_item.dart';
@@ -102,7 +103,7 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
                                           photoUrl: list[index - 1].urlPhoto,
                                         ),
                                         onTap: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => TesteGraf()));
+                                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => GrafVolei()));
                                           print("topper");
                                         },
                                       ),
