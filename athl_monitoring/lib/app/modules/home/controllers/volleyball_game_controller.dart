@@ -24,4 +24,13 @@ abstract class _VolleyballGameControllerBase with Store {
   save(DadosVolleyModel model) {
     dadosVolleyService.save(model);
   }
+
+  @observable
+  ObservableStream<List<DadosVolleyModel>> dadosList;
+
+  @action
+  getList() {
+    dadosList = dadosVolleyService.get().asObservable();
+    return dadosList;
+  }
 }
