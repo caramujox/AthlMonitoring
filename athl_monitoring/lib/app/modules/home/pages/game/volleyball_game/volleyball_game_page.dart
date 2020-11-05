@@ -281,7 +281,7 @@ class _VolleyballGameState
                     padding: EdgeInsets.only(
                         top: 30.0, bottom: 35.0, left: 5.0, right: 5.0),
                     color: Colors.yellow.shade600,
-                    child: AutoSizeText("Ataque Bloqueado",
+                    child: AutoSizeText("Erro de Ataque",
                         maxLines: 1,
                         style: TextStyle(
                           color: ConstColors.ccBlueVioletWheel,
@@ -292,7 +292,7 @@ class _VolleyballGameState
                         )),
                     onPressed: () {
                       DadosVolleyModel modelo = new DadosVolleyModel(
-                          tipo: 'ataque bloqueado',
+                          tipo: 'erro de ataque',
                           jogador: 'pedro',
                           ponto: 'con');
                       controller.save(modelo, widget.gameModel);
@@ -347,7 +347,7 @@ class _VolleyballGameState
                     padding: EdgeInsets.only(
                         top: 30.0, bottom: 35.0, left: 5.0, right: 5.0),
                     color: Colors.yellow.shade600,
-                    child: AutoSizeText("Erro de Ataque",
+                    child: AutoSizeText("Ataque Bloqueado",
                         maxLines: 1,
                         style: TextStyle(
                           color: ConstColors.ccBlueVioletWheel,
@@ -358,7 +358,7 @@ class _VolleyballGameState
                         )),
                     onPressed: () {
                       DadosVolleyModel modelo = new DadosVolleyModel(
-                          tipo: 'erro de ataque',
+                          tipo: 'ataque bloqueado',
                           jogador: 'pedro',
                           ponto: 'con');
                       controller.save(modelo, widget.gameModel);
@@ -413,7 +413,7 @@ class _VolleyballGameState
                     padding: EdgeInsets.only(
                         top: 30.0, bottom: 35.0, left: 5.0, right: 5.0),
                     color: Colors.yellow.shade600,
-                    child: AutoSizeText("Erro Genérico",
+                    child: AutoSizeText("Ponto do Oponente",
                         maxLines: 1,
                         style: TextStyle(
                           color: ConstColors.ccBlueVioletWheel,
@@ -424,7 +424,7 @@ class _VolleyballGameState
                         )),
                     onPressed: () {
                       DadosVolleyModel modelo = new DadosVolleyModel(
-                          tipo: 'erro generico',
+                          tipo: 'ponto do oponente',
                           jogador: 'pedro',
                           ponto: 'con');
                       controller.save(modelo, widget.gameModel);
@@ -448,7 +448,7 @@ class _VolleyballGameState
                     padding: EdgeInsets.only(
                         top: 30.0, bottom: 35.0, left: 5.0, right: 5.0),
                     color: Colors.yellow.shade600,
-                    child: AutoSizeText("Ponto do Oponente",
+                    child: AutoSizeText("Erro Genérico",
                         maxLines: 1,
                         style: TextStyle(
                           color: ConstColors.ccBlueVioletWheel,
@@ -459,7 +459,7 @@ class _VolleyballGameState
                         )),
                     onPressed: () {
                       DadosVolleyModel modelo = new DadosVolleyModel(
-                          tipo: 'ponto do oponente',
+                          tipo: 'erro generico',
                           jogador: 'pedro',
                           ponto: 'con');
                       controller.save(modelo, widget.gameModel);
