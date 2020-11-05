@@ -27,7 +27,7 @@ class DadosVolleyRepository extends Disposable
 
   @override
   Stream<List<DadosVolleyModel>> get() {
-    return firestore.collection('dados').snapshots().map((query) =>
+    return firestore.collection('jogosVolley').document('uAv8PK8l587NtWZJ8YZd').collection('dados').snapshots().map((query) =>
         query.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
   }
 }

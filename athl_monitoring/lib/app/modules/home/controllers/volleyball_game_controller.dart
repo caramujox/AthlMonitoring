@@ -13,7 +13,9 @@ abstract class _VolleyballGameControllerBase with Store {
   @observable
   int value = 0;
 
-  _VolleyballGameControllerBase({this.dadosVolleyService});
+  _VolleyballGameControllerBase({this.dadosVolleyService}){
+    getList();
+  }
 
   @action
   void increment() {

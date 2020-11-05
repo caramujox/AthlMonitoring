@@ -1,8 +1,11 @@
 import 'package:athl_monitoring/app/modules/home/controllers/volleyball_game_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/dadosVolley_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
 class GrafVolei extends StatefulWidget {
   @override
@@ -12,6 +15,7 @@ class GrafVolei extends StatefulWidget {
 class _GrafVoleiState
     extends ModularState<GrafVolei, VolleyballGameController> {
   static List<charts.Series<Ponto, String>> _dadosSerie;
+  static List<charts.Series<PontoType, String>> _dadosSerieT;
   static List<charts.Series<Erro, String>> _dadosSerieErro;
 
   final blue = charts.MaterialPalette.blue.makeShades(2);
@@ -20,34 +24,77 @@ class _GrafVoleiState
   final purple = charts.MaterialPalette.purple.makeShades(50);
   final yellow = charts.MaterialPalette.yellow.makeShades(50);
 
-  _createSampleDataPonto() {
-    var proPtData = [
-      new Ponto('1° SET', 5),
-      new Ponto('2° SET', 15),
-      new Ponto('3° SET', 10),
+  _createSampleDataPonto(List<DadosVolleyModel> list) {
+    int _conCountSaque = 0;
+    int _proCountSaque = 0;
+
+    
+    list.forEach((element) {
+      if (element.ponto == 'con' && element.tipo == 'Erro de saque') {
+        _conCountSaque++; //colocar tipo na variavel, criar variaveis
+      } else if (element.ponto == 'pro' && element.tipo == 'Ponto de saque') {
+        _proCountSaque++;
+      }
+    });
+
+    var proPtTipo = [
+      new PontoType('Ação de saque', _proCountSaque),
+      new PontoType('Ação de ataque', _proCountSaque),
+      new PontoType('Ação de bloqueio', _proCountSaque),
+      new PontoType('Erro genérico', _proCountSaque)
     ];
 
-    var contraPtData = [
-      new Ponto('1° SET', 20),
-      new Ponto('2° SET', 10),
-      new Ponto('3° SET', 15),
+    var conPtTipo = [
+      new PontoType('Ação de saque', _conCountSaque),
+      new PontoType('Ação de ataque', _conCountSaque),
+      new PontoType('Ação de bloqueio', _conCountSaque),
+      new PontoType('Erro genérico', _conCountSaque)
     ];
 
-    _dadosSerie.add(
+    _dadosSerieT.add(
       charts.Series(
-          data: proPtData,
-          domainFn: (Ponto ponto, _) => ponto.tempo,
-          measureFn: (Ponto ponto, _) => ponto.pontos,
-          colorFn: (Ponto ponto, _) => purple[50],
+          data: proPtTipo,
+          domainFn: (PontoType ponto, _) => ponto.tipo,
+          measureFn: (PontoType ponto, _) => ponto.ponto,
+          colorFn: (PontoType ponto, _) => purple[50],
           id: 'pro'),
     );
-    _dadosSerie.add(charts.Series(
-        data: contraPtData,
-        domainFn: (Ponto ponto, _) => ponto.tempo,
-        measureFn: (Ponto ponto, _) => ponto.pontos,
-        colorFn: (Ponto ponto, _) => purple[15],
+
+    _dadosSerieT.add(charts.Series(
+        data: conPtTipo,
+        domainFn: (PontoType ponto, _) => ponto.tipo,
+        measureFn: (PontoType ponto, _) => ponto.ponto,
+        colorFn: (PontoType ponto, _) => purple[15],
         id: 'contra'));
-  }
+    //else
+/*
+      var proPtData = [
+        new Ponto('1° SET', 5),
+        new Ponto('2° SET', 15),
+        new Ponto('3° SET', 10),
+      ];
+
+      var contraPtData = [
+        new Ponto('1° SET', 20),
+        new Ponto('2° SET', 10),
+        new Ponto('3° SET', 15),
+      ];
+
+      _dadosSerie.add(
+        charts.Series(
+            data: proPtData,
+            domainFn: (Ponto ponto, _) => ponto.tempo,
+            measureFn: (Ponto ponto, _) => ponto.pontos,
+            colorFn: (Ponto ponto, _) => purple[50],
+            id: 'pro'),
+      );
+      _dadosSerie.add(charts.Series(
+          data: contraPtData,
+          domainFn: (Ponto ponto, _) => ponto.tempo,
+          measureFn: (Ponto ponto, _) => ponto.pontos,
+          colorFn: (Ponto ponto, _) => purple[15],
+          id: 'contra'));*/
+  } //createSampleData
 
   _createSampleDataErro() {
     var erroSaque = [
@@ -88,8 +135,9 @@ class _GrafVoleiState
   @override
   void initState() {
     super.initState();
+    _dadosSerieT = List<charts.Series<PontoType, String>>();
     _dadosSerie = List<charts.Series<Ponto, String>>();
-    _createSampleDataPonto();
+    //_createSampleDataPonto();
     _dadosSerieErro = List<charts.Series<Erro, String>>();
     _createSampleDataErro();
   }
@@ -147,11 +195,28 @@ class _GrafVoleiState
                     fontSize: 20),
               ),
               SizedBox(height: 10.0),
-              Expanded(
-                  child: charts.BarChart(
-                _dadosSerie,
-                barGroupingType: charts.BarGroupingType.stacked,
-                animate: true,
+              Expanded(child: Observer(
+                builder: (_) {
+                  if (controller.dadosList.data == null) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (controller.dadosList.hasError) {
+                    return Center(
+                        child: RaisedButton(
+                      onPressed: controller.getList,
+                      child: Text('Error'),
+                    ));
+                  } else {
+                    List<DadosVolleyModel> list = controller.dadosList.data;
+                    _createSampleDataPonto(list);
+                    return charts.BarChart(
+                      _dadosSerieT,
+                      barGroupingType: charts.BarGroupingType.stacked,
+                      animate: true,
+                    );
+                  }
+                },
               ))
             ],
           ),
@@ -213,11 +278,24 @@ class _GrafVoleiState
   }
 }
 
+@override
+Widget build(BuildContext context) {
+  // TODO: implement build
+  throw UnimplementedError();
+}
+
 class Ponto {
   final String tempo;
   final int pontos;
 
   Ponto(this.tempo, this.pontos);
+}
+
+class PontoType {
+  final String tipo;
+  final int ponto;
+
+  PontoType(this.tipo, this.ponto);
 }
 
 class Erro {

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class TesteGraf extends StatefulWidget {
@@ -210,6 +210,8 @@ class _TesteGrafState extends State<TesteGraf> {
   }
 }
 
+
+/*
 class Ponto {
   final String tempo;
   final int pontos;
@@ -223,3 +225,5 @@ class Erro {
 
   Erro(this.tipo, this.qnt);
 }
+
+*/*/
