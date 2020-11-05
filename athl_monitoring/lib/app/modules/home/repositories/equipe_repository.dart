@@ -61,9 +61,9 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
   Future startGame(GameModel gameModel) async {
     await Firestore.instance
         .collection('jogosVolley')
-        .document('${gameModel.equipeId} + ${gameModel.dataGame}')
+        .document('${gameModel.codEquipe}' + '${gameModel.dataGame}')
         .setData({
-      'equipeId': gameModel.equipeId,
+      'equipeId': gameModel.codEquipe,
       'equipeAdv': gameModel.equipeAdv,
       'nomeCompeticao': gameModel.nomeCompeticao,
       'dataGame': gameModel.dataGame

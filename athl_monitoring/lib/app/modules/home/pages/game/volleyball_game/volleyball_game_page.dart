@@ -48,44 +48,52 @@ class _VolleyballGameState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    child: AutoSizeText(
-                      widget.gameModel == null
-                          ? 'Minha Equipe'
-                          : widget.gameModel.equipeId,
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: ConstColors.ccBlueVioletWheel,
-                          letterSpacing: 1.5,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                          fontStyle: FontStyle.italic),
+                    child: Center(
+                      child: AutoSizeText(
+                        widget.gameModel == null
+                            ? 'Minha Equipe'
+                            : widget.gameModel.nomeEquipe,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: ConstColors.ccBlueVioletWheel,
+                            letterSpacing: 1.5,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                            fontStyle: FontStyle.italic),
+                      ),
                     ),
                   ),
                   Flexible(
-                    child: AutoSizeText(
-                      'NDU',
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: ConstColors.ccBlueVioletWheel,
-                          letterSpacing: 1.5,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                          fontStyle: FontStyle.italic),
+                    child: Center(
+                      child: AutoSizeText(
+                        widget.gameModel == null
+                            ? 'Competição'
+                            : widget.gameModel.nomeCompeticao,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: ConstColors.ccBlueVioletWheel,
+                            letterSpacing: 1.5,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                            fontStyle: FontStyle.italic),
+                      ),
                     ),
                   ),
                   Flexible(
-                    child: AutoSizeText(
-                      _currentDate(),
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: ConstColors.ccBlueVioletWheel,
-                          letterSpacing: 1.5,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                          fontStyle: FontStyle.italic),
+                    child: Center(
+                      child: AutoSizeText(
+                        _currentDate(),
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: ConstColors.ccBlueVioletWheel,
+                            letterSpacing: 1.5,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                            fontStyle: FontStyle.italic),
+                      ),
                     ),
                   ),
                 ],

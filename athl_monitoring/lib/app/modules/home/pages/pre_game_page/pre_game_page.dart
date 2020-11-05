@@ -177,7 +177,8 @@ class _PreGamePagePageState
                       )),
                   onPressed: () {
                     GameModel x = new GameModel(
-                        equipeId: selectedType.codEquipe,
+                        codEquipe: selectedType.codEquipe,
+                        nomeEquipe: selectedType.nome,
                         equipeAdv: equipeAdvController.text,
                         nomeCompeticao: campeonatoController.text,
                         dataGame: DateTime.now());

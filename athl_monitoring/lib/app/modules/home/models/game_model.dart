@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GameModel {
-  final String equipeId, equipeAdv, nomeCompeticao;
+  final String codEquipe, equipeAdv, nomeCompeticao, nomeEquipe;
   final DateTime dataGame;
   DocumentReference reference;
 
   GameModel(
-      {this.equipeId,
+      {this.codEquipe,
       this.equipeAdv,
       this.nomeCompeticao,
       this.dataGame,
+      this.nomeEquipe,
       this.reference});
 
   factory GameModel.fromDocument(DocumentSnapshot doc) {
@@ -17,6 +18,7 @@ class GameModel {
         dataGame: doc['dataGame'],
         equipeAdv: doc['equipeAdv'],
         nomeCompeticao: doc['nomeCompetição'],
-        equipeId: doc['equipeId']);
+        nomeEquipe: doc['nomeEquipe'],
+        codEquipe: doc['codEquipe']);
   }
 }

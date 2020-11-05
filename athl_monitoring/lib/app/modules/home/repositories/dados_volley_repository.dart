@@ -21,7 +21,7 @@ class DadosVolleyRepository extends Disposable
     if (model.reference == null) {
       await Firestore.instance
           .collection('jogosVolley')
-          .document('${game.equipeId}' + '${game.dataGame}')
+          .document('${game.codEquipe}' + '${game.dataGame}')
           .collection('dados')
           .document()
           .setData({
