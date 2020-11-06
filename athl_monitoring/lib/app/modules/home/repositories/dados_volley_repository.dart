@@ -27,7 +27,73 @@ class DadosVolleyRepository extends Disposable
 
   @override
   Stream<List<DadosVolleyModel>> get() {
-    return firestore.collection('jogosVolley').document('uAv8PK8l587NtWZJ8YZd').collection('dados').snapshots().map((query) =>
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').snapshots().map((query) =>
         query.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getPro(){
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('ponto', isEqualTo: 'pro').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());    
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getCon(){
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('ponto', isEqualTo: 'con').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());    
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getConAtaque() {
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'erro de ataque').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getConBloqueio() {
+   return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'ataque bloqueado').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getConGenerico() {
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'erro genérico').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getConSaque() {
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'erro de saque').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getProAtaque() {
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'ponto de ataque').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getProBloqueio() {
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'ponto de bloqueio').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getProErroOponente() {
+   return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'erro oponente').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getProSaque() {
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'ponto de saque').snapshots().map((event) => 
+        event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
+  
   }
 }

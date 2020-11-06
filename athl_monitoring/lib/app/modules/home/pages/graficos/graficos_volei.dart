@@ -14,7 +14,6 @@ class GrafVolei extends StatefulWidget {
 
 class _GrafVoleiState
     extends ModularState<GrafVolei, VolleyballGameController> {
-  static List<charts.Series<Ponto, String>> _dadosSerie;
   static List<charts.Series<PontoType, String>> _dadosSerieT;
   static List<charts.Series<Erro, String>> _dadosSerieErro;
 
@@ -24,31 +23,70 @@ class _GrafVoleiState
   final purple = charts.MaterialPalette.purple.makeShades(50);
   final yellow = charts.MaterialPalette.yellow.makeShades(50);
 
-  _createSampleDataPonto(List<DadosVolleyModel> list) {
-    int _conCountSaque = 0;
-    int _proCountSaque = 0;
+  int _conCountSaque;
+  int _conCountAtaque;
+  int _conCountBloqueio;
+  int _conCountGenerico;
+  int _proCountSaque;
+  int _proCountAtaque;
+  int _proCountBloqueio;
+  int _proCountGenerico;
 
-    
+  _lista(List<DadosVolleyModel> list){
     list.forEach((element) {
-      if (element.ponto == 'con' && element.tipo == 'Erro de saque') {
-        _conCountSaque++; //colocar tipo na variavel, criar variaveis
-      } else if (element.ponto == 'pro' && element.tipo == 'Ponto de saque') {
-        _proCountSaque++;
+      switch (element.tipo) {
+        case ('ponto de saque'):
+          {
+            return _conCountSaque = list.length;
+          }
+        case 'ponto de ataque':
+          {
+            return _conCountAtaque = list.length;
+          }
+        case 'ponto de bloqueio':
+          {
+            return _conCountBloqueio = list.length;
+          }
+        case 'ponto do oponente':
+          {
+            return _conCountGenerico = list.length;
+          }
+        case ('ponto de saque'):
+          {
+            return _proCountSaque = list.length;
+          }
+        case 'ponto de ataque':
+          {
+            return _proCountAtaque = list.length;
+          }
+        case 'ponto de bloqueio':
+          {
+            return _proCountBloqueio = list.length;
+          }
+        case 'erro genérico':
+          {
+            return _proCountGenerico = list.length;
+          }
       }
     });
 
+  }
+  
+
+  _createSampleDataPonto() {
+    
     var proPtTipo = [
-      new PontoType('Ação de saque', _proCountSaque),
-      new PontoType('Ação de ataque', _proCountSaque),
-      new PontoType('Ação de bloqueio', _proCountSaque),
-      new PontoType('Erro genérico', _proCountSaque)
+      new PontoType('Saque', _proCountSaque),
+      new PontoType('Ataque', _proCountAtaque),
+      new PontoType('Bloqueio', _proCountBloqueio),
+      new PontoType('Genérico', _proCountGenerico)
     ];
 
     var conPtTipo = [
-      new PontoType('Ação de saque', _conCountSaque),
-      new PontoType('Ação de ataque', _conCountSaque),
-      new PontoType('Ação de bloqueio', _conCountSaque),
-      new PontoType('Erro genérico', _conCountSaque)
+      new PontoType('Saque', _conCountSaque),
+      new PontoType('Ataque', _conCountAtaque),
+      new PontoType('Bloqueio', _conCountBloqueio),
+      new PontoType('Genérico', _conCountGenerico)
     ];
 
     _dadosSerieT.add(
@@ -66,69 +104,80 @@ class _GrafVoleiState
         measureFn: (PontoType ponto, _) => ponto.ponto,
         colorFn: (PontoType ponto, _) => purple[15],
         id: 'contra'));
-    //else
-/*
-      var proPtData = [
-        new Ponto('1° SET', 5),
-        new Ponto('2° SET', 15),
-        new Ponto('3° SET', 10),
-      ];
 
-      var contraPtData = [
-        new Ponto('1° SET', 20),
-        new Ponto('2° SET', 10),
-        new Ponto('3° SET', 15),
-      ];
-
-      _dadosSerie.add(
-        charts.Series(
-            data: proPtData,
-            domainFn: (Ponto ponto, _) => ponto.tempo,
-            measureFn: (Ponto ponto, _) => ponto.pontos,
-            colorFn: (Ponto ponto, _) => purple[50],
-            id: 'pro'),
-      );
-      _dadosSerie.add(charts.Series(
-          data: contraPtData,
-          domainFn: (Ponto ponto, _) => ponto.tempo,
-          measureFn: (Ponto ponto, _) => ponto.pontos,
-          colorFn: (Ponto ponto, _) => purple[15],
-          id: 'contra'));*/
   } //createSampleData
 
-  _createSampleDataErro() {
+  _createSampleDataErro(List<DadosVolleyModel> list) {
     var erroSaque = [
-      new Erro('Defesa', 12),
-      new Erro('Ataque', 7),
-      new Erro('Saque', 4),
+      new Erro('J1', 1),
+      new Erro('J2', 2),
+      new Erro('J3', 3),
+      new Erro('J4', 4),
+      new Erro('J5', 3),
+      new Erro('J6', 4)
+    ];
+
+    var erroBloqueio = [
+      new Erro('J1', 1),
+      new Erro('J2', 2),
+      new Erro('J3', 3),
+      new Erro('J4', 4),
+      new Erro('J5', 3),
+      new Erro('J6', 4)
+    ];
+
+    var erroAtaque = [
+      new Erro('J1', 1),
+      new Erro('J2', 2),
+      new Erro('J3', 3),
+      new Erro('J4', 4),
+      new Erro('J5', 3),
+      new Erro('J6', 4)
+    ];
+
+    var erroGenerico = [
+      new Erro('J1', 1),
+      new Erro('J2', 2),
+      new Erro('J3', 3),
+      new Erro('J4', 4),
+      new Erro('J5', 3),
+      new Erro('J6', 4)
     ];
 
     _dadosSerieErro.add(
       charts.Series(
           data: erroSaque,
           domainFn: (Erro erro, _) => erro.tipo,
-          measureFn: (Erro erro, _) => erro.qnt,
-          colorFn: (Erro erro, _) {
-            switch (erro.tipo) {
-              case 'Ataque':
-                {
-                  return purple[12];
-                }
-              case 'Defesa':
-                {
-                  return purple[25];
-                }
-              case 'Saque':
-                {
-                  return purple[50];
-                }
-              default:
-                {
-                  return green[0];
-                }
-            }
-          },
-          id: 'pro'),
+          measureFn: (Erro erro, _) => erro.jogador,
+          colorFn: (Erro erro, _) => purple[15],
+          id: 'saque'),
+    );
+
+    _dadosSerieErro.add(
+      charts.Series(
+          data: erroAtaque,
+          domainFn: (Erro erro, _) => erro.tipo,
+          measureFn: (Erro erro, _) => erro.jogador,
+          colorFn: (Erro erro, _) => purple[15],
+          id: 'ataque'),
+    );
+
+    _dadosSerieErro.add(
+      charts.Series(
+          data: erroBloqueio,
+          domainFn: (Erro erro, _) => erro.tipo,
+          measureFn: (Erro erro, _) => erro.jogador,
+          colorFn: (Erro erro, _) => purple[15],
+          id: 'bloqueio'),
+    );
+
+    _dadosSerieErro.add(
+      charts.Series(
+          data: erroGenerico,
+          domainFn: (Erro erro, _) => erro.tipo,
+          measureFn: (Erro erro, _) => erro.jogador,
+          colorFn: (Erro erro, _) => purple[15],
+          id: 'generico'),
     );
   }
 
@@ -136,10 +185,10 @@ class _GrafVoleiState
   void initState() {
     super.initState();
     _dadosSerieT = List<charts.Series<PontoType, String>>();
-    _dadosSerie = List<charts.Series<Ponto, String>>();
-    //_createSampleDataPonto();
+    //_dadosSerie = List<charts.Series<Ponto, String>>();
     _dadosSerieErro = List<charts.Series<Erro, String>>();
-    _createSampleDataErro();
+    List<DadosVolleyModel> list = controller.dadosList.data;
+    _createSampleDataErro(list);
   }
 
   @override
@@ -209,7 +258,28 @@ class _GrafVoleiState
                     ));
                   } else {
                     List<DadosVolleyModel> list = controller.dadosList.data;
-                    _createSampleDataPonto(list);
+                    List<DadosVolleyModel> listp = controller.dadosListPro.data;
+                    List<DadosVolleyModel> listpa = controller.dadosListProAtaque.data;
+                    List<DadosVolleyModel> listpb = controller.dadosListProBloqueio.data;
+                    List<DadosVolleyModel> listpeo = controller.dadosListProErroOponente.data;
+                    List<DadosVolleyModel> listps = controller.dadosListProSaque.data;
+                    List<DadosVolleyModel> listc = controller.dadosListCon.data;
+                    List<DadosVolleyModel> listca = controller.dadosListConAtaque.data;
+                    List<DadosVolleyModel> listcb = controller.dadosListConBloqueio.data;
+                    List<DadosVolleyModel> listcg = controller.dadosListConGenerico.data;
+                    List<DadosVolleyModel> listcs = controller.dadosListConSaque.data;
+
+                    _lista(listpa);
+                    _lista(listpb);
+                    _lista(listpeo);
+                    _lista(listps);
+                    _lista(listca);
+                    _lista(listcb);
+                    _lista(listcg);
+                    _lista(listcs);
+
+                    _createSampleDataPonto();
+
                     return charts.BarChart(
                       _dadosSerieT,
                       barGroupingType: charts.BarGroupingType.stacked,
@@ -237,17 +307,29 @@ class _GrafVoleiState
                     fontSize: 20),
               ),
               SizedBox(height: 10.0),
-              Expanded(
-                  child: charts.PieChart(
-                _dadosSerieErro,
-                animate: true,
-                defaultRenderer: charts.ArcRendererConfig(
-                    arcWidth: 100,
-                    arcRendererDecorators: [
-                      new charts.ArcLabelDecorator(
-                        labelPosition: charts.ArcLabelPosition.auto,
-                      )
-                    ]),
+              Expanded(child: Observer(
+                builder: (_) {
+                  if (controller.dadosList.data == null) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (controller.dadosList.hasError) {
+                    return Center(
+                        child: RaisedButton(
+                      onPressed: controller.getList,
+                      child: Text('Error'),
+                    ));
+                  } else {/*
+                    List<DadosVolleyModel> list = controller.dadosList.data;
+                    _createSampleDataPonto(listcg);
+                    return charts.BarChart(
+                      _dadosSerieT,
+                      barGroupingType: charts.BarGroupingType.stacked,
+                      animate: true,
+                    );*/
+                    return Text('ok');
+                  }
+                },
               ))
             ],
           ),
@@ -300,7 +382,7 @@ class PontoType {
 
 class Erro {
   final String tipo;
-  final int qnt;
+  final int jogador;
 
-  Erro(this.tipo, this.qnt);
+  Erro(this.tipo, this.jogador);
 }
