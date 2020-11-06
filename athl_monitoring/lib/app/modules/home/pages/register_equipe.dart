@@ -1,10 +1,7 @@
 import 'dart:io';
-
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
-import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -13,6 +10,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 class RegisterEquipeForm extends StatefulWidget {
+  final String uidTreinador;
+
+  const RegisterEquipeForm({Key key, this.uidTreinador}) : super(key: key);
   @override
   _RegisterEquipeFormState createState() => _RegisterEquipeFormState();
 }
@@ -23,7 +23,6 @@ class _RegisterEquipeFormState
   final TextEditingController codEquipeController = TextEditingController();
   final TextEditingController modalidadeController = TextEditingController();
   File _image;
-  String _uploadedFileUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -168,6 +167,7 @@ class _RegisterEquipeFormState
                 codEquipe: uuid.v1(),
                 nome: nomeEquipeController.text,
                 modalidade: modalidadeController.text,
+                uidTreinador: widget.uidTreinador,
                 urlPhoto:
                     '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png');
             controller.save(model);

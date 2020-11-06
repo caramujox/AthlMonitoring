@@ -33,7 +33,7 @@ class _WelcomePageTreinadorState
   }
 
   _welcomeTreinadorDrawer()  {
-    dynamic user = controller.userModel;
+    dynamic user = controller.userModel.value;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -146,7 +146,7 @@ class _WelcomePageTreinadorState
   }
 
   _welcomeBodyTreinador() {
-    UserModel user = controller.userModel;      
+    UserModel user = controller.userModel.value;      
     return Container(
       child: Column(
         children: <Widget>[
@@ -270,7 +270,7 @@ class _WelcomePageTreinadorState
                   _botaoComFoto("assets/images/atleta4.png", "ATLETAS",
                       "/atletas", Icons.person),
                   _botaoComFoto("assets/images/equipe.png", "EQUIPES",
-                      "/equipes", Icons.people),
+                      "/equipes", Icons.people, args: user.uid),
                 ],
               ),
             ),
@@ -281,11 +281,11 @@ class _WelcomePageTreinadorState
     );
   }
 
-  _botaoComFoto(String assetPath, btnText, route, IconData icon) {
+  _botaoComFoto(String assetPath, btnText, route, IconData icon, {args}) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(route);
+          Navigator.of(context).pushNamed(route, arguments: args);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),

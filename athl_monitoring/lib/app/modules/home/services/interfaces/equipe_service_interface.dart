@@ -4,6 +4,7 @@ import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 
 abstract class IEquipeService{
   Stream<List<EquipeModel>> get();
+  Stream<List<EquipeModel>> getEquipesDoTreinador(String uidTreinador);
   Future save(EquipeModel model);
   Future delete(EquipeModel model);
   Future index(EquipeModel model);

@@ -53,7 +53,7 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
       //Se tiver na lista de atletas -> WelcomePageAtletas
       //Else -> WelcomePageTreinador
       Navigator.of(context)
-          .pushNamedAndRemoveUntil('welcomeTreinador', (route) => false);
+          .pushNamed('/welcomeTreinador');
     } else {
       prefs.setBool('seen', true);
     }

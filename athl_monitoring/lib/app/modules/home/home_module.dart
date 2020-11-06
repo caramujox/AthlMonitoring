@@ -71,7 +71,7 @@ class HomeModule extends ChildModule {
             (i) => EquipeRepository(firestore: Firestore.instance)),
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
         Bind((i) =>
-            EquipeController(equipeService: i.get(), uploadService: i.get())),
+            EquipeController(equipeService: i.get(), uploadService: i.get(), uidsTreinador: i.args.data)),
 
         //Auth and Users
         Bind<IBaseAuth>((i) => AuthService(userRepository: i.get())),
@@ -92,18 +92,18 @@ class HomeModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => PreGamePagePage()),
+        Router(Modular.initialRoute, child: (_, args) => WrapperPage()),
         Router('/welcomeTreinador', child: (_, args) => WelcomePageTreinador()),
         Router('/welcomeAtleta', child: (_, args) => WelcomeAtletaPage()),
         Router('/atletas', child: (_, args) => AtletaPage()),
         Router('/authpage', child: (_, args) => AuthpagePage()),
         Router('/register', child: (_, args) => RegisterForm()),
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
-        Router('/regEquipes', child: (_, args) => RegisterEquipeForm()),
+        Router('/regEquipes', child: (_, args) => RegisterEquipeForm(uidTreinador: args.data,)),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
         Router('/pregame', child: (_, args) => PreGamePagePage()),
         Router('/selecAtleta', child: (_, args) => SelecAtleta()),
-        Router('/equipes', child: (_, args) => GridEquipePage()),
+        Router('/equipes', child: (_, args) => GridEquipePage(uidTreinador: args.data,)),
         Router('/welcomeRegisterAtleta',
             child: (_, args) => WelcomeRegisterAtleta()),
         Router('/welcomeRegisterTreinador',

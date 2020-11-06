@@ -33,7 +33,7 @@ class _WelcomeAtletaPageState
   }
 
   _welcomeBodyAtleta() {
-    UserModel user = controller.userModel;
+    UserModel user = controller.userModel.value;
     return Container(
       child: Column(
         children: <Widget>[
@@ -186,7 +186,7 @@ class _WelcomeAtletaPageState
   }
 
   _welcomeAtletaDrawer() {
-    UserModel user = controller.userModel;
+    UserModel user = controller.userModel.value;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,

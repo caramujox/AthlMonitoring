@@ -11,14 +11,14 @@ abstract class _UserControllerBase with Store {
   final IBaseAuth auth;
 
   _UserControllerBase({@required this.auth}) {
-    startUp();
+    getUserInfo();
   }
 
   @observable
   FirebaseUser user;
 
   @observable
-  dynamic userModel;
+  ObservableFuture<dynamic> userModel;
 
   @observable
   ObservableStream<List<UserModel>> userList;
@@ -59,8 +59,8 @@ abstract class _UserControllerBase with Store {
   }
 
   @action
-  getUserInfo() async{
-    userModel =  await auth.getUserModel();
+  getUserInfo() {
+    userModel = auth.getUserModel().asObservable();
     return  userModel;
     }
 
@@ -72,7 +72,7 @@ abstract class _UserControllerBase with Store {
 
   @action
   startUp() async {
-    user = await auth.getCurrentUser();
-    userModel = await auth.getUserModel();
+    //user = await auth.getCurrentUser();
+    getUserInfo();
   }
 }

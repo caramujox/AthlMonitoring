@@ -27,6 +27,12 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
   }
 
   @override
+  Stream<List<EquipeModel>> getEquipesDoTreinador(String uidTreinador) {
+    return firestore.collection('equipe').where('uidTreinador', isEqualTo: uidTreinador).snapshots().map((query) =>
+        query.documents.map((doc) => EquipeModel.fromDocument(doc)).toList());
+  }
+
+  @override
   Future<EquipeModel> index(EquipeModel equipeModel) {
     return Firestore.instance
         .collection('equipe')
@@ -45,7 +51,8 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
         'nome': equipeModel.nome,
         'codEquipe': equipeModel.codEquipe,
         'modalidade': equipeModel.modalidade,
-        'urlPhoto': equipeModel.urlPhoto
+        'urlPhoto': equipeModel.urlPhoto,
+        'uidTreinador': equipeModel.uidTreinador
       });
     } else {
       equipeModel.reference.updateData({

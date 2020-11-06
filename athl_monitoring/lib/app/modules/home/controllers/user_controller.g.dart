@@ -27,13 +27,13 @@ mixin _$UserController on _UserControllerBase, Store {
   final _$userModelAtom = Atom(name: '_UserControllerBase.userModel');
 
   @override
-  dynamic get userModel {
+  ObservableFuture<dynamic> get userModel {
     _$userModelAtom.reportRead();
     return super.userModel;
   }
 
   @override
-  set userModel(dynamic value) {
+  set userModel(ObservableFuture<dynamic> value) {
     _$userModelAtom.reportWrite(value, super.userModel, () {
       super.userModel = value;
     });
@@ -86,14 +86,6 @@ mixin _$UserController on _UserControllerBase, Store {
         .run(() => super.sendEmailVerification());
   }
 
-  final _$getUserInfoAsyncAction =
-      AsyncAction('_UserControllerBase.getUserInfo');
-
-  @override
-  Future getUserInfo() {
-    return _$getUserInfoAsyncAction.run(() => super.getUserInfo());
-  }
-
   final _$getUserAsyncAction = AsyncAction('_UserControllerBase.getUser');
 
   @override
@@ -139,6 +131,17 @@ mixin _$UserController on _UserControllerBase, Store {
         name: '_UserControllerBase.signUp');
     try {
       return super.signUp(email, password, name);
+    } finally {
+      _$_UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getUserInfo() {
+    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
+        name: '_UserControllerBase.getUserInfo');
+    try {
+      return super.getUserInfo();
     } finally {
       _$_UserControllerBaseActionController.endAction(_$actionInfo);
     }

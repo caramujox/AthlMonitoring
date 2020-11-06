@@ -69,18 +69,18 @@ class _PreGamePagePageState
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Observer(builder: (_) {
-                if (controller.equipeList.data == null) {
+                if (controller.equipesDoTreinadorList.data == null) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (controller.equipeList.hasError) {
+                } else if (controller.equipesDoTreinadorList.hasError) {
                   return Center(
                       child: RaisedButton(
                     onPressed: controller.getList,
                     child: Text('Error'),
                   ));
                 } else {
-                  List<EquipeModel> list = controller.equipeList.data;
+                  List<EquipeModel> list = controller.equipesDoTreinadorList.data;
                   return FutureBuilder(builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     return DropdownButton(
