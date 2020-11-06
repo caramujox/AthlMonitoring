@@ -32,25 +32,9 @@ class _GrafVoleiState
   int _proCountBloqueio;
   int _proCountGenerico;
 
-  _lista(List<DadosVolleyModel> list){
+  int _pontosClassificado(List<DadosVolleyModel> list) {
     list.forEach((element) {
       switch (element.tipo) {
-        case ('ponto de saque'):
-          {
-            return _conCountSaque = list.length;
-          }
-        case 'ponto de ataque':
-          {
-            return _conCountAtaque = list.length;
-          }
-        case 'ponto de bloqueio':
-          {
-            return _conCountBloqueio = list.length;
-          }
-        case 'ponto do oponente':
-          {
-            return _conCountGenerico = list.length;
-          }
         case ('ponto de saque'):
           {
             return _proCountSaque = list.length;
@@ -63,47 +47,59 @@ class _GrafVoleiState
           {
             return _proCountBloqueio = list.length;
           }
-        case 'erro genérico':
+        case 'ponto do oponente':
           {
             return _proCountGenerico = list.length;
           }
+        case ('erro de saque'):
+          {
+            return _conCountSaque = list.length;
+          }
+        case 'erro de ataque':
+          {
+            return _conCountAtaque = list.length;
+          }
+        case 'erro de bloqueio':
+          {
+            return _conCountBloqueio = list.length;
+          }
+        case 'erro generico':
+          {
+            return _conCountGenerico = list.length;
+          }
       }
     });
-
   }
-  
 
-  _createSampleDataPonto() {
-    
+  _createSampleDataPonto(int pa, pb, pg, ps, cs, ca, cb, cg) {
     var proPtTipo = [
-      new PontoType('Saque', _proCountSaque),
-      new PontoType('Ataque', _proCountAtaque),
-      new PontoType('Bloqueio', _proCountBloqueio),
-      new PontoType('Genérico', _proCountGenerico)
+      new PontoType('Saque', ps),
+      new PontoType('Ataque', pa),
+      new PontoType('Bloqueio', pb),
+      new PontoType('Genérico', pg)
     ];
 
     var conPtTipo = [
-      new PontoType('Saque', _conCountSaque),
-      new PontoType('Ataque', _conCountAtaque),
-      new PontoType('Bloqueio', _conCountBloqueio),
-      new PontoType('Genérico', _conCountGenerico)
+      new PontoType('Saque', cs),
+      new PontoType('Ataque', ca),
+      new PontoType('Bloqueio', cb),
+      new PontoType('Genérico', cg)
     ];
 
-    _dadosSerieT.add(
-      charts.Series(
+    return [
+      new charts.Series<PontoType, String>(
           data: proPtTipo,
           domainFn: (PontoType ponto, _) => ponto.tipo,
           measureFn: (PontoType ponto, _) => ponto.ponto,
           colorFn: (PontoType ponto, _) => purple[50],
           id: 'pro'),
-    );
-
-    _dadosSerieT.add(charts.Series(
-        data: conPtTipo,
-        domainFn: (PontoType ponto, _) => ponto.tipo,
-        measureFn: (PontoType ponto, _) => ponto.ponto,
-        colorFn: (PontoType ponto, _) => purple[15],
-        id: 'contra'));
+      new charts.Series<PontoType, String>(
+          data: conPtTipo,
+          domainFn: (PontoType ponto, _) => ponto.tipo,
+          measureFn: (PontoType ponto, _) => ponto.ponto,
+          colorFn: (PontoType ponto, _) => yellow[15],
+          id: 'contra')
+    ];
 
   } //createSampleData
 
@@ -269,16 +265,24 @@ class _GrafVoleiState
                     List<DadosVolleyModel> listcg = controller.dadosListConGenerico.data;
                     List<DadosVolleyModel> listcs = controller.dadosListConSaque.data;
 
-                    _lista(listpa);
-                    _lista(listpb);
-                    _lista(listpeo);
-                    _lista(listps);
-                    _lista(listca);
-                    _lista(listcb);
-                    _lista(listcg);
-                    _lista(listcs);
-
-                    _createSampleDataPonto();
+                    _pontosClassificado(listpa);
+                    _pontosClassificado(listpb);
+                    _pontosClassificado(listpeo);
+                    _pontosClassificado(listps);
+                    _pontosClassificado(listca);
+                    _pontosClassificado(listcb);
+                    _pontosClassificado(listcg);
+                    _pontosClassificado(listcs);
+                    
+                    _dadosSerieT = _createSampleDataPonto(
+                        _proCountAtaque,
+                        _proCountBloqueio,
+                        _proCountGenerico,
+                        _proCountSaque,
+                        _conCountSaque,
+                        _conCountAtaque,
+                        _conCountBloqueio,
+                        _conCountGenerico);
 
                     return charts.BarChart(
                       _dadosSerieT,
@@ -319,7 +323,8 @@ class _GrafVoleiState
                       onPressed: controller.getList,
                       child: Text('Error'),
                     ));
-                  } else {/*
+                  } else {
+                    /*
                     List<DadosVolleyModel> list = controller.dadosList.data;
                     _createSampleDataPonto(listcg);
                     return charts.BarChart(

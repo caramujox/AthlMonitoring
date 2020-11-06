@@ -57,7 +57,7 @@ class DadosVolleyRepository extends Disposable
 
   @override
   Stream<List<DadosVolleyModel>> getConGenerico() {
-    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'erro genérico').snapshots().map((event) => 
+    return firestore.collection('jogosVolley').document('9d1ece70-159e-11eb-8b50-014840b4b2b02020-11-05 01:28:56.958953').collection('dados').where('tipo', isEqualTo: 'erro generico').snapshots().map((event) => 
         event.documents.map((doc) => DadosVolleyModel.fromDocument(doc)).toList());
   
   }
