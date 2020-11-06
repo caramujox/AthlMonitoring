@@ -16,23 +16,20 @@ class _WelcomePageTreinadorState
     extends ModularState<WelcomePageTreinador, UserController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-
   @override
   Widget build(BuildContext context) {
     return _constroiWelcomeTreinador();
   }
 
-  
-
   _constroiWelcomeTreinador() {
     return Scaffold(
       key: _scaffoldKey,
       drawer: _welcomeTreinadorDrawer(),
-      body: _welcomeBodyTreinador(),      
+      body: _welcomeBodyTreinador(),
     );
   }
 
-  _welcomeTreinadorDrawer()  {
+  _welcomeTreinadorDrawer() {
     dynamic user = controller.userModel.value;
     return Drawer(
       child: ListView(
@@ -135,8 +132,7 @@ class _WelcomePageTreinadorState
                   ),
                   onTap: () {
                     controller.signOut();
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/', (route) => false);
+                    Navigator.pushNamed(context, '/');
                   }),
             ),
           ),
@@ -146,7 +142,7 @@ class _WelcomePageTreinadorState
   }
 
   _welcomeBodyTreinador() {
-    UserModel user = controller.userModel.value;      
+    UserModel user = controller.userModel.value;
     return Container(
       child: Column(
         children: <Widget>[
@@ -270,7 +266,8 @@ class _WelcomePageTreinadorState
                   _botaoComFoto("assets/images/atleta4.png", "ATLETAS",
                       "/atletas", Icons.person),
                   _botaoComFoto("assets/images/equipe.png", "EQUIPES",
-                      "/equipes", Icons.people, args: user.uid),
+                      "/equipes", Icons.people,
+                      args: user.uid),
                 ],
               ),
             ),

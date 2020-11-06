@@ -24,8 +24,7 @@ class _WelcomeRegisterAtletaState
   final TextEditingController numeroAtletaController = TextEditingController();
   final TextEditingController nomeAtletaController = TextEditingController();
   File _image;
-  String _uploadedFileUrl;
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

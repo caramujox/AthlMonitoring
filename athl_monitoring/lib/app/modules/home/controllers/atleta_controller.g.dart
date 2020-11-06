@@ -87,6 +87,17 @@ mixin _$AtletaController on _AtletaControllerBase, Store {
   }
 
   @override
+  dynamic startUp() {
+    final _$actionInfo = _$_AtletaControllerBaseActionController.startAction(
+        name: '_AtletaControllerBase.startUp');
+    try {
+      return super.startUp();
+    } finally {
+      _$_AtletaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic uploadPicture(String filePath, File file) {
     final _$actionInfo = _$_AtletaControllerBaseActionController.startAction(
         name: '_AtletaControllerBase.uploadPicture');

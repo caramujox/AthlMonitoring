@@ -5,7 +5,6 @@ import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/atleta_service_interface.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/base_auth_interface.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/upload_service_interface.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -20,7 +19,8 @@ abstract class _AtletaControllerBase with Store {
 
   _AtletaControllerBase( {this.atletaService, this.uploadService, this.auth,}) {
     // getList();
-    getUser();
+    // getUser();
+    startUp();
   }
 
   @observable
@@ -47,6 +47,12 @@ abstract class _AtletaControllerBase with Store {
   @action
   delete(AtletaModel model) {
     atletaService.delete(model);
+  }
+
+  @action
+  startUp(){
+    getUser();
+    getList();
   }
 
   @action
