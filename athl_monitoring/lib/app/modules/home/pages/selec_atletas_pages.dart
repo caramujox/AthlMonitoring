@@ -23,7 +23,7 @@ class SelecAtleta extends StatefulWidget {
 
 class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
   //use 'controller' variable to access controller
-
+  ScrollController scrollController = new ScrollController();
   @override
   Widget build(BuildContext context) {
     bool successDrop = false;
@@ -49,7 +49,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                 Expanded(
                   child: Center(
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.555,
+                      height: MediaQuery.of(context).size.height * 0.40,
                       child: GridView.count(
                           physics: NeverScrollableScrollPhysics(),
                           primary: false,
@@ -58,7 +58,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                           crossAxisSpacing: 0,
                           mainAxisSpacing: 0,
                           crossAxisCount: 3,
-                          childAspectRatio: 0.6,
+                          childAspectRatio: 0.85,
                           children: <Widget>[
                             SizedBox.expand(
                                 child: DragTarget<AtletaModel>(
@@ -69,22 +69,36 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border: Border(bottom: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
-                                        child: Text(
-                                      tavindo.nome,
-                                      textAlign: TextAlign.center,
+                                        child: GestureDetector(
+                                      child: GridItem(
+                                        nome: tavindo.nome,
+                                        num: tavindo.number.toString(),
+                                        photoUrl: tavindo.urlPhoto,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          successDrop = !successDrop;
+                                        });
+                                      },
                                     )),
                                   );
                                 } else {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border:  Border(bottom: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
                                       child: AutoSizeText(
                                         '4',
@@ -125,22 +139,36 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border: Border(bottom: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
-                                        child: Text(
-                                      tavindo.nome,
-                                      textAlign: TextAlign.center,
+                                        child: GestureDetector(
+                                      child: GridItem(
+                                        nome: tavindo.nome,
+                                        num: tavindo.number.toString(),
+                                        photoUrl: tavindo.urlPhoto,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          successDrop = !successDrop;
+                                        });
+                                      },
                                     )),
                                   );
                                 } else {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border: Border(bottom: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
                                       child: AutoSizeText(
                                         '3',
@@ -181,22 +209,36 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border: Border(bottom: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
-                                        child: Text(
-                                      tavindo.nome,
-                                      textAlign: TextAlign.center,
+                                        child: GestureDetector(
+                                      child: GridItem(
+                                        nome: tavindo.nome,
+                                        num: tavindo.number.toString(),
+                                        photoUrl: tavindo.urlPhoto,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          successDrop = !successDrop;
+                                        });
+                                      },
                                     )),
                                   );
                                 } else {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border: Border(bottom: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
                                       child: AutoSizeText(
                                         '2',
@@ -237,22 +279,36 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border: Border(top: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          top: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
-                                        child: Text(
-                                      tavindo.nome,
-                                      textAlign: TextAlign.center,
+                                        child: GestureDetector(
+                                      child: GridItem(
+                                        nome: tavindo.nome,
+                                        num: tavindo.number.toString(),
+                                        photoUrl: tavindo.urlPhoto,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          successDrop = !successDrop;
+                                        });
+                                      },
                                     )),
                                   );
                                 } else {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border: Border(top: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          top: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
                                       child: AutoSizeText(
                                         '5',
@@ -293,22 +349,36 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border: Border(top: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          top: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
-                                        child: Text(
-                                      tavindo.nome,
-                                      textAlign: TextAlign.center,
+                                        child: GestureDetector(
+                                      child: GridItem(
+                                        nome: tavindo.nome,
+                                        num: tavindo.number.toString(),
+                                        photoUrl: tavindo.urlPhoto,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          successDrop = !successDrop;
+                                        });
+                                      },
                                     )),
                                   );
                                 } else {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                        border: Border(top: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          top: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
                                       child: AutoSizeText(
                                         '6',
@@ -348,23 +418,37 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                   successDrop = !successDrop;
                                   return Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.orange[300],
-                                      border: Border.all(
-                                          color: ConstColors.ccBlueVioletWheel, width: 2),
-                                    ),
+                                        color: Colors.orange[300],
+                                        border: Border(
+                                          top: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
-                                        child: Text(
-                                      tavindo.nome,
-                                      textAlign: TextAlign.center,
+                                        child: GestureDetector(
+                                      child: GridItem(
+                                        nome: tavindo.nome,
+                                        num: tavindo.number.toString(),
+                                        photoUrl: tavindo.urlPhoto,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          successDrop = !successDrop;
+                                        });
+                                      },
                                     )),
                                   );
                                 } else {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
-                                       border: Border(top: BorderSide(color:
-                                                ConstColors.ccBlueVioletWheel, width: 2),
-                                            )),
+                                        border: Border(
+                                          top: BorderSide(
+                                              color:
+                                                  ConstColors.ccBlueVioletWheel,
+                                              width: 2),
+                                        )),
                                     child: Center(
                                       child: AutoSizeText(
                                         '1',
@@ -418,35 +502,53 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                       child: Wrap(
                         children: [
                           Container(
-                            padding: EdgeInsets.fromLTRB(0, 15.0, 0, 15.0),
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 10.0),
                             height: MediaQuery.of(context).size.height * 0.300,
                             child: FutureBuilder(
                               builder: (BuildContext context,
                                   AsyncSnapshot<dynamic> snapshot) {
                                 return Container(
-                                  child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      shrinkWrap: true,
-                                      itemCount: list.length,
-                                      itemBuilder: (context, index) {
-                                        return AnimationConfiguration
-                                            .staggeredList(
-                                                position: index,
-                                                duration: const Duration(
-                                                    microseconds: 375),
-                                                child: ScaleAnimation(
-                                                  child: GestureDetector(
-                                                    child: Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.4,
-                                                      child: Card(
-                                                        child: Draggable(
-                                                          data: list[index],
-                                                          child: Container(
-                                                            child: GridItem(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Scrollbar(
+                                    isAlwaysShown: true,
+                                    controller: scrollController,
+                                    child: ListView.builder(
+                                        controller: scrollController,
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount: list.length,
+                                        itemBuilder: (context, index) {
+                                          return AnimationConfiguration
+                                              .staggeredList(
+                                                  position: index,
+                                                  duration: const Duration(
+                                                      microseconds: 375),
+                                                  child: ScaleAnimation(
+                                                    child: GestureDetector(
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.4,
+                                                        child: Card(
+                                                          child: Draggable(
+                                                            data: list[index],
+                                                            child: Container(
+                                                              child: GridItem(
+                                                                index: index,
+                                                                nome:
+                                                                    list[index]
+                                                                        .nome,
+                                                                num: list[index]
+                                                                    .number
+                                                                    .toString(),
+                                                                photoUrl: list[
+                                                                        index]
+                                                                    .urlPhoto,
+                                                              ),
+                                                            ),
+                                                            feedback: GridItem(
                                                               index: index,
                                                               nome: list[index]
                                                                   .nome,
@@ -458,30 +560,54 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                                                       .urlPhoto,
                                                             ),
                                                           ),
-                                                          feedback: GridItem(
-                                                            index: index,
-                                                            nome: list[index]
-                                                                .nome,
-                                                            num: list[index]
-                                                                .number
-                                                                .toString(),
-                                                            photoUrl:
-                                                                list[index]
-                                                                    .urlPhoto,
-                                                          ),
                                                         ),
                                                       ),
+                                                      onLongPress: () {
+                                                        print(
+                                                            'LOOOOOOOOOOOOOOOOOOOOOOONG press');
+                                                      },
                                                     ),
-                                                    onLongPress: () {
-                                                      print(
-                                                          'LOOOOOOOOOOOOOOOOOOOOOOONG press');
-                                                    },
-                                                  ),
-                                                ));
-                                      }),
+                                                  ));
+                                        }),
+                                  ),
                                 );
                               },
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: RaisedButton(
+                                color: ConstColors.ccBlueVioletWheel,
+                                textColor: Colors.white,
+                                child: Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Text("INICIAR PARTIDA",
+                                            style: TextStyle(fontSize: 24.0)),
+                                      ],
+                                    )),
+                                onPressed: () {
+                                  List<EquipeModel> gambi =
+                                      new List<EquipeModel>();
+
+                                  // GameModel x = new GameModel(
+                                  //     codEquipe: selectedType.codEquipe,
+                                  //     nomeEquipe: selectedType.nome,
+                                  //     equipeAdv: equipeAdvController.text,
+                                  //     nomeCompeticao: campeonatoController.text,
+                                  //     dataGame: DateTime.now());
+                                  // controller.startGame(x);
+                                  // Navigator.of(context)
+                                  //     .pushNamed('/volleyballGame', arguments: x);
+                                  Navigator.of(context).pushNamed('/selecAtleta',
+                                      arguments: gambi);
+                                },
+                                shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(30.0))),
                           ),
                         ],
                       ),

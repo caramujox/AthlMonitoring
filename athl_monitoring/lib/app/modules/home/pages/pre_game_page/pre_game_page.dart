@@ -173,8 +173,9 @@ class _PreGamePagePageState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Text("INICIAR PARTIDA",
-                              style: TextStyle(fontSize: 24.0)),
+                          AutoSizeText("SELECIONE A EQUIPE TITULAR",
+                              maxLines: 1, 
+                              maxFontSize: 25,),
                         ],
                       )),
                   onPressed: () {
@@ -189,9 +190,8 @@ class _PreGamePagePageState
                     // controller.startGame(x);
                     // Navigator.of(context)
                     //     .pushNamed('/volleyballGame', arguments: x);
-                    Navigator.of(context).pushNamed('/selecAtleta', arguments: 
-                      gambi                    
-                    );
+                    Navigator.of(context)
+                        .pushNamed('/selecAtleta', arguments: gambi);
                   },
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),
