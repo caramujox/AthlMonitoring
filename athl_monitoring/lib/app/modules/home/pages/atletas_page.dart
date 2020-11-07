@@ -51,6 +51,7 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
                   ));
                 } else {
                   List<AtletaModel> list = controller.atletaList.data;
+                  list.sort((a,b) => a.codEquipe.compareTo(b.codEquipe));
                   return Stack(children: <Widget>[
                     Container(
                       child: FutureBuilder(

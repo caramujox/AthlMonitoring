@@ -30,8 +30,8 @@ class GridItem extends StatelessWidget {
                         future: _getImage(photoUrl),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.done)
-                            return SizedBox.expand(
-                              child: snapshot.data,
+                            return SizedBox(
+                              child: Container(child: snapshot.data),
                             );
                           if (snapshot.connectionState ==
                               ConnectionState.waiting)
@@ -40,7 +40,6 @@ class GridItem extends StatelessWidget {
                                     MediaQuery.of(context).size.height / 1.25,
                                 width: MediaQuery.of(context).size.width / 1.25,
                                 child: CircularProgressIndicator());
-
                           return Container();
                         },
                       ),
@@ -91,7 +90,7 @@ class GridItem extends StatelessWidget {
   }
 
   Future<Widget> _getImage(String image) async {
-    Image m;
+    Widget m;
     CachedNetworkImage n;
 
     await FirebaseStorage.instance
@@ -99,10 +98,12 @@ class GridItem extends StatelessWidget {
         .child(image)
         .getDownloadURL()
         .then((downloadURL) {
-      m = Image.network(
-        downloadURL.toString(),
-        fit: BoxFit.cover,
-      );
+      m = Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.fitWidth,
+                  alignment: FractionalOffset.topCenter,
+                  image: NetworkImage(downloadURL.toString()))));
       n = CachedNetworkImage(
         placeholder: (context, url) => new Container(
           color: Colors.transparent,

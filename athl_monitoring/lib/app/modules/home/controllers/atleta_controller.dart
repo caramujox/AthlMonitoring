@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/atleta_service_interface.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/base_auth_interface.dart';
@@ -70,7 +71,7 @@ abstract class _AtletaControllerBase with Store {
   startUp() {
     getUser();
     getList(codigosEquipe);
-    getAtletasSingleTeam(codigoEquipe);
+   // getAtletasSingleTeam(codigoEquipe.codEquipe);
   }
 
   @action

@@ -59,7 +59,7 @@ class HomeModule extends ChildModule {
             storage: FirebaseStorage(
                 storageBucket: "gs://athlmonitoring-62273.appspot.com"))),
         Bind((i) => AtletaController(
-            atletaService: i.get(), uploadService: i.get(), auth: i.get(), codigoEquipe: i.args.data)),
+            atletaService: i.get(), uploadService: i.get(), auth: i.get(), codigosEquipe: i.args.data)),
 
         //EquipesPages
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
@@ -103,7 +103,7 @@ class HomeModule extends ChildModule {
                 )),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
         Router('/pregame', child: (_, args) => PreGamePagePage()),
-        Router('/selecAtleta', child: (_, args) => SelecAtleta()),
+        Router('/selecAtleta', child: (_, args) => SelecAtleta(equipeJogando: args.data,)),
         Router('/equipes',
             child: (_, args) => GridEquipePage(
                   uidTreinador: args.data,

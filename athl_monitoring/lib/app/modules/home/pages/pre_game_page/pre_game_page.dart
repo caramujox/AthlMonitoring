@@ -81,7 +81,8 @@ class _PreGamePagePageState
                     child: Text('Error'),
                   ));
                 } else {
-                  List<EquipeModel> list = controller.equipesDoTreinadorList.data;
+                  List<EquipeModel> list =
+                      controller.equipesDoTreinadorList.data;
                   return FutureBuilder(builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     return DropdownButton(
@@ -177,7 +178,8 @@ class _PreGamePagePageState
                         ],
                       )),
                   onPressed: () {
-                    List<AtletaModel> atletasList = controller.equipesDoTreinadorList.data;
+                    List<EquipeModel> gambi = new List<EquipeModel>();
+                    gambi.add(selectedType);
                     // GameModel x = new GameModel(
                     //     codEquipe: selectedType.codEquipe,
                     //     nomeEquipe: selectedType.nome,
@@ -187,7 +189,9 @@ class _PreGamePagePageState
                     // controller.startGame(x);
                     // Navigator.of(context)
                     //     .pushNamed('/volleyballGame', arguments: x);
-                    Navigator.of(context).pushNamed('/selecAtleta', arguments: atletasList);
+                    Navigator.of(context).pushNamed('/selecAtleta', arguments: 
+                      gambi                    
+                    );
                   },
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),

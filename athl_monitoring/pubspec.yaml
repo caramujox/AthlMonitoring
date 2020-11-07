@@ -84,6 +84,7 @@ flutter:
   - assets/images/atleta2.png
   - assets/images/atleta3.png
   - assets/images/atleta4.png
+  - assets/images/volley-court.jpg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
