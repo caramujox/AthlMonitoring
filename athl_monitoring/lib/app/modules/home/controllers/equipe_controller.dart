@@ -17,7 +17,9 @@ abstract class _EquipeControllerBase with Store {
   final String uidsTreinador;
 
   _EquipeControllerBase(
-      {IEquipeService this.equipeService, this.uploadService, this.uidsTreinador}) {
+      {IEquipeService this.equipeService,
+      this.uploadService,
+      this.uidsTreinador}) {
     startUp();
   }
 
@@ -28,7 +30,7 @@ abstract class _EquipeControllerBase with Store {
   ObservableStream<List<EquipeModel>> equipesDoTreinadorList;
 
   @action
-  startUp(){
+  startUp() {
     //getList();
     equipesDoTreinador(uidsTreinador);
   }
@@ -41,7 +43,8 @@ abstract class _EquipeControllerBase with Store {
 
   @action
   equipesDoTreinador(String uidTreinador) {
-    equipesDoTreinadorList = equipeService.getEquipesDoTreinador(uidTreinador).asObservable();
+    equipesDoTreinadorList =
+        equipeService.getEquipesDoTreinador(uidTreinador).asObservable();
     return equipesDoTreinadorList;
   }
 
@@ -59,12 +62,16 @@ abstract class _EquipeControllerBase with Store {
   uploadPicture(String filePath, File file) {
     return uploadService.startUpload(filePath, file);
   }
-  
 
   @action
-  startGame(GameModel model){
+  startGame(GameModel model) {
     equipeService.startGame(model);
-  }  
+  }
+
+  @action
+  updateUser(String equipeId, idTreinador) {
+    equipeService.updateUser(equipeId, idTreinador);
+  }
 
   Future<PickedFile> pickImage(ImageSource source) async {
     final _picker = ImagePicker();

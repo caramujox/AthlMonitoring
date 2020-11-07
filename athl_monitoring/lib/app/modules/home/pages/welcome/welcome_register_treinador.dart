@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/treinador_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -137,10 +139,7 @@ class _WelcomeRegisterTreinadorState
                     '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png',
                     File(_image.path))
                 .onComplete;
-            AtletaModel model = AtletaModel(
-                email: emailAtletaController.text,
-                nome: nomeAtletaController.text,
-                number: int.parse(numeroAtletaController.text),
+            UserModel model = UserModel(
                 urlPhoto:
                     '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
             controller.save(model);

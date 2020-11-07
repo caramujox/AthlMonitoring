@@ -21,6 +21,13 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
   }
 
   @override
+  Future updateUser(String equipeId, idTreinador) async {
+    await Firestore.instance.collection('users').document(idTreinador).setData({
+      'equipes': {equipeId}
+    }, merge: true);
+  }
+
+  @override
   Stream<List<EquipeModel>> get() {
     return firestore.collection('equipe').snapshots().map((query) =>
         query.documents.map((doc) => EquipeModel.fromDocument(doc)).toList());
@@ -28,8 +35,13 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
 
   @override
   Stream<List<EquipeModel>> getEquipesDoTreinador(String uidTreinador) {
-    return firestore.collection('equipe').where('uidTreinador', isEqualTo: uidTreinador).snapshots().map((query) =>
-        query.documents.map((doc) => EquipeModel.fromDocument(doc)).toList());
+    return firestore
+        .collection('equipe')
+        .where('uidTreinador', isEqualTo: uidTreinador)
+        .snapshots()
+        .map((query) => query.documents
+            .map((doc) => EquipeModel.fromDocument(doc))
+            .toList());
   }
 
   @override

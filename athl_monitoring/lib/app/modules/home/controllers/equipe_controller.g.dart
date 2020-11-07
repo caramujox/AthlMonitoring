@@ -122,6 +122,17 @@ mixin _$EquipeController on _EquipeControllerBase, Store {
   }
 
   @override
+  dynamic updateUser(String equipeId, dynamic idTreinador) {
+    final _$actionInfo = _$_EquipeControllerBaseActionController.startAction(
+        name: '_EquipeControllerBase.updateUser');
+    try {
+      return super.updateUser(equipeId, idTreinador);
+    } finally {
+      _$_EquipeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 equipeList: ${equipeList},

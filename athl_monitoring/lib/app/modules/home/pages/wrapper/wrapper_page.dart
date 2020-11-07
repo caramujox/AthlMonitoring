@@ -1,6 +1,6 @@
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:athl_monitoring/app/modules/home/pages/authpage/authpage_page.dart';
-import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_screen.dart';
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -21,15 +21,14 @@ class _WrapperPageState extends ModularState<WrapperPage, UserController> {
   FirebaseUser _user;
 
   @override
-  void initState() {    
+  void initState() {
     super.initState();
     controller.getUser().then((user) {
       setState(() {
         if (user != null) {
           _user = user;
           authStatus = AuthStatus.LOGGED_IN;
-        }
-        else {
+        } else {
           authStatus = AuthStatus.NOT_LOGGED_IN;
         }
         // authStatus =

@@ -43,11 +43,11 @@ mixin _$AtletaController on _AtletaControllerBase, Store {
       ActionController(name: '_AtletaControllerBase');
 
   @override
-  dynamic getList() {
+  dynamic getList(String codEquipe) {
     final _$actionInfo = _$_AtletaControllerBaseActionController.startAction(
         name: '_AtletaControllerBase.getList');
     try {
-      return super.getList();
+      return super.getList(codEquipe);
     } finally {
       _$_AtletaControllerBaseActionController.endAction(_$actionInfo);
     }

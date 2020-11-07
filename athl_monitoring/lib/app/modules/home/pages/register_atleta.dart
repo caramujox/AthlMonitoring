@@ -144,7 +144,7 @@ class _RegisterAtletaFormState
                         formIcon: Icons.assignment_ind,
                         formHint: "Digite o Número do Atleta",
                         formTitle: "Número do Atleta",
-                      ),                
+                      ),
                       _buildRegisterBtn(),
                     ],
                   ),
@@ -154,8 +154,7 @@ class _RegisterAtletaFormState
           ),
         ),
       ),
-    
-    resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: true,
     );
   }
 
@@ -172,12 +171,9 @@ class _RegisterAtletaFormState
                     File(_image.path))
                 .onComplete;
             AtletaModel model = AtletaModel(
-                email: emailAtletaController.text,
-                nome: nomeAtletaController.text,
-                number: int.parse(numeroAtletaController.text),
-                codEquipe: codEquipeController.text,
-                urlPhoto:
-                    '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
+              number: int.parse(numeroAtletaController.text),
+              codEquipe: codEquipeController.text,
+            );
             controller.save(model);
             Navigator.of(context).pop();
           },

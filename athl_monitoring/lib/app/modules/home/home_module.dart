@@ -30,7 +30,7 @@ import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.d
 import 'package:athl_monitoring/app/modules/home/pages/atletas_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/authpage/register_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/register_atleta.dart';
-import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_screen.dart';
+import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_treinador.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/equipe_repository.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/equipe_repository_interface.dart';
@@ -70,8 +70,10 @@ class HomeModule extends ChildModule {
         Bind<IEquipeRepository>(
             (i) => EquipeRepository(firestore: Firestore.instance)),
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
-        Bind((i) =>
-            EquipeController(equipeService: i.get(), uploadService: i.get(), uidsTreinador: i.args.data)),
+        Bind((i) => EquipeController(
+            equipeService: i.get(),
+            uploadService: i.get(),
+            uidsTreinador: i.args.data)),
 
         //Auth and Users
         Bind<IBaseAuth>((i) => AuthService(userRepository: i.get())),
@@ -99,11 +101,17 @@ class HomeModule extends ChildModule {
         Router('/authpage', child: (_, args) => AuthpagePage()),
         Router('/register', child: (_, args) => RegisterForm()),
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
-        Router('/regEquipes', child: (_, args) => RegisterEquipeForm(uidTreinador: args.data,)),
+        Router('/regEquipes',
+            child: (_, args) => RegisterEquipeForm(
+                  uidTreinador: args.data,
+                )),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
         Router('/pregame', child: (_, args) => PreGamePagePage()),
         Router('/selecAtleta', child: (_, args) => SelecAtleta()),
-        Router('/equipes', child: (_, args) => GridEquipePage(uidTreinador: args.data,)),
+        Router('/equipes',
+            child: (_, args) => GridEquipePage(
+                  uidTreinador: args.data,
+                )),
         Router('/welcomeRegisterAtleta',
             child: (_, args) => WelcomeRegisterAtleta()),
         Router('/welcomeRegisterTreinador',

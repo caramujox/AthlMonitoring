@@ -41,10 +41,10 @@ class _RegisterEquipeFormState
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color(0xFFddd0f5),
-                      Color(0xFFd8c9f2),
-                      Color(0xFFbeaae3),
                       Color(0xFFB39DDB),
+                      Color(0xFF9575CD),
+                      Color(0xFF7E57C2),
+                      Color(0xFF673AB7),
                     ],
                     stops: [0.1, 0.4, 0.7, 0.9],
                   ),
@@ -133,9 +133,7 @@ class _RegisterEquipeFormState
                       _buildRegisterBtn(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          
-                        ],
+                        children: <Widget>[],
                       ),
                       // _buildRegisterBtn(),
                     ],
@@ -158,19 +156,21 @@ class _RegisterEquipeFormState
         return RaisedButton(
           onPressed: () async {
             var uuid = Uuid();
+            var equid = uuid.v1();
             await controller
                 .uploadPicture(
                     '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png',
                     File(_image.path))
                 .onComplete;
             var model = EquipeModel(
-                codEquipe: uuid.v1(),
+                codEquipe: equid,
                 nome: nomeEquipeController.text,
                 modalidade: modalidadeController.text,
                 uidTreinador: widget.uidTreinador,
                 urlPhoto:
                     '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png');
             controller.save(model);
+            controller.updateUser(equid, widget.uidTreinador);
             Navigator.of(context).pop();
           },
           elevation: 5.0,

@@ -1,5 +1,6 @@
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/grid_item.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/header_title.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,9 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
       Container(
         child: Column(
           children: <Widget>[
-            TitlePage(titulo: 'Selecione a equipe titular',),
+            TitlePage(
+              titulo: 'Selecione a equipe titular',
+            ),
             const Divider(
               color: Color(0xFFb6a5c4),
               height: 20,
@@ -41,7 +44,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
               } else if (controller.atletaList.hasError) {
                 return Center(
                     child: RaisedButton(
-                  onPressed: controller.getList,
+                  onPressed: () {},
                   child: Text('Error'),
                 ));
               } else {
@@ -87,5 +90,14 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
         ),
       ),
     ]));
+  }
+
+  List<AtletaModel> _encontraAtleta(List<UserModel> list) {
+    List<AtletaModel> alist = new List();
+    list.forEach((user) {
+      user.reference.collection('atleta').snapshots().map((event) =>
+          event.documents.map((e) => alist.add(AtletaModel.fromDocument(e))));
+    });
+    return alist;
   }
 }

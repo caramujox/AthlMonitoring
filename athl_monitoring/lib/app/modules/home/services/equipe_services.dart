@@ -43,4 +43,9 @@ class EquipeService extends Disposable implements IEquipeService {
   Future startGame(GameModel model) {
     return equipeRepository.startGame(model);
   }
+
+  @override
+  Future updateUser(String equipeId, idTreinador) {
+    return equipeRepository.updateUser(equipeId, idTreinador);
+  }
 }

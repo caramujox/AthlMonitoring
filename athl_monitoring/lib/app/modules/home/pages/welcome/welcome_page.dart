@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
-
 }
 
 class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
@@ -52,8 +51,7 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
     if (_seen) {
       //Se tiver na lista de atletas -> WelcomePageAtletas
       //Else -> WelcomePageTreinador
-      Navigator.of(context)
-          .pushNamed('/welcomeTreinador');
+      Navigator.of(context).pushNamed('/welcomeTreinador');
     } else {
       prefs.setBool('seen', true);
     }

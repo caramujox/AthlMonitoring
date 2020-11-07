@@ -2,7 +2,6 @@ import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/atleta_repository_interface.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/atleta_service_interface.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -11,21 +10,19 @@ class AtletaService extends Disposable implements IAtletaService {
   @override
   void dispose() {}
 
-
-  
   final IAtletaRepository atletaRepository;
   AtletaService({@required this.atletaRepository});
 
   @override
   Future delete(AtletaModel atletaModel) {
     return atletaRepository.delete(atletaModel);
-    }
-  
-  @override
-  Stream<List<AtletaModel>> get() {
-    return atletaRepository.get();
   }
-  
+
+  @override
+  Stream<List<AtletaModel>> get(String codEquipe) {
+    return atletaRepository.get(codEquipe);
+  }
+
   @override
   Future save(AtletaModel atletaModel) {
     return atletaRepository.save(atletaModel);
@@ -40,5 +37,4 @@ class AtletaService extends Disposable implements IAtletaService {
   Future register(AtletaModel atletaModel, UserModel fbuser) {
     return atletaRepository.register(atletaModel, fbuser);
   }
-
 }

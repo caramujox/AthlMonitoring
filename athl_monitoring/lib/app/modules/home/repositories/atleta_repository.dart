@@ -2,7 +2,6 @@ import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/atleta_repository_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -17,10 +16,23 @@ class AtletaRepository extends Disposable implements IAtletaRepository {
   }
 
   @override
-  Stream<List<AtletaModel>> get() {
-    return firestore.collection('atletas').snapshots().map((query) =>
-        query.documents.map((doc) => AtletaModel.fromDocument(doc)).toList());
+  Stream<List<AtletaModel>> get(String codEquipe) {
+    return firestore
+        .collection('atletas')
+        .where('codEquipe', isEqualTo: codEquipe)
+        .snapshots()
+        .map((query) => query.documents
+            .map((doc) => AtletaModel.fromDocument(doc))
+            .toList());
+    // return firestore.collection('atletas').snapshots().map((query) =>
+    //     query.documents.map((doc) => AtletaModel.fromDocument(doc)).toList());
   }
+
+  // @override
+  // Stream<List<AtletaModel>> get() {
+  //   return firestore.collection('atletas').snapshots().map((query) =>
+  //       query.documents.map((doc) => AtletaModel.fromDocument(doc)).toList());
+  // }
 
   @override
   Future save(AtletaModel model) async {
@@ -35,8 +47,7 @@ class AtletaRepository extends Disposable implements IAtletaRepository {
         'email': model.email,
         'uid': model.uid,
         'urlPhoto': model.urlPhoto,
-        'numero': model.number,
-        'modalidade': model.modalidade
+        'numero': model.number
       });
     } else {
       model.reference.updateData({
@@ -44,8 +55,7 @@ class AtletaRepository extends Disposable implements IAtletaRepository {
         'email': model.email,
         'uid': model.uid,
         'urlPhoto': model.urlPhoto,
-        'numero': model.number,
-        'modalidade': model.modalidade
+        'numero': model.number
       });
     }
   }
@@ -82,6 +92,8 @@ class AtletaRepository extends Disposable implements IAtletaRepository {
         'email': fbuser.email,
         'urlPhoto': model.urlPhoto,
         'numero': model.number,
+        'uid': fbuser.uid,
+        'codEquipe': model.codEquipe
       });
     }
   }
