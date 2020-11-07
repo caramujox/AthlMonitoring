@@ -27,23 +27,6 @@ class UserRepository extends IUserRepository {
         .where('firebaseId', isEqualTo: model.uid)
         .snapshots()
         .first.then((value) => UserModel.fromDocument(value.documents.first));
-    //  QuerySnapshot qsnp = await Firestore.instance.collection('users').where('firebaseId', isEqualTo: model.uid).getDocuments();
-    //  DocumentSnapshot doc = qsnp.documents.first;
-    //  UserModel teste = UserModel.fromDocument(doc);
-    //  if (teste == null){
-    //    print ("algo deu errado");
-    //    return null;
-    //  }
-    //  else
-    //   return teste;
-
-    // return firestore
-    //     .collection('users')
-    //     .where('firebaseId', isEqualTo: model.uid)
-    //     .getDocuments()
-    //     .then((querySnapshot) {
-    //   return UserModel.fromDocument(querySnapshot.documents.first);
-    // });
   }
 
   @override

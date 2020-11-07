@@ -1,4 +1,5 @@
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
@@ -176,17 +177,17 @@ class _PreGamePagePageState
                         ],
                       )),
                   onPressed: () {
-                    GameModel x = new GameModel(
-                        codEquipe: selectedType.codEquipe,
-                        nomeEquipe: selectedType.nome,
-                        equipeAdv: equipeAdvController.text,
-                        nomeCompeticao: campeonatoController.text,
-                        dataGame: DateTime.now());
-                    controller.startGame(x);
-                    Navigator.of(context)
-                        .pushNamed('/volleyballGame', arguments: x);
-                    // Modular.to.pushNamed('volleyballGame',
-                    // arguments: {'gameModel': x});
+                    List<AtletaModel> atletasList = controller.equipesDoTreinadorList.data;
+                    // GameModel x = new GameModel(
+                    //     codEquipe: selectedType.codEquipe,
+                    //     nomeEquipe: selectedType.nome,
+                    //     equipeAdv: equipeAdvController.text,
+                    //     nomeCompeticao: campeonatoController.text,
+                    //     dataGame: DateTime.now());
+                    // controller.startGame(x);
+                    // Navigator.of(context)
+                    //     .pushNamed('/volleyballGame', arguments: x);
+                    Navigator.of(context).pushNamed('/selecAtleta', arguments: atletasList);
                   },
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),

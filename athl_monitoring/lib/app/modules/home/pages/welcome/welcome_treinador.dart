@@ -207,7 +207,7 @@ class _WelcomePageTreinadorState
                 width: double.infinity,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/pregame');
+                    Navigator.of(context).pushNamed('/pregame', arguments: user.uid);
                   },
                   elevation: 5.0,
                   padding: EdgeInsets.all(15.0),
@@ -264,7 +264,7 @@ class _WelcomePageTreinadorState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   _botaoComFoto("assets/images/atleta4.png", "ATLETAS",
-                      "/atletas", Icons.person),
+                      "/atletas", Icons.person, args: user.equipes),
                   _botaoComFoto("assets/images/equipe.png", "EQUIPES",
                       "/equipes", Icons.people,
                       args: user.uid),

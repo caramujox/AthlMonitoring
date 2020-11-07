@@ -10,7 +10,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class SelecAtleta extends StatefulWidget {
   final String title;
-  const SelecAtleta({Key key, this.title = "Home"}) : super(key: key);
+  final List<AtletaModel> atletasList;
+  const SelecAtleta({Key key, this.title = "Home", this.atletasList}) : super(key: key);
 
   @override
   _SelecAtletaState createState() => _SelecAtletaState();
@@ -37,18 +38,18 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
               endIndent: 20,
             ),
             Observer(builder: (_) {
-              if (controller.atletaList.data == null) {
+              if (controller.atletasTeamList.data == null) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (controller.atletaList.hasError) {
+              } else if (controller.atletasTeamList.hasError) {
                 return Center(
                     child: RaisedButton(
                   onPressed: () {},
                   child: Text('Error'),
                 ));
               } else {
-                List<AtletaModel> list = controller.atletaList.data;
+                List<AtletaModel> list = controller.atletasTeamList.data;
                 return Stack(children: <Widget>[
                   Container(
                     child: FutureBuilder(

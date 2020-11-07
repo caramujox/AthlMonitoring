@@ -16,7 +16,22 @@ class AtletaRepository extends Disposable implements IAtletaRepository {
   }
 
   @override
-  Stream<List<AtletaModel>> get(String codEquipe) {
+  Stream<List<AtletaModel>> get(List<dynamic> codEquipe) {
+    print(codEquipe);
+    return firestore
+        .collection('atletas')
+        .where('codEquipe', whereIn: codEquipe)
+        .snapshots()
+        .map((query) => query.documents
+            .map((doc) => AtletaModel.fromDocument(doc))
+            .toList());
+    // return firestore.collection('atletas').snapshots().map((query) =>
+    //     query.documents.map((doc) => AtletaModel.fromDocument(doc)).toList());
+  }
+
+  @override
+  Stream<List<AtletaModel>> getFromSingleEquipe(String codEquipe) {
+    print(codEquipe);
     return firestore
         .collection('atletas')
         .where('codEquipe', isEqualTo: codEquipe)
@@ -37,18 +52,29 @@ class AtletaRepository extends Disposable implements IAtletaRepository {
   @override
   Future save(AtletaModel model) async {
     if (model.reference == null) {
-      await Firestore.instance
-          .collection('users')
-          .document(model.uid)
-          .collection('atleta')
+      await Firestore.instance          
+          .collection('atletas')
           .document(model.uid)
           .setData({
         'nome': model.nome,
         'email': model.email,
         'uid': model.uid,
         'urlPhoto': model.urlPhoto,
-        'numero': model.number
+        'numero': model.number,
+        'codEquipe': model.codEquipe        
       });
+      // await Firestore.instance
+      //     .collection('users')
+      //     .document(model.uid)
+      //     .collection('atleta')
+      //     .document(model.uid)
+      //     .setData({
+      //   'nome': model.nome,
+      //   'email': model.email,
+      //   'uid': model.uid,
+      //   'urlPhoto': model.urlPhoto,
+      //   'numero': model.number
+      // });
     } else {
       model.reference.updateData({
         'nome': model.nome,

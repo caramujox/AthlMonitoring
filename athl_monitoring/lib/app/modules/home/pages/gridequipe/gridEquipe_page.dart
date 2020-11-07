@@ -57,6 +57,8 @@ class _GridEquipePageState
                               (BuildContext context,
                                   AsyncSnapshot<dynamic> snapshot) {
                             return GridView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
                                 gridDelegate:
                                     new SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3),

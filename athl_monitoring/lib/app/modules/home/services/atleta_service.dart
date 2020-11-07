@@ -17,9 +17,14 @@ class AtletaService extends Disposable implements IAtletaService {
   Future delete(AtletaModel atletaModel) {
     return atletaRepository.delete(atletaModel);
   }
+  
+  @override
+  Stream<List<AtletaModel>> getFromSingleEquipe(String codEquipe){
+    return atletaRepository.getFromSingleEquipe(codEquipe);
+  }
 
   @override
-  Stream<List<AtletaModel>> get(String codEquipe) {
+  Stream<List<AtletaModel>> get(List<dynamic> codEquipe) {
     return atletaRepository.get(codEquipe);
   }
 

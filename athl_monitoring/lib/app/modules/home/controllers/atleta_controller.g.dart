@@ -39,15 +39,42 @@ mixin _$AtletaController on _AtletaControllerBase, Store {
     });
   }
 
+  final _$atletasTeamListAtom =
+      Atom(name: '_AtletaControllerBase.atletasTeamList');
+
+  @override
+  ObservableStream<List<AtletaModel>> get atletasTeamList {
+    _$atletasTeamListAtom.reportRead();
+    return super.atletasTeamList;
+  }
+
+  @override
+  set atletasTeamList(ObservableStream<List<AtletaModel>> value) {
+    _$atletasTeamListAtom.reportWrite(value, super.atletasTeamList, () {
+      super.atletasTeamList = value;
+    });
+  }
+
   final _$_AtletaControllerBaseActionController =
       ActionController(name: '_AtletaControllerBase');
 
   @override
-  dynamic getList(String codEquipe) {
+  dynamic getList(List<dynamic> codEquipe) {
     final _$actionInfo = _$_AtletaControllerBaseActionController.startAction(
         name: '_AtletaControllerBase.getList');
     try {
       return super.getList(codEquipe);
+    } finally {
+      _$_AtletaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getAtletasSingleTeam(String codEquipe) {
+    final _$actionInfo = _$_AtletaControllerBaseActionController.startAction(
+        name: '_AtletaControllerBase.getAtletasSingleTeam');
+    try {
+      return super.getAtletasSingleTeam(codEquipe);
     } finally {
       _$_AtletaControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -123,7 +150,8 @@ mixin _$AtletaController on _AtletaControllerBase, Store {
   String toString() {
     return '''
 user: ${user},
-atletaList: ${atletaList}
+atletaList: ${atletaList},
+atletasTeamList: ${atletasTeamList}
     ''';
   }
 }

@@ -15,12 +15,14 @@ abstract class _AtletaControllerBase with Store {
   final IAtletaService atletaService;
   final IUploadFIleService uploadService;
   final IBaseAuth auth;
+  final List<dynamic> codigosEquipe;
   final String codigoEquipe;
 
   _AtletaControllerBase({
     this.atletaService,
     this.uploadService,
     this.auth,
+    this.codigosEquipe,
     this.codigoEquipe,
   }) {
     // getList();
@@ -33,10 +35,20 @@ abstract class _AtletaControllerBase with Store {
 
   @observable
   ObservableStream<List<AtletaModel>> atletaList;
+  
+  @observable
+  ObservableStream<List<AtletaModel>> atletasTeamList;
 
   @action
-  getList(String codEquipe) {
+  getList(List<dynamic> codEquipe) {
     atletaList = atletaService.get(codEquipe).asObservable();
+    return atletaList;
+  }
+
+  @action
+  getAtletasSingleTeam(String codEquipe){
+    atletasTeamList = atletaService.getFromSingleEquipe(codEquipe).asObservable();
+    return atletasTeamList;
   }
 
   @action
@@ -57,7 +69,8 @@ abstract class _AtletaControllerBase with Store {
   @action
   startUp() {
     getUser();
-    getList(codigoEquipe);
+    getList(codigosEquipe);
+    getAtletasSingleTeam(codigoEquipe);
   }
 
   @action

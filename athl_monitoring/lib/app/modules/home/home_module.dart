@@ -11,14 +11,10 @@ import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_atleta_pa
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_register_treinador.dart';
 import 'package:athl_monitoring/app/modules/home/pages/wrapper/wrapper_page.dart';
-
 import 'package:athl_monitoring/app/modules/home/pages/selec_atletas_pages.dart';
-import 'package:athl_monitoring/app/modules/home/pages/welcome/welcome_atleta.dart';
 import 'package:athl_monitoring/app/modules/home/pages/gridequipe/gridEquipe_page.dart';
 
 import 'package:athl_monitoring/app/modules/home/pages/register_equipe.dart';
-import 'package:athl_monitoring/app/modules/home/pages/gridequipe/gridEquipe_page.dart';
-
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/upload_file_interface.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/upload_file_repository.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/upload_service_interface.dart';
@@ -63,7 +59,7 @@ class HomeModule extends ChildModule {
             storage: FirebaseStorage(
                 storageBucket: "gs://athlmonitoring-62273.appspot.com"))),
         Bind((i) => AtletaController(
-            atletaService: i.get(), uploadService: i.get(), auth: i.get())),
+            atletaService: i.get(), uploadService: i.get(), auth: i.get(), codigoEquipe: i.args.data)),
 
         //EquipesPages
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),

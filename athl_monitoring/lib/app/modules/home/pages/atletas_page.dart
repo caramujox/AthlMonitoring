@@ -1,7 +1,5 @@
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
-import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
-
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/grid_item.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/header_title.dart';

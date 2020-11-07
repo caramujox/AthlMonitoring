@@ -2,7 +2,8 @@ import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/user_model.dart';
 
 abstract class IAtletaRepository {
-  Stream<List<AtletaModel>> get(String codEquipe);
+  Stream<List<AtletaModel>> get(List<dynamic> codEquipe);
+  Stream<List<AtletaModel>> getFromSingleEquipe(String codEquipe);
   Future<AtletaModel> index(AtletaModel model);
   Future save(AtletaModel atletaModel);
   Future delete(AtletaModel atletaModel);

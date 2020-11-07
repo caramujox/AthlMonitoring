@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  final String email, nome, uid, urlPhoto, firebaseId;
+  final String email, nome, uid, urlPhoto, firebaseId; 
+  final List equipes; 
   DocumentReference reference;
 
   UserModel(
@@ -10,6 +11,7 @@ class UserModel {
       this.uid,
       this.urlPhoto,
       this.firebaseId,
+      this.equipes,
       this.reference});
 
   factory UserModel.fromDocument(DocumentSnapshot doc) {
@@ -18,6 +20,7 @@ class UserModel {
         nome: doc['nome'],
         uid: doc['uid'],
         firebaseId: doc['firebaseId'],
-        urlPhoto: doc['urlPhoto']);
+        urlPhoto: doc['urlPhoto'],
+        equipes: doc['equipes']);
   }
 }

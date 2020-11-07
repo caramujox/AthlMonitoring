@@ -22,9 +22,9 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
 
   @override
   Future updateUser(String equipeId, idTreinador) async {
-    await Firestore.instance.collection('users').document(idTreinador).setData({
-      'equipes': {equipeId}
-    }, merge: true);
+    await Firestore.instance.collection('users').document(idTreinador).updateData({
+      'equipes': FieldValue.arrayUnion([equipeId])
+    });
   }
 
   @override
