@@ -173,9 +173,11 @@ class _PreGamePagePageState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          AutoSizeText("SELECIONE A EQUIPE TITULAR",
-                              maxLines: 1, 
-                              maxFontSize: 25,),
+                          AutoSizeText(
+                            "SELECIONE A EQUIPE TITULAR",
+                            maxLines: 1,
+                            maxFontSize: 25,
+                          ),
                         ],
                       )),
                   onPressed: () {

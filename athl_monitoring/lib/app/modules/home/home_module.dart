@@ -1,9 +1,16 @@
+import 'package:athl_monitoring/app/modules/home/controllers/treino_controller.dart';
 import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game/volleyball_game_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/pre_game_page/pre_game_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/treino/register_treino_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/treino/treino_list_page.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/dados_volley_repository.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/dados_volley_repository_interface.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/interfaces/treino_repository_interface.dart';
+import 'package:athl_monitoring/app/modules/home/repositories/treino_repository.dart';
 import 'package:athl_monitoring/app/modules/home/services/dadosVolley_service.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/dadosVolley_service_interface.dart';
+import 'package:athl_monitoring/app/modules/home/services/interfaces/treino_service_interface.dart';
+import 'package:athl_monitoring/app/modules/home/services/treino_service.dart';
 
 import 'controllers/volleyball_game_controller.dart';
 
@@ -59,7 +66,10 @@ class HomeModule extends ChildModule {
             storage: FirebaseStorage(
                 storageBucket: "gs://athlmonitoring-62273.appspot.com"))),
         Bind((i) => AtletaController(
-            atletaService: i.get(), uploadService: i.get(), auth: i.get(), codigosEquipe: i.args.data)),
+            atletaService: i.get(),
+            uploadService: i.get(),
+            auth: i.get(),
+            codigosEquipe: i.args.data)),
 
         //EquipesPages
         Bind<IEquipeService>((i) => EquipeService(equipeRepository: i.get())),
@@ -80,6 +90,12 @@ class HomeModule extends ChildModule {
         //Captures
         Bind((i) => ImageCaputreController()),
 
+        //treino
+        Bind((i) => TreinoController(treinoService: i.get())),
+        Bind<ITreinoService>((i) => TreinoService(treinoRepository: i.get())),
+        Bind<ITreinoRepository>(
+            (i) => TreinoRepository(firestore: Firestore.instance)),
+
         //Dados Volley
         Bind<IDadosVolleyService>(
             (i) => DadosVolleyService(dadosVolleyRepository: i.get())),
@@ -90,8 +106,9 @@ class HomeModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => WrapperPage()),
+        Router(Modular.initialRoute, child: (_, args) => TreinoListPage()),
         Router('/welcomeTreinador', child: (_, args) => WelcomePageTreinador()),
+        Router('/treinoPage', child: (_, args) => TreinoListPage()),
         Router('/welcomeAtleta', child: (_, args) => WelcomeAtletaPage()),
         Router('/atletas', child: (_, args) => AtletaPage()),
         Router('/authpage', child: (_, args) => AuthpagePage()),
@@ -102,8 +119,12 @@ class HomeModule extends ChildModule {
                   uidTreinador: args.data,
                 )),
         Router('/welcome', child: (_, args) => WelcomeScreen()),
+        Router('/registerTreino', child: (_, args) => RegisterTreino()),
         Router('/pregame', child: (_, args) => PreGamePagePage()),
-        Router('/selecAtleta', child: (_, args) => SelecAtleta(equipeJogando: args.data,)),
+        Router('/selecAtleta',
+            child: (_, args) => SelecAtleta(
+                  equipeJogando: args.data,
+                )),
         Router('/equipes',
             child: (_, args) => GridEquipePage(
                   uidTreinador: args.data,

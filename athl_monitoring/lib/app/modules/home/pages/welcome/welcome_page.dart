@@ -46,7 +46,7 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // bool _seen = (prefs.getBool('seen') ?? false);
 
-    bool _seen = true; //SE QUISER TESTAR SEM O ONE TIME INTRO
+    bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
 
     if (_seen) {
       //Se tiver na lista de atletas -> WelcomePageAtletas
@@ -59,12 +59,12 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.signOut();
-          Navigator.of(context).pop();
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     controller.signOut();
+      //     Navigator.of(context).pop();
+      //   },
+      // ),
       body: Container(
         color: Colors.white,
         child: Stack(

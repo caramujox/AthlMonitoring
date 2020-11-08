@@ -152,10 +152,11 @@ class AuthService implements IBaseAuth {
     final firestoreRef = Firestore.instance.collection("users");
     String fbid = '';
     _auth.currentUser().then((value) => fbid = value.uid);
-
-    if ((await firestoreRef.document(user.uid.toString()).get()).exists)
-      return await firestoreRef.document(user.uid.toString()).get();
-    else {
+    firestoreRef.where('firebaseId', isEqualTo: user.uid).snapshots().isEmpty;
+    if (await firestoreRef
+        .where('firebaseId', isEqualTo: user.uid)
+        .snapshots()
+        .isEmpty) {
       userRepository.save(new UserModel(
           nome: user.displayName,
           urlPhoto: user.photoUrl,
