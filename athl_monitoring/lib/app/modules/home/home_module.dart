@@ -93,10 +93,11 @@ class HomeModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => GrafVolei()),
+        Router(Modular.initialRoute, child: (_, args) => VolleyballGame()),
         Router('/welcomeTreinador', child: (_, args) => WelcomePageTreinador()),
         Router('/welcomeAtleta', child: (_, args) => WelcomeAtletaPage()),
         Router('/atletas', child: (_, args) => AtletaPage()),
+        Router('/grafvolei', child: (_, args) => GrafVolei()),
         Router('/authpage', child: (_, args) => AuthpagePage()),
         Router('/register', child: (_, args) => RegisterForm()),
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),

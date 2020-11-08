@@ -31,6 +31,37 @@ class _GrafVoleiState
   int _proCountAtaque;
   int _proCountBloqueio;
   int _proCountGenerico;
+  
+  int _countSaque1 =0;
+  int _countSaque2 = 0;
+  int _countSaque3= 0;
+  int _countSaque4= 0;
+  int _countSaque5= 0;
+  int _countSaque6= 0;
+  int _countAtaque1= 0;
+  int _countAtaque2= 0;
+  int _countAtaque3= 0;
+  int _countAtaque4= 0;
+  int _countAtaque5= 0;
+  int _countAtaque6= 0;
+  int _countBloqueio1= 0;
+  int _countBloqueio2= 0;
+  int _countBloqueio3= 0;
+  int _countBloqueio4= 0;
+  int _countBloqueio5= 0;
+  int _countBloqueio6= 0;
+  int _countGenerico1= 0;
+  int _countGenerico2= 0;
+  int _countGenerico3= 0;
+  int _countGenerico4= 0;
+  int _countGenerico5= 0;
+  int _countGenerico6= 0;
+
+  List<Erro> erroSaque;
+  List<Erro> erroAtaque;
+  List<Erro> erroBloqueio;
+  List<Erro> erroGenerico;
+
 
   int _pontosClassificado(List<DadosVolleyModel> list) {
     list.forEach((element) {
@@ -92,19 +123,209 @@ class _GrafVoleiState
           domainFn: (PontoType ponto, _) => ponto.tipo,
           measureFn: (PontoType ponto, _) => ponto.ponto,
           colorFn: (PontoType ponto, _) => purple[50],
-          id: 'pro'),
+          id: 'Pro'),
       new charts.Series<PontoType, String>(
           data: conPtTipo,
           domainFn: (PontoType ponto, _) => ponto.tipo,
           measureFn: (PontoType ponto, _) => ponto.ponto,
-          colorFn: (PontoType ponto, _) => yellow[15],
-          id: 'contra')
+          colorFn: (PontoType ponto, _) => purple[20],
+          id: 'Contra')
     ];
 
   } //createSampleData
 
-  _createSampleDataErro(List<DadosVolleyModel> list) {
-    var erroSaque = [
+
+  _errosJogador(List<DadosVolleyModel> list){
+    
+    var jogador = [];
+    
+    list.forEach((element) {      
+      jogador.add(element.jogador);
+      }           
+    );
+
+    var jogadorDist = jogador.toSet().toList();
+    
+    list.forEach((element) {
+      if(element.jogador==jogadorDist[0]){
+        switch (element.tipo) {
+         case ('erro de saque'):
+         {           
+           _countSaque1++;
+           return erroSaque.add(Erro (element.jogador, _countSaque1));
+         }
+         case ('erro de ataque'):
+         {
+           _countAtaque1++;
+           return erroAtaque.add(Erro (element.jogador, _countAtaque1));
+         }
+         case ('erro de bloqueio'):
+         {
+           _countBloqueio1++;
+           return erroBloqueio.add(Erro (element.jogador, _countBloqueio1));
+         }
+         case ('erro generico'):
+         {
+           _countGenerico1++;
+           return erroGenerico.add(Erro (element.jogador, _countGenerico1));
+         }
+        }
+      }
+      else if (element.jogador==jogadorDist[1]){
+        switch (element.tipo) {
+         case ('erro de saque'):
+         {           
+           _countSaque1++;
+           return erroSaque.add(Erro (element.jogador, _countSaque2));
+         }
+         case ('erro de ataque'):
+         {
+           _countAtaque1++;
+           return erroAtaque.add(Erro (element.jogador, _countAtaque2));
+         }
+         case ('erro de bloqueio'):
+         {
+           _countBloqueio1++;
+           return erroBloqueio.add(Erro (element.jogador, _countBloqueio2));
+         }
+         case ('erro generico'):
+         {
+           _countGenerico1++;
+           return erroGenerico.add(Erro (element.jogador, _countGenerico2));
+         }
+        }
+
+      }
+      else if (element.jogador==jogadorDist[2]){
+        switch (element.tipo) {
+         case ('erro de saque'):
+         {           
+           _countSaque1++;
+           return erroSaque.add(Erro (element.jogador, _countSaque3));
+         }
+         case ('erro de ataque'):
+         {
+           _countAtaque1++;
+           return erroAtaque.add(Erro (element.jogador, _countAtaque3));
+         }
+         case ('erro de bloqueio'):
+         {
+           _countBloqueio1++;
+           return erroBloqueio.add(Erro (element.jogador, _countBloqueio3));
+         }
+         case ('erro generico'):
+         {
+           _countGenerico1++;
+           return erroGenerico.add(Erro (element.jogador, _countGenerico3));
+         }
+        }
+        
+      }
+      else if (element.jogador==jogadorDist[3]){
+        switch (element.tipo) {
+         case ('erro de saque'):
+         {           
+           _countSaque1++;
+           return erroSaque.add(Erro (element.jogador, _countSaque4));
+         }
+         case ('erro de ataque'):
+         {
+           _countAtaque1++;
+           return erroAtaque.add(Erro (element.jogador, _countAtaque4));
+         }
+         case ('erro de bloqueio'):
+         {
+           _countBloqueio1++;
+           return erroBloqueio.add(Erro (element.jogador, _countBloqueio4));
+         }
+         case ('erro generico'):
+         {
+           _countGenerico1++;
+           return erroGenerico.add(Erro (element.jogador, _countGenerico4));
+         }
+        }
+      }
+      else if (element.jogador==jogadorDist[4]){
+        switch (element.tipo) {
+         case ('erro de saque'):
+         {           
+           _countSaque1++;
+           return erroSaque.add(Erro (element.jogador, _countSaque5));
+         }
+         case ('erro de ataque'):
+         {
+           _countAtaque1++;
+           return erroAtaque.add(Erro (element.jogador, _countAtaque5));
+         }
+         case ('erro de bloqueio'):
+         {
+           _countBloqueio1++;
+           return erroBloqueio.add(Erro (element.jogador, _countBloqueio5));
+         }
+         case ('erro generico'):
+         {
+           _countGenerico1++;
+           return erroGenerico.add(Erro (element.jogador, _countGenerico5));
+         }
+        }
+      }
+      else if (element.jogador==jogadorDist[5]){
+        switch (element.tipo) {
+         case ('erro de saque'):
+         {           
+           _countSaque1++;
+           return erroSaque.add(Erro (element.jogador, _countSaque6));
+         }
+         case ('erro de ataque'):
+         {
+           _countAtaque1++;
+           return erroAtaque.add(Erro (element.jogador, _countAtaque6));
+         }
+         case ('erro de bloqueio'):
+         {
+           _countBloqueio1++;
+           return erroBloqueio.add(Erro (element.jogador, _countBloqueio6));
+         }
+         case ('erro generico'):
+         {
+           _countGenerico1++;
+           return erroGenerico.add(Erro (element.jogador, _countGenerico6));
+         }
+        }
+      }
+      
+    });
+  } 
+ 
+  _createSampleDataErro() {
+    var erroSaqueStat = [
+      new Erro('J1', 1),
+      new Erro('J2', 2),
+      new Erro('J3', 1),
+      new Erro('J4', 4),
+      new Erro('J5', 3),
+      new Erro('J6', 4)
+    ];
+
+    var erroBloqueioStat = [
+      new Erro('J1', 7),
+      new Erro('J2', 1),
+      new Erro('J3', 4),
+      new Erro('J4', 3),
+      new Erro('J5', 5),
+      new Erro('J6', 5)
+    ];
+
+    var erroAtaqueStat = [
+      new Erro('J1', 1),
+      new Erro('J2', 6),
+      new Erro('J3', 2),
+      new Erro('J4', 1),
+      new Erro('J5', 2),
+      new Erro('J6', 1)
+    ];
+
+    var erroGenericoStat = [
       new Erro('J1', 1),
       new Erro('J2', 2),
       new Erro('J3', 3),
@@ -113,68 +334,34 @@ class _GrafVoleiState
       new Erro('J6', 4)
     ];
 
-    var erroBloqueio = [
-      new Erro('J1', 1),
-      new Erro('J2', 2),
-      new Erro('J3', 3),
-      new Erro('J4', 4),
-      new Erro('J5', 3),
-      new Erro('J6', 4)
+    return [
+      new charts.Series<Erro, String>(
+        data: erroSaqueStat,
+          domainFn: (Erro erro, _) => erro.tipo,
+          measureFn: (Erro erro, _) => erro.jogador,
+          colorFn: (Erro erro, _) => purple[30],
+          id: 'Saque'),
+      new charts.Series<Erro, String>(        
+          data: erroAtaqueStat,
+          domainFn: (Erro erro, _) => erro.tipo,
+          measureFn: (Erro erro, _) => erro.jogador,
+          colorFn: (Erro erro, _) => purple[20],
+          id: 'Ataque'),
+      new charts.Series<Erro, String>(
+          data: erroBloqueioStat,
+          domainFn: (Erro erro, _) => erro.tipo,
+          measureFn: (Erro erro, _) => erro.jogador,
+          colorFn: (Erro erro, _) => purple[10],
+          id: 'Bloqueio'),
+      new charts.Series<Erro, String>(
+          data: erroGenericoStat,
+          domainFn: (Erro erro, _) => erro.tipo,
+          measureFn: (Erro erro, _) => erro.jogador,
+          colorFn: (Erro erro, _) => purple[50],
+          id: 'Genérico'),
     ];
 
-    var erroAtaque = [
-      new Erro('J1', 1),
-      new Erro('J2', 2),
-      new Erro('J3', 3),
-      new Erro('J4', 4),
-      new Erro('J5', 3),
-      new Erro('J6', 4)
-    ];
-
-    var erroGenerico = [
-      new Erro('J1', 1),
-      new Erro('J2', 2),
-      new Erro('J3', 3),
-      new Erro('J4', 4),
-      new Erro('J5', 3),
-      new Erro('J6', 4)
-    ];
-
-    _dadosSerieErro.add(
-      charts.Series(
-          data: erroSaque,
-          domainFn: (Erro erro, _) => erro.tipo,
-          measureFn: (Erro erro, _) => erro.jogador,
-          colorFn: (Erro erro, _) => purple[15],
-          id: 'saque'),
-    );
-
-    _dadosSerieErro.add(
-      charts.Series(
-          data: erroAtaque,
-          domainFn: (Erro erro, _) => erro.tipo,
-          measureFn: (Erro erro, _) => erro.jogador,
-          colorFn: (Erro erro, _) => purple[15],
-          id: 'ataque'),
-    );
-
-    _dadosSerieErro.add(
-      charts.Series(
-          data: erroBloqueio,
-          domainFn: (Erro erro, _) => erro.tipo,
-          measureFn: (Erro erro, _) => erro.jogador,
-          colorFn: (Erro erro, _) => purple[15],
-          id: 'bloqueio'),
-    );
-
-    _dadosSerieErro.add(
-      charts.Series(
-          data: erroGenerico,
-          domainFn: (Erro erro, _) => erro.tipo,
-          measureFn: (Erro erro, _) => erro.jogador,
-          colorFn: (Erro erro, _) => purple[15],
-          id: 'generico'),
-    );
+    
   }
 
   @override
@@ -184,7 +371,7 @@ class _GrafVoleiState
     //_dadosSerie = List<charts.Series<Ponto, String>>();
     _dadosSerieErro = List<charts.Series<Erro, String>>();
     List<DadosVolleyModel> list = controller.dadosList.data;
-    _createSampleDataErro(list);
+    _createSampleDataErro();
   }
 
   @override
@@ -237,7 +424,7 @@ class _GrafVoleiState
                     color: Color(0xff230a42),
                     fontFamily: 'Google',
                     //fontWeight: FontWeight.bold,
-                    fontSize: 20),
+                    fontSize: 24),
               ),
               SizedBox(height: 10.0),
               Expanded(child: Observer(
@@ -287,7 +474,8 @@ class _GrafVoleiState
                     return charts.BarChart(
                       _dadosSerieT,
                       barGroupingType: charts.BarGroupingType.stacked,
-                      animate: true,
+                      animate: true,                      
+                      behaviors: [new charts.SeriesLegend()]
                     );
                   }
                 },
@@ -303,12 +491,12 @@ class _GrafVoleiState
             children: [
               SizedBox(height: 10.0),
               Text(
-                'Erros Predominantes',
+                'Tipos de erro por jogador',
                 style: TextStyle(
                     color: Color(0xff230a42),
                     fontFamily: 'Google',
                     //fontWeight: FontWeight.bold,
-                    fontSize: 20),
+                    fontSize: 24),
               ),
               SizedBox(height: 10.0),
               Expanded(child: Observer(
@@ -324,15 +512,15 @@ class _GrafVoleiState
                       child: Text('Error'),
                     ));
                   } else {
-                    /*
-                    List<DadosVolleyModel> list = controller.dadosList.data;
-                    _createSampleDataPonto(listcg);
+                    _dadosSerieErro = _createSampleDataErro();
                     return charts.BarChart(
-                      _dadosSerieT,
-                      barGroupingType: charts.BarGroupingType.stacked,
+                      _dadosSerieErro,
+                      barGroupingType: charts.BarGroupingType.grouped,
                       animate: true,
-                    );*/
-                    return Text('ok');
+                      vertical: false,
+                      behaviors: [new charts.SeriesLegend()]
+                    );
+                    
                   }
                 },
               ))
@@ -391,3 +579,5 @@ class Erro {
 
   Erro(this.tipo, this.jogador);
 }
+
+

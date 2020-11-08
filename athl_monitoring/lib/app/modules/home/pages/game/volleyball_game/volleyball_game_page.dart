@@ -28,10 +28,14 @@ class _VolleyballGameState
 
   _constroiVolleyGame() {
     return Scaffold(
+      
+   
       //key: _scaffoldKey,
       //appBar: _welcomeAppBar(),
-      body: _volleyGame(),
-    );
+      body: _volleyGame(), 
+      
+      );
+      
   }
 
   _volleyGame() {
@@ -402,12 +406,15 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      _incrementProPoint();
+                      Navigator.of(context).pushNamed('/grafvolei');},
                   ),
                 ),
               ),
             ],
           ),
+          
         ],
       ),
     );
