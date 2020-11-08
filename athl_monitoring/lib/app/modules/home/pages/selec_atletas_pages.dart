@@ -26,7 +26,12 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
   ScrollController scrollController = new ScrollController();
   @override
   Widget build(BuildContext context) {
-    bool successDrop = false;
+    bool successDrop4 = false;
+    bool successDrop3= false;
+    bool successDrop2 = false;
+    bool successDrop5 = false;
+    bool successDrop6 = false;
+    bool successDrop1 = false;
     AtletaModel tavindo = new AtletaModel();
     controller.getAtletasSingleTeam(widget.equipeJogando[0].codEquipe);
     return Scaffold(
@@ -64,8 +69,8 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 child: DragTarget<AtletaModel>(
                               builder: (context, List<AtletaModel> incoming,
                                   List rejected) {
-                                if (successDrop == true) {
-                                  successDrop = !successDrop;
+                                if (successDrop4 == true) {
+                                  successDrop4 = !successDrop4;
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
@@ -84,7 +89,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop = !successDrop;
+                                          successDrop4 = !successDrop4;
                                         });
                                       },
                                     )),
@@ -122,7 +127,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 return data.nome.isNotEmpty;
                               },
                               onAccept: (data) {
-                                successDrop = true;
+                                successDrop4 = true;
                                 tavindo = data;
                                 print("xablau");
                               },
@@ -134,8 +139,8 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 child: DragTarget<AtletaModel>(
                               builder: (context, List<AtletaModel> incoming,
                                   List rejected) {
-                                if (successDrop == true) {
-                                  successDrop = !successDrop;
+                                if (successDrop3 == true) {
+                                  successDrop3 = !successDrop3;
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
@@ -154,7 +159,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop = !successDrop;
+                                          successDrop3 = !successDrop3;
                                         });
                                       },
                                     )),
@@ -192,7 +197,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 return data.nome.isNotEmpty;
                               },
                               onAccept: (data) {
-                                successDrop = true;
+                                successDrop3 = true;
                                 tavindo = data;
                                 print("xablau");
                               },
@@ -204,8 +209,8 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 child: DragTarget<AtletaModel>(
                               builder: (context, List<AtletaModel> incoming,
                                   List rejected) {
-                                if (successDrop == true) {
-                                  successDrop = !successDrop;
+                                if (successDrop2 == true) {
+                                  successDrop2 = !successDrop2;
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
@@ -224,7 +229,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop = !successDrop;
+                                          successDrop2 = !successDrop2;
                                         });
                                       },
                                     )),
@@ -262,7 +267,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 return data.nome.isNotEmpty;
                               },
                               onAccept: (data) {
-                                successDrop = true;
+                                successDrop2 = true;
                                 tavindo = data;
                                 print("xablau");
                               },
@@ -274,8 +279,8 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 child: DragTarget<AtletaModel>(
                               builder: (context, List<AtletaModel> incoming,
                                   List rejected) {
-                                if (successDrop == true) {
-                                  successDrop = !successDrop;
+                                if (successDrop5 == true) {
+                                  successDrop5 = !successDrop5;
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
@@ -294,7 +299,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop = !successDrop;
+                                          successDrop5 = !successDrop5;
                                         });
                                       },
                                     )),
@@ -332,7 +337,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 return data.nome.isNotEmpty;
                               },
                               onAccept: (data) {
-                                successDrop = true;
+                                successDrop5 = true;
                                 tavindo = data;
                                 print("xablau");
                               },
@@ -344,8 +349,8 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 child: DragTarget<AtletaModel>(
                               builder: (context, List<AtletaModel> incoming,
                                   List rejected) {
-                                if (successDrop == true) {
-                                  successDrop = !successDrop;
+                                if (successDrop6 == true) {
+                                  successDrop6 = !successDrop6;
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
@@ -364,7 +369,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop = !successDrop;
+                                          successDrop6 = !successDrop6;
                                         });
                                       },
                                     )),
@@ -402,7 +407,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 return data.nome.isNotEmpty;
                               },
                               onAccept: (data) {
-                                successDrop = true;
+                                successDrop6 = true;
                                 tavindo = data;
                                 print("xablau");
                               },
@@ -414,8 +419,8 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 child: DragTarget<AtletaModel>(
                               builder: (context, List<AtletaModel> incoming,
                                   List rejected) {
-                                if (successDrop == true) {
-                                  successDrop = !successDrop;
+                                if (successDrop1 == true) {
+                                  successDrop1 = !successDrop1;
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: Colors.orange[300],
@@ -434,7 +439,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop = !successDrop;
+                                          successDrop1 = !successDrop1;
                                         });
                                       },
                                     )),
@@ -472,7 +477,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                 return data.nome.isNotEmpty;
                               },
                               onAccept: (data) {
-                                successDrop = true;
+                                successDrop1 = true;
                                 tavindo = data;
                                 print("xablau");
                               },
@@ -548,16 +553,24 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                                                     .urlPhoto,
                                                               ),
                                                             ),
-                                                            feedback: GridItem(
-                                                              index: index,
-                                                              nome: list[index]
-                                                                  .nome,
-                                                              num: list[index]
-                                                                  .number
-                                                                  .toString(),
-                                                              photoUrl:
-                                                                  list[index]
-                                                                      .urlPhoto,
+                                                            // feedback: GridItem(
+                                                            //   index: index,
+                                                            //   nome:
+                                                            //       list[index]
+                                                            //           .nome,
+                                                            //   num: list[index]
+                                                            //       .number
+                                                            //       .toString(),
+                                                            //   photoUrl: list[
+                                                            //           index]
+                                                            //       .urlPhoto,
+                                                            // ),
+                                                            feedback: Card(
+                                                              child: Container(
+                                                                child: Text(
+                                                                    list[index]
+                                                                        .nome),
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -602,7 +615,8 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                   // controller.startGame(x);
                                   // Navigator.of(context)
                                   //     .pushNamed('/volleyballGame', arguments: x);
-                                  Navigator.of(context).pushNamed('/selecAtleta',
+                                  Navigator.of(context).pushNamed(
+                                      '/selecAtleta',
                                       arguments: gambi);
                                 },
                                 shape: new RoundedRectangleBorder(
