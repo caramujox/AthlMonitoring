@@ -28,10 +28,14 @@ class _VolleyballGameState
 
   _constroiVolleyGame() {
     return Scaffold(
+      
+   
       //key: _scaffoldKey,
       //appBar: _welcomeAppBar(),
-      body: _volleyGame(),
-    );
+      body: _volleyGame(), 
+      
+      );
+      
   }
 
   _volleyGame() {
@@ -458,6 +462,10 @@ class _VolleyballGameState
                           fontFamily: 'OpenSans',
                         )),
                     onPressed: () {
+<<<<<<< HEAD
+                      _incrementProPoint();
+                      Navigator.of(context).pushNamed('/grafvolei');},
+=======
                       DadosVolleyModel modelo = new DadosVolleyModel(
                           tipo: 'erro generico',
                           jogador: 'pedro',
@@ -465,11 +473,13 @@ class _VolleyballGameState
                       controller.save(modelo, widget.gameModel);
                       _incrementConPoint();
                     },
+>>>>>>> colincol
                   ),
                 ),
               ),
             ],
           ),
+          
         ],
       ),
     );

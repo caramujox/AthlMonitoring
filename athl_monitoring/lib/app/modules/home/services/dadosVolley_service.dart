@@ -18,4 +18,59 @@ class DadosVolleyService extends Disposable implements IDadosVolleyService {
   Future save(DadosVolleyModel model, GameModel game) {
     return dadosVolleyRepository.save(model, game);
   }
+
+  @override
+  Stream<List<DadosVolleyModel>> get() {
+    return dadosVolleyRepository.get();
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getCon() {
+    return dadosVolleyRepository.getCon();
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getPro() {
+    return dadosVolleyRepository.getPro();
+}
+
+  @override
+  Stream<List<DadosVolleyModel>> getConAtaque() {
+    return dadosVolleyRepository.getConAtaque();
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getConBloqueio() {
+    return dadosVolleyRepository.getConBloqueio();
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getConGenerico() {
+    return dadosVolleyRepository.getConGenerico();
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getConSaque() {
+    return dadosVolleyRepository.getConSaque();
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getProAtaque() {
+    return dadosVolleyRepository.getProAtaque();
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getProBloqueio() {
+    return dadosVolleyRepository.getProBloqueio();
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getProErroOponente() {
+    return dadosVolleyRepository.getProErroOponente();
+  }
+
+  @override
+  Stream<List<DadosVolleyModel>> getProSaque() {
+    return dadosVolleyRepository.getProSaque();
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:athl_monitoring/app/modules/home/controllers/treino_controller.dart';
 import 'package:athl_monitoring/app/modules/home/pages/game/volleyball_game/volleyball_game_page.dart';
+import 'package:athl_monitoring/app/modules/home/pages/graficos/graficos_volei.dart';
 import 'package:athl_monitoring/app/modules/home/pages/pre_game_page/pre_game_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/treino/register_treino_page.dart';
 import 'package:athl_monitoring/app/modules/home/pages/treino/treino_list_page.dart';
@@ -111,6 +112,7 @@ class HomeModule extends ChildModule {
         Router('/treinoPage', child: (_, args) => TreinoListPage()),
         Router('/welcomeAtleta', child: (_, args) => WelcomeAtletaPage()),
         Router('/atletas', child: (_, args) => AtletaPage()),
+        Router('/grafvolei', child: (_, args) => GrafVolei()),
         Router('/authpage', child: (_, args) => AuthpagePage()),
         Router('/register', child: (_, args) => RegisterForm()),
         Router('/regAtleta', child: (_, args) => RegisterAtletaForm()),
