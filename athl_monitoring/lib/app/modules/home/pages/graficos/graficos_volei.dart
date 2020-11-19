@@ -336,25 +336,25 @@ class _GrafVoleiState
 
     return [
       new charts.Series<Erro, String>(
-        data: erroSaqueStat,
+        data: erroSaque,
           domainFn: (Erro erro, _) => erro.tipo,
           measureFn: (Erro erro, _) => erro.jogador,
           colorFn: (Erro erro, _) => purple[30],
           id: 'Saque'),
       new charts.Series<Erro, String>(        
-          data: erroAtaqueStat,
+          data: erroAtaque,
           domainFn: (Erro erro, _) => erro.tipo,
           measureFn: (Erro erro, _) => erro.jogador,
           colorFn: (Erro erro, _) => purple[20],
           id: 'Ataque'),
       new charts.Series<Erro, String>(
-          data: erroBloqueioStat,
+          data: erroBloqueio,
           domainFn: (Erro erro, _) => erro.tipo,
           measureFn: (Erro erro, _) => erro.jogador,
           colorFn: (Erro erro, _) => purple[10],
           id: 'Bloqueio'),
       new charts.Series<Erro, String>(
-          data: erroGenericoStat,
+          data: erroGenerico,
           domainFn: (Erro erro, _) => erro.tipo,
           measureFn: (Erro erro, _) => erro.jogador,
           colorFn: (Erro erro, _) => purple[50],
@@ -512,6 +512,9 @@ class _GrafVoleiState
                       child: Text('Error'),
                     ));
                   } else {
+                    List<DadosVolleyModel> listErro = controller.dadosList.data;
+                    _errosJogador(listErro);
+
                     _dadosSerieErro = _createSampleDataErro();
                     return charts.BarChart(
                       _dadosSerieErro,
