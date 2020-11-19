@@ -51,8 +51,7 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
   _showLogo() {
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 70.0, 0, 0),
-      child: Image.asset('assets/images/logoalvoaaabm_400x400.jpg',
-          height: 250, width: 250),
+      child: Image.asset('assets/images/logo.png', height: 250, width: 250),
     );
   }
 
@@ -282,11 +281,11 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
           splashColor: Colors.grey,
           onPressed: () {
             if (controller.user == null) {
-            controller.signInGoogle().then((retUser) {
-              Navigator.of(context).pushNamed('/welcome');
-            });}
-            else {
-              print ('dapsojkbduaiso');
+              controller.signInGoogle().then((retUser) {
+                Navigator.of(context).pushNamed('/welcome');
+              });
+            } else {
+              print('dapsojkbduaiso');
             }
           },
           shape:
@@ -329,9 +328,9 @@ class _AuthpagePageState extends ModularState<AuthpagePage, UserController> {
           splashColor: Colors.grey,
           onPressed: () {
             if (controller.user != null)
-            controller.signInFacebook().then((retUser){
-              Navigator.of(context).pushNamed('/welcome');
-            });
+              controller.signInFacebook().then((retUser) {
+                Navigator.of(context).pushNamed('/welcome');
+              });
             else {
               print('achei cuzão');
             }

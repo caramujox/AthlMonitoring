@@ -25,6 +25,11 @@ class EquipeService extends Disposable implements IEquipeService {
   }
 
   @override
+  Stream<List<EquipeModel>> getEquipesDoTreinador(String uidTreinador) {
+    return equipeRepository.getEquipesDoTreinador(uidTreinador);
+  }
+
+  @override
   Future index(EquipeModel model) {
     return equipeRepository.index(model);
   }
@@ -37,5 +42,10 @@ class EquipeService extends Disposable implements IEquipeService {
   @override
   Future startGame(GameModel model) {
     return equipeRepository.startGame(model);
+  }
+
+  @override
+  Future updateUser(String equipeId, idTreinador) {
+    return equipeRepository.updateUser(equipeId, idTreinador);
   }
 }

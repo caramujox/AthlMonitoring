@@ -16,24 +16,21 @@ class _WelcomePageTreinadorState
     extends ModularState<WelcomePageTreinador, UserController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-
   @override
   Widget build(BuildContext context) {
     return _constroiWelcomeTreinador();
   }
 
-  
-
   _constroiWelcomeTreinador() {
     return Scaffold(
       key: _scaffoldKey,
       drawer: _welcomeTreinadorDrawer(),
-      body: _welcomeBodyTreinador(),      
+      body: _welcomeBodyTreinador(),
     );
   }
 
-  _welcomeTreinadorDrawer()  {
-    dynamic user = controller.userModel;
+  _welcomeTreinadorDrawer() {
+    dynamic user = controller.userModel.value;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -135,8 +132,7 @@ class _WelcomePageTreinadorState
                   ),
                   onTap: () {
                     controller.signOut();
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/', (route) => false);
+                    Navigator.pushNamed(context, '/');
                   }),
             ),
           ),
@@ -146,7 +142,7 @@ class _WelcomePageTreinadorState
   }
 
   _welcomeBodyTreinador() {
-    UserModel user = controller.userModel;      
+    UserModel user = controller.userModel.value;
     return Container(
       child: Column(
         children: <Widget>[
@@ -211,7 +207,7 @@ class _WelcomePageTreinadorState
                 width: double.infinity,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/pregame');
+                    Navigator.of(context).pushNamed('/pregame', arguments: user.uid);
                   },
                   elevation: 5.0,
                   padding: EdgeInsets.all(15.0),
@@ -268,9 +264,10 @@ class _WelcomePageTreinadorState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   _botaoComFoto("assets/images/atleta4.png", "ATLETAS",
-                      "/atletas", Icons.person),
+                      "/atletas", Icons.person, args: user.equipes),
                   _botaoComFoto("assets/images/equipe.png", "EQUIPES",
-                      "/equipes", Icons.people),
+                      "/equipes", Icons.people,
+                      args: user.uid),
                 ],
               ),
             ),
@@ -281,11 +278,11 @@ class _WelcomePageTreinadorState
     );
   }
 
-  _botaoComFoto(String assetPath, btnText, route, IconData icon) {
+  _botaoComFoto(String assetPath, btnText, route, IconData icon, {args}) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(route);
+          Navigator.of(context).pushNamed(route, arguments: args);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),

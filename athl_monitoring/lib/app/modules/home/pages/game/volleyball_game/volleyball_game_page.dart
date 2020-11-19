@@ -52,44 +52,52 @@ class _VolleyballGameState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    child: AutoSizeText(
-                      widget.gameModel == null
-                          ? 'Minha Equipe'
-                          : widget.gameModel.equipeId,
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: ConstColors.ccBlueVioletWheel,
-                          letterSpacing: 1.5,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                          fontStyle: FontStyle.italic),
+                    child: Center(
+                      child: AutoSizeText(
+                        widget.gameModel == null
+                            ? 'Minha Equipe'
+                            : widget.gameModel.nomeEquipe,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: ConstColors.ccBlueVioletWheel,
+                            letterSpacing: 1.5,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                            fontStyle: FontStyle.italic),
+                      ),
                     ),
                   ),
                   Flexible(
-                    child: AutoSizeText(
-                      'NDU',
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: ConstColors.ccBlueVioletWheel,
-                          letterSpacing: 1.5,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                          fontStyle: FontStyle.italic),
+                    child: Center(
+                      child: AutoSizeText(
+                        widget.gameModel == null
+                            ? 'Competição'
+                            : widget.gameModel.nomeCompeticao,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: ConstColors.ccBlueVioletWheel,
+                            letterSpacing: 1.5,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                            fontStyle: FontStyle.italic),
+                      ),
                     ),
                   ),
                   Flexible(
-                    child: AutoSizeText(
-                      _currentDate(),
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: ConstColors.ccBlueVioletWheel,
-                          letterSpacing: 1.5,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                          fontStyle: FontStyle.italic),
+                    child: Center(
+                      child: AutoSizeText(
+                        _currentDate(),
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: ConstColors.ccBlueVioletWheel,
+                            letterSpacing: 1.5,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                            fontStyle: FontStyle.italic),
+                      ),
                     ),
                   ),
                 ],
@@ -194,8 +202,8 @@ class _VolleyballGameState
                           tipo: 'ponto de saque',
                           jogador: 'pedro',
                           ponto: 'pro');
+                      controller.save(modelo, widget.gameModel);
                       _incrementProPoint();
-                      controller.save(modelo);
                     },
                   ),
                 ),
@@ -221,6 +229,11 @@ class _VolleyballGameState
                           fontFamily: 'OpenSans',
                         )),
                     onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'erro de saque',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
                       _incrementConPoint();
                     },
                   ),
@@ -250,7 +263,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'ponto de ataque',
+                          jogador: 'pedro',
+                          ponto: 'pro');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementProPoint();
+                    },
                   ),
                 ),
               ),
@@ -265,7 +285,7 @@ class _VolleyballGameState
                     padding: EdgeInsets.only(
                         top: 30.0, bottom: 35.0, left: 5.0, right: 5.0),
                     color: Colors.yellow.shade600,
-                    child: AutoSizeText("Ataque Bloqueado",
+                    child: AutoSizeText("Erro de Ataque",
                         maxLines: 1,
                         style: TextStyle(
                           color: ConstColors.ccBlueVioletWheel,
@@ -274,7 +294,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'erro de ataque',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementConPoint();
+                    },
                   ),
                 ),
               ),
@@ -302,7 +329,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'ponto de bloqueio',
+                          jogador: 'pedro',
+                          ponto: 'pro');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementProPoint();
+                    },
                   ),
                 ),
               ),
@@ -317,7 +351,7 @@ class _VolleyballGameState
                     padding: EdgeInsets.only(
                         top: 30.0, bottom: 35.0, left: 5.0, right: 5.0),
                     color: Colors.yellow.shade600,
-                    child: AutoSizeText("Erro de Ataque",
+                    child: AutoSizeText("Ataque Bloqueado",
                         maxLines: 1,
                         style: TextStyle(
                           color: ConstColors.ccBlueVioletWheel,
@@ -326,7 +360,14 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'ataque bloqueado',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementConPoint();
+                    },
                   ),
                 ),
               ),
@@ -354,38 +395,17 @@ class _VolleyballGameState
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'erro do oponente',
+                          jogador: 'pedro',
+                          ponto: 'pro');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementProPoint();
+                    },
                   ),
                 ),
               ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  width: double.infinity,
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7.32)),
-                    elevation: 5.0,
-                    padding: EdgeInsets.only(
-                        top: 30.0, bottom: 35.0, left: 5.0, right: 5.0),
-                    color: Colors.yellow.shade600,
-                    child: AutoSizeText("Erro Genérico",
-                        maxLines: 1,
-                        style: TextStyle(
-                          color: ConstColors.ccBlueVioletWheel,
-                          letterSpacing: 1.5,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        )),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(10.0),
@@ -407,8 +427,53 @@ class _VolleyballGameState
                           fontFamily: 'OpenSans',
                         )),
                     onPressed: () {
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'ponto do oponente',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementConPoint();
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  width: double.infinity,
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7.32)),
+                    elevation: 5.0,
+                    padding: EdgeInsets.only(
+                        top: 30.0, bottom: 35.0, left: 5.0, right: 5.0),
+                    color: Colors.yellow.shade600,
+                    child: AutoSizeText("Erro Genérico",
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: ConstColors.ccBlueVioletWheel,
+                          letterSpacing: 1.5,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        )),
+                    onPressed: () {
+<<<<<<< HEAD
                       _incrementProPoint();
                       Navigator.of(context).pushNamed('/grafvolei');},
+=======
+                      DadosVolleyModel modelo = new DadosVolleyModel(
+                          tipo: 'erro generico',
+                          jogador: 'pedro',
+                          ponto: 'con');
+                      controller.save(modelo, widget.gameModel);
+                      _incrementConPoint();
+                    },
+>>>>>>> colincol
                   ),
                 ),
               ),

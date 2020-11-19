@@ -1,7 +1,10 @@
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
+<<<<<<< HEAD
 import 'package:athl_monitoring/app/modules/home/pages/graficos/graficos_volei.dart';
 import 'package:athl_monitoring/app/modules/home/pages/teste2.dart';
+=======
+>>>>>>> colincol
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/grid_item.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/header_title.dart';
@@ -48,11 +51,12 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
                 } else if (controller.atletaList.hasError) {
                   return Center(
                       child: RaisedButton(
-                    onPressed: controller.getList,
+                    onPressed: () {},
                     child: Text('Error'),
                   ));
                 } else {
                   List<AtletaModel> list = controller.atletaList.data;
+                  list.sort((a,b) => a.codEquipe.compareTo(b.codEquipe));
                   return Stack(children: <Widget>[
                     Container(
                       child: FutureBuilder(
@@ -103,8 +107,18 @@ class _AtletaPageState extends ModularState<AtletaPage, AtletaController> {
                                           photoUrl: list[index - 1].urlPhoto,
                                         ),
                                         onTap: () {
+<<<<<<< HEAD
                                           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => GrafVolei()));
                                           print("topper");
+=======
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder:
+                                          //             (BuildContext context) =>
+                                          //                 TesteGraf()));
+                                          // print("topper");
+>>>>>>> colincol
                                         },
                                       ),
                                     ));

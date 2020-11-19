@@ -10,8 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 class RegisterAtletaForm extends StatefulWidget {
   @override
@@ -144,7 +144,7 @@ class _RegisterAtletaFormState
                         formIcon: Icons.assignment_ind,
                         formHint: "Digite o Número do Atleta",
                         formTitle: "Número do Atleta",
-                      ),                
+                      ),
                       _buildRegisterBtn(),
                     ],
                   ),
@@ -154,8 +154,7 @@ class _RegisterAtletaFormState
           ),
         ),
       ),
-    
-    resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: true,
     );
   }
 
@@ -166,18 +165,21 @@ class _RegisterAtletaFormState
       child: Observer(builder: (_) {
         return RaisedButton(
           onPressed: () async {
+            var uuid = Uuid();
+            var atluid = uuid.v1();
             await controller
                 .uploadPicture(
                     '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png',
                     File(_image.path))
                 .onComplete;
             AtletaModel model = AtletaModel(
-                email: emailAtletaController.text,
-                nome: nomeAtletaController.text,
-                number: int.parse(numeroAtletaController.text),
-                codEquipe: codEquipeController.text,
-                urlPhoto:
-                    '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
+              nome: nomeAtletaController.text,
+              email: emailAtletaController.text,
+              codEquipe: codEquipeController.text,
+              number: int.parse(numeroAtletaController.text),
+              uid: atluid,
+              urlPhoto:'${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png'     
+            );
             controller.save(model);
             Navigator.of(context).pop();
           },

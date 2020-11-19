@@ -24,7 +24,6 @@ class _WelcomeRegisterAtletaState
   final TextEditingController numeroAtletaController = TextEditingController();
   final TextEditingController nomeAtletaController = TextEditingController();
   File _image;
-  String _uploadedFileUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -157,16 +156,18 @@ class _WelcomeRegisterAtletaState
                 .uploadPicture(
                     '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png',
                     File(_image.path))
-                .onComplete;                            
+                .onComplete;
             AtletaModel model = AtletaModel(
                 codEquipe: codEquipeController.text,
-                number: int.parse(numeroAtletaController.text),  
+                number: int.parse(numeroAtletaController.text),
+                uid: controller.user.value.uid,
                 email: controller.user.value.email,
-                nome: controller.user.name,                           
+                nome: controller.user.name,
                 urlPhoto:
                     '${codEquipeController.text}/${nomeAtletaController.text + numeroAtletaController.text}.png');
             controller.register(model, controller.user.value);
-            Navigator.of(context).pushNamedAndRemoveUntil('/welcomeAtleta', (route) => false);
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/welcomeAtleta', (route) => false);
           },
           elevation: 5.0,
           padding: EdgeInsets.all(15.0),

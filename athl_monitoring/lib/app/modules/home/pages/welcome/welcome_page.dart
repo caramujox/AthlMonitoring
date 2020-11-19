@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
-
 }
 
 class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
@@ -45,15 +44,14 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // bool _seen = (prefs.getBool('seen') ?? false);
+    bool _seen = (prefs.getBool('seen') ?? false);
 
-    bool _seen = true; //SE QUISER TESTAR SEM O ONE TIME INTRO
+    // bool _seen = false; //SE QUISER TESTAR SEM O ONE TIME INTRO
 
     if (_seen) {
       //Se tiver na lista de atletas -> WelcomePageAtletas
       //Else -> WelcomePageTreinador
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('welcomeTreinador', (route) => false);
+      Navigator.of(context).pushNamed('/welcomeTreinador');
     } else {
       prefs.setBool('seen', true);
     }
@@ -61,12 +59,12 @@ class _WelcomeScreenState extends ModularState<WelcomeScreen, UserController> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.signOut();
-          Navigator.of(context).pop();
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     controller.signOut();
+      //     Navigator.of(context).pop();
+      //   },
+      // ),
       body: Container(
         color: Colors.white,
         child: Stack(

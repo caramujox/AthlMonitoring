@@ -1,4 +1,5 @@
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
@@ -69,18 +70,19 @@ class _PreGamePagePageState
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Observer(builder: (_) {
-                if (controller.equipeList.data == null) {
+                if (controller.equipesDoTreinadorList.data == null) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (controller.equipeList.hasError) {
+                } else if (controller.equipesDoTreinadorList.hasError) {
                   return Center(
                       child: RaisedButton(
                     onPressed: controller.getList,
                     child: Text('Error'),
                   ));
                 } else {
-                  List<EquipeModel> list = controller.equipeList.data;
+                  List<EquipeModel> list =
+                      controller.equipesDoTreinadorList.data;
                   return FutureBuilder(builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     return DropdownButton(
@@ -171,19 +173,26 @@ class _PreGamePagePageState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Text("INICIAR PARTIDA",
-                              style: TextStyle(fontSize: 24.0)),
+                          AutoSizeText(
+                            "SELECIONE A EQUIPE TITULAR",
+                            maxLines: 1,
+                            maxFontSize: 25,
+                          ),
                         ],
                       )),
                   onPressed: () {
-                    GameModel x = new GameModel(
-                        equipeId: selectedType.codEquipe,
-                        equipeAdv: equipeAdvController.text,
-                        nomeCompeticao: campeonatoController.text,
-                        dataGame: DateTime.now());
-                    controller.startGame(x);
-                    Navigator.of(context)
-                        .pushNamed('/volleyballGame', arguments: x);
+                    List<EquipeModel> gambi = new List<EquipeModel>();
+                    gambi.add(selectedType);
+                    // GameModel x = new GameModel(
+                    //     codEquipe: selectedType.codEquipe,
+                    //     nomeEquipe: selectedType.nome,
+                    //     equipeAdv: equipeAdvController.text,
+                    //     nomeCompeticao: campeonatoController.text,
+                    //     dataGame: DateTime.now());
+                    // controller.startGame(x);
+                    // Navigator.of(context)
+                    //     .pushNamed('/volleyballGame', arguments: x);
+                    Navigator.of(context).pushNamed('/selecAtleta', arguments: gambi);
                   },
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),

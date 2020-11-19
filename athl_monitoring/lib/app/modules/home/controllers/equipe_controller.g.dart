@@ -24,8 +24,36 @@ mixin _$EquipeController on _EquipeControllerBase, Store {
     });
   }
 
+  final _$equipesDoTreinadorListAtom =
+      Atom(name: '_EquipeControllerBase.equipesDoTreinadorList');
+
+  @override
+  ObservableStream<List<EquipeModel>> get equipesDoTreinadorList {
+    _$equipesDoTreinadorListAtom.reportRead();
+    return super.equipesDoTreinadorList;
+  }
+
+  @override
+  set equipesDoTreinadorList(ObservableStream<List<EquipeModel>> value) {
+    _$equipesDoTreinadorListAtom
+        .reportWrite(value, super.equipesDoTreinadorList, () {
+      super.equipesDoTreinadorList = value;
+    });
+  }
+
   final _$_EquipeControllerBaseActionController =
       ActionController(name: '_EquipeControllerBase');
+
+  @override
+  dynamic startUp() {
+    final _$actionInfo = _$_EquipeControllerBaseActionController.startAction(
+        name: '_EquipeControllerBase.startUp');
+    try {
+      return super.startUp();
+    } finally {
+      _$_EquipeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic getList() {
@@ -33,6 +61,17 @@ mixin _$EquipeController on _EquipeControllerBase, Store {
         name: '_EquipeControllerBase.getList');
     try {
       return super.getList();
+    } finally {
+      _$_EquipeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic equipesDoTreinador(String uidTreinador) {
+    final _$actionInfo = _$_EquipeControllerBaseActionController.startAction(
+        name: '_EquipeControllerBase.equipesDoTreinador');
+    try {
+      return super.equipesDoTreinador(uidTreinador);
     } finally {
       _$_EquipeControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -83,9 +122,21 @@ mixin _$EquipeController on _EquipeControllerBase, Store {
   }
 
   @override
+  dynamic updateUser(String equipeId, dynamic idTreinador) {
+    final _$actionInfo = _$_EquipeControllerBaseActionController.startAction(
+        name: '_EquipeControllerBase.updateUser');
+    try {
+      return super.updateUser(equipeId, idTreinador);
+    } finally {
+      _$_EquipeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-equipeList: ${equipeList}
+equipeList: ${equipeList},
+equipesDoTreinadorList: ${equipesDoTreinadorList}
     ''';
   }
 }

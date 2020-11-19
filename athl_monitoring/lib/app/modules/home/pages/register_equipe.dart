@@ -1,10 +1,7 @@
 import 'dart:io';
-
 import 'package:athl_monitoring/app/modules/home/controllers/equipe_controller.dart';
-import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -13,6 +10,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 class RegisterEquipeForm extends StatefulWidget {
+  final String uidTreinador;
+
+  const RegisterEquipeForm({Key key, this.uidTreinador}) : super(key: key);
   @override
   _RegisterEquipeFormState createState() => _RegisterEquipeFormState();
 }
@@ -23,7 +23,6 @@ class _RegisterEquipeFormState
   final TextEditingController codEquipeController = TextEditingController();
   final TextEditingController modalidadeController = TextEditingController();
   File _image;
-  String _uploadedFileUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +41,10 @@ class _RegisterEquipeFormState
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color(0xFFddd0f5),
-                      Color(0xFFd8c9f2),
-                      Color(0xFFbeaae3),
                       Color(0xFFB39DDB),
+                      Color(0xFF9575CD),
+                      Color(0xFF7E57C2),
+                      Color(0xFF673AB7),
                     ],
                     stops: [0.1, 0.4, 0.7, 0.9],
                   ),
@@ -134,9 +133,7 @@ class _RegisterEquipeFormState
                       _buildRegisterBtn(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          
-                        ],
+                        children: <Widget>[],
                       ),
                       // _buildRegisterBtn(),
                     ],
@@ -159,18 +156,21 @@ class _RegisterEquipeFormState
         return RaisedButton(
           onPressed: () async {
             var uuid = Uuid();
+            var equid = uuid.v1();
             await controller
                 .uploadPicture(
                     '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png',
                     File(_image.path))
                 .onComplete;
             var model = EquipeModel(
-                codEquipe: uuid.v1(),
+                codEquipe: equid,
                 nome: nomeEquipeController.text,
                 modalidade: modalidadeController.text,
+                uidTreinador: widget.uidTreinador,
                 urlPhoto:
                     '${codEquipeController.text}/${nomeEquipeController.text + modalidadeController.text}.png');
             controller.save(model);
+            controller.updateUser(equid, widget.uidTreinador);
             Navigator.of(context).pop();
           },
           elevation: 5.0,

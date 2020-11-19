@@ -21,9 +21,27 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
   }
 
   @override
+  Future updateUser(String equipeId, idTreinador) async {
+    await Firestore.instance.collection('users').document(idTreinador).updateData({
+      'equipes': FieldValue.arrayUnion([equipeId])
+    });
+  }
+
+  @override
   Stream<List<EquipeModel>> get() {
     return firestore.collection('equipe').snapshots().map((query) =>
         query.documents.map((doc) => EquipeModel.fromDocument(doc)).toList());
+  }
+
+  @override
+  Stream<List<EquipeModel>> getEquipesDoTreinador(String uidTreinador) {
+    return firestore
+        .collection('equipe')
+        .where('uidTreinador', isEqualTo: uidTreinador)
+        .snapshots()
+        .map((query) => query.documents
+            .map((doc) => EquipeModel.fromDocument(doc))
+            .toList());
   }
 
   @override
@@ -45,7 +63,8 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
         'nome': equipeModel.nome,
         'codEquipe': equipeModel.codEquipe,
         'modalidade': equipeModel.modalidade,
-        'urlPhoto': equipeModel.urlPhoto
+        'urlPhoto': equipeModel.urlPhoto,
+        'uidTreinador': equipeModel.uidTreinador
       });
     } else {
       equipeModel.reference.updateData({
@@ -60,10 +79,10 @@ class EquipeRepository extends Disposable implements IEquipeRepository {
   @override
   Future startGame(GameModel gameModel) async {
     await Firestore.instance
-        .collection('jogo')
-        .document('${gameModel.equipeId}')
+        .collection('jogosVolley')
+        .document('${gameModel.codEquipe}' + '${gameModel.dataGame}')
         .setData({
-      'equipeId': gameModel.equipeId,
+      'equipeId': gameModel.codEquipe,
       'equipeAdv': gameModel.equipeAdv,
       'nomeCompeticao': gameModel.nomeCompeticao,
       'dataGame': gameModel.dataGame

@@ -43,6 +43,7 @@ dependencies:
   uuid: ^2.2.2
   auto_size_text: ^2.1.0
   charts_flutter: ^0.9.0
+  draggable_scrollbar: ^0.0.4
      
 
   flutter:
@@ -84,6 +85,8 @@ flutter:
   - assets/images/atleta2.png
   - assets/images/atleta3.png
   - assets/images/atleta4.png
+  - assets/images/volley-court.jpg
+  - assets/images/logo.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

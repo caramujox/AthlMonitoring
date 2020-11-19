@@ -1,4 +1,5 @@
 import 'package:athl_monitoring/app/modules/home/models/dadosVolley_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/dados_volley_repository.dart';
 import 'package:athl_monitoring/app/modules/home/repositories/interfaces/dados_volley_repository_interface.dart';
 import 'package:athl_monitoring/app/modules/home/services/interfaces/dadosVolley_service_interface.dart';
@@ -14,8 +15,8 @@ class DadosVolleyService extends Disposable implements IDadosVolleyService {
   void dispose() {}
 
   @override
-  Future save(DadosVolleyModel model) {
-    return dadosVolleyRepository.save(model);
+  Future save(DadosVolleyModel model, GameModel game) {
+    return dadosVolleyRepository.save(model, game);
   }
 
   @override

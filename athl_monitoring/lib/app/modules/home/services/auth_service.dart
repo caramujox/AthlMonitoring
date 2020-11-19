@@ -61,10 +61,9 @@ class AuthService implements IBaseAuth {
     );
 
     FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-    user.updateProfile(info);   
+    user.updateProfile(info);
 
     _cadastrarUserFirebase(user);
-
 
     return user;
   }
@@ -123,10 +122,11 @@ class AuthService implements IBaseAuth {
     FirebaseUser user = await _auth.currentUser();
 
     userRepository.save(new UserModel(
-        nome: user.displayName, 
+        nome: user.displayName,
+        firebaseId: user.uid,
         urlPhoto: user.photoUrl == null ? "" : user.photoUrl,
         email: user.email,
-        uid: user.uid));
+        uid: uuid.v1()));
 
     return user;
   }
@@ -141,30 +141,28 @@ class AuthService implements IBaseAuth {
     FirebaseUser x = await _auth.currentUser();
 
     if (x == null)
-      return ;
-    else{
+      return;
+    else {
       var ret = await userRepository.index(x);
-    return ret;
+      return ret;
     }
   }
 
-
-    _cadastrarUserFirebase(FirebaseUser user) async {
+  _cadastrarUserFirebase(FirebaseUser user) async {
     final firestoreRef = Firestore.instance.collection("users");
     String fbid = '';
     _auth.currentUser().then((value) => fbid = value.uid);
-
-
-    if ((await firestoreRef.document(user.uid.toString()).get()).exists)
-      return await firestoreRef.document(user.uid.toString()).get();
-    else {
+    firestoreRef.where('firebaseId', isEqualTo: user.uid).snapshots().isEmpty;
+    if (await firestoreRef
+        .where('firebaseId', isEqualTo: user.uid)
+        .snapshots()
+        .isEmpty) {
       userRepository.save(new UserModel(
-        nome: user.displayName,
-        urlPhoto: user.photoUrl,
-        email: user.email,
-        firebaseId: fbid,
-        uid: uuid.v1()));
-        
+          nome: user.displayName,
+          urlPhoto: user.photoUrl,
+          email: user.email,
+          firebaseId: fbid,
+          uid: uuid.v1()));
     }
   }
 }

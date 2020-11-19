@@ -6,18 +6,24 @@ class AtletaModel extends UserModel {
   int number;
   DocumentReference reference;
 
-  AtletaModel({nome, email, uid, urlPhoto, type, this.codEquipe, this.number, this.reference,this.modalidade}):super(nome: nome , type: type, email: email, urlPhoto: urlPhoto, uid: uid);
-
+  AtletaModel(
+      {nome,
+      email,
+      uid,
+      urlPhoto,
+      this.codEquipe,
+      this.number,
+      this.reference,
+      this.modalidade})
+      : super(nome: nome, email: email, urlPhoto: urlPhoto, uid: uid);
 
   factory AtletaModel.fromDocument(DocumentSnapshot doc) {
     return AtletaModel(
-      nome: doc['nome'],
-      type: doc['type'],
-      email: doc['email'],
-      uid: doc['uid'],
-      urlPhoto: doc['urlPhoto'],
-      number: doc['numero'],
-      codEquipe: doc['codEquipe']
-    );
+        nome: doc['nome'],
+        email: doc['email'],
+        uid: doc['uid'],
+        urlPhoto: doc['urlPhoto'],
+        number: doc['numero'],
+        codEquipe: doc['codEquipe']);
   }
 }

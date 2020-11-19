@@ -9,8 +9,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class GridEquipePage extends StatefulWidget {
-  final String title;
-  const GridEquipePage({Key key, this.title = "Equipes Page"})
+  final String title, uidTreinador;
+  const GridEquipePage({Key key, this.title = "Equipes Page", this.uidTreinador})
       : super(key: key);
   @override
   _GridEquipePageState createState() => _GridEquipePageState();
@@ -19,7 +19,7 @@ class GridEquipePage extends StatefulWidget {
 class _GridEquipePageState
     extends ModularState<GridEquipePage, EquipeController> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return Scaffold(
       body: Stack(
         alignment: Alignment.topCenter,
@@ -40,23 +40,25 @@ class _GridEquipePageState
                 Expanded(
                   child: Observer(
                     builder: (_) {
-                      if (controller.equipeList.data == null) {
+                      if (controller.equipesDoTreinadorList.data == null) {
                         return Center(
                           child: CircularProgressIndicator(),
                         );
-                      } else if (controller.equipeList.hasError) {
+                      } else if (controller.equipesDoTreinadorList.hasError) {
                         return Center(
                             child: RaisedButton(
                           onPressed: controller.getList,
                           child: Text('Error'),
                         ));
                       } else {
-                        List<EquipeModel> list = controller.equipeList.data;
+                        List<EquipeModel> list = controller.equipesDoTreinadorList.data;
                         return Stack(children: <Widget>[
                           Container(child: FutureBuilder(builder:
                               (BuildContext context,
                                   AsyncSnapshot<dynamic> snapshot) {
                             return GridView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
                                 gridDelegate:
                                     new SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3),
@@ -78,7 +80,7 @@ class _GridEquipePageState
                                           ),
                                           onPressed: () {
                                             Navigator.of(context)
-                                                .pushNamed('/regEquipes');
+                                                .pushNamed('/regEquipes', arguments: widget.uidTreinador);
                                           },
                                         ),
                                       ),

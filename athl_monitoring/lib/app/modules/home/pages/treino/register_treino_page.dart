@@ -1,4 +1,5 @@
-import 'package:athl_monitoring/app/modules/home/controllers/user_controller.dart';
+import 'package:athl_monitoring/app/modules/home/controllers/treino_controller.dart';
+import 'package:athl_monitoring/app/modules/home/models/treino_model.dart';
 import 'package:athl_monitoring/app/modules/home/services/auth_service.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/form_padrao.dart';
@@ -6,20 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class RegisterForm extends StatefulWidget {
-  RegisterForm({this.authService, this.loginCallBack});
+class RegisterTreino extends StatefulWidget {
+  RegisterTreino({this.authService, this.loginCallBack});
 
   final AuthService authService;
   final VoidCallback loginCallBack;
 
   @override
-  _RegisterFormState createState() => _RegisterFormState();
+  _RegisterTreinoState createState() => _RegisterTreinoState();
 }
 
-class _RegisterFormState extends ModularState<RegisterForm, UserController> {
-  final TextEditingController emailController = TextEditingController();
+class _RegisterTreinoState
+    extends ModularState<RegisterTreino, TreinoController> {
+  final TextEditingController descricaoController = TextEditingController();
   final TextEditingController nomeController = TextEditingController();
-  final TextEditingController passController = TextEditingController();
+  final TextEditingController duracaoController = TextEditingController();
 
   Widget _buildRegisterBtn() {
     return Container(
@@ -28,10 +30,14 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          controller.signUp(
-              emailController.text, passController.text, nomeController.text);
-          controller.signIn(emailController.text, passController.text);
-          Navigator.of(context).pushNamed('/welcomeTreinador');
+          TreinoModel model = new TreinoModel(
+            descricao: descricaoController.text,
+            nome: nomeController.text,
+            duracao: ('oi'),
+            codEquipe: ('oi'),
+            data: DateTime.now(),
+          );
+          controller.save(model);
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -91,7 +97,7 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Cadastro',
+                        'Novo Treino',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OpenSans',
@@ -101,28 +107,28 @@ class _RegisterFormState extends ModularState<RegisterForm, UserController> {
                       ),
                       SizedBox(height: 30.0),
                       FormPadrao(
-                        formTitle: "Nome Completo",
-                        formHint: "Digite seu nome",
-                        formIcon: Icons.person,
+                        formTitle: "Nome do treino",
+                        formHint: "Digite o nome do treino",
+                        formIcon: Icons.directions_run,
                         formEditingController: nomeController,
                       ),
                       SizedBox(
                         height: 10.0,
                       ),
                       FormPadrao(
-                        formTitle: "Email",
-                        formHint: "Digite seu email",
-                        formIcon: Icons.email,
-                        formEditingController: emailController,
+                        formTitle: "Duração",
+                        formHint: "Digite a duração do treino",
+                        formIcon: Icons.timer,
+                        formEditingController: duracaoController,
                       ),
                       SizedBox(
                         height: 10.0,
                       ),
                       FormPadrao(
-                        formTitle: "Senha",
-                        formHint: "Digite sua senha",
-                        formIcon: Icons.lock,
-                        formEditingController: passController,
+                        formTitle: "Descrição",
+                        formHint: "Descreva o treino a ser realizado",
+                        formIcon: Icons.textsms,
+                        formEditingController: descricaoController,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
