@@ -192,8 +192,7 @@ class _PreGamePagePageState
                     // controller.startGame(x);
                     // Navigator.of(context)
                     //     .pushNamed('/volleyballGame', arguments: x);
-                    Navigator.of(context)
-                        .pushNamed('/selecAtleta', arguments: gambi);
+                    Navigator.of(context).pushNamed('/selecAtleta', arguments: gambi);
                   },
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),

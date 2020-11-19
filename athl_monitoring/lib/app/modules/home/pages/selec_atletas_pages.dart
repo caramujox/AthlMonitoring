@@ -1,6 +1,7 @@
 import 'package:athl_monitoring/app/modules/home/controllers/atleta_controller.dart';
 import 'package:athl_monitoring/app/modules/home/models/atleta_model.dart';
 import 'package:athl_monitoring/app/modules/home/models/equipe_model.dart';
+import 'package:athl_monitoring/app/modules/home/models/game_model.dart';
 import 'package:athl_monitoring/app/modules/home/util/const_colors.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/grid_item.dart';
 import 'package:athl_monitoring/app/modules/home/widgets/header_title.dart';
@@ -14,7 +15,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 class SelecAtleta extends StatefulWidget {
   final String title;
   final List<EquipeModel> equipeJogando;
-  const SelecAtleta({Key key, this.title = "Home", this.equipeJogando})
+  final String equipeAdv, nomeCompeticao;
+  const SelecAtleta({Key key, this.title = "Home", this.equipeJogando, this.equipeAdv, this.nomeCompeticao})
       : super(key: key);
 
   @override
@@ -24,14 +26,14 @@ class SelecAtleta extends StatefulWidget {
 class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
   //use 'controller' variable to access controller
   ScrollController scrollController = new ScrollController();
-  @override
-  Widget build(BuildContext context) {
     bool successDrop4 = false;
-    bool successDrop3= false;
+    bool successDrop3 = false;
     bool successDrop2 = false;
     bool successDrop5 = false;
     bool successDrop6 = false;
     bool successDrop1 = false;
+  @override
+  Widget build(BuildContext context) {
     AtletaModel tavindo = new AtletaModel();
     controller.getAtletasSingleTeam(widget.equipeJogando[0].codEquipe);
     return Scaffold(
@@ -88,9 +90,8 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                         photoUrl: tavindo.urlPhoto,
                                       ),
                                       onTap: () {
-                                        setState(() {
-                                          successDrop4 = !successDrop4;
-                                        });
+                                        print('nnanarewanitonight');
+                                        successDrop4 = false;
                                       },
                                     )),
                                   );
@@ -159,7 +160,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop3 = !successDrop3;
+                                          successDrop3 = false;
                                         });
                                       },
                                     )),
@@ -229,7 +230,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop2 = !successDrop2;
+                                          successDrop2 = false;
                                         });
                                       },
                                     )),
@@ -299,7 +300,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop5 = !successDrop5;
+                                          successDrop5 = false;
                                         });
                                       },
                                     )),
@@ -369,7 +370,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop6 = !successDrop6;
+                                          successDrop6 = false;
                                         });
                                       },
                                     )),
@@ -439,7 +440,7 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                          successDrop1 = !successDrop1;
+                                          successDrop1 = false;
                                         });
                                       },
                                     )),
@@ -553,23 +554,13 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                                                     .urlPhoto,
                                                               ),
                                                             ),
-                                                            // feedback: GridItem(
-                                                            //   index: index,
-                                                            //   nome:
-                                                            //       list[index]
-                                                            //           .nome,
-                                                            //   num: list[index]
-                                                            //       .number
-                                                            //       .toString(),
-                                                            //   photoUrl: list[
-                                                            //           index]
-                                                            //       .urlPhoto,
-                                                            // ),
-                                                            feedback: Card(
-                                                              child: Container(
-                                                                child: Text(
-                                                                    list[index]
-                                                                        .nome),
+                                                            feedback: Center(
+                                                              child: Card(
+                                                                child: Container(
+                                                                  child: AutoSizeText(
+                                                                      list[index]
+                                                                          .nome),
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -603,21 +594,18 @@ class _SelecAtletaState extends ModularState<SelecAtleta, AtletaController> {
                                       ],
                                     )),
                                 onPressed: () {
-                                  List<EquipeModel> gambi =
-                                      new List<EquipeModel>();
+                                  // List<EquipeModel> gambi =
+                                  //     new List<EquipeModel>();
 
-                                  // GameModel x = new GameModel(
-                                  //     codEquipe: selectedType.codEquipe,
-                                  //     nomeEquipe: selectedType.nome,
-                                  //     equipeAdv: equipeAdvController.text,
-                                  //     nomeCompeticao: campeonatoController.text,
-                                  //     dataGame: DateTime.now());
+                                  GameModel x = new GameModel(
+                                      codEquipe: widget.equipeJogando[0].codEquipe,
+                                      nomeEquipe: widget.equipeJogando[0].nome,
+                                      equipeAdv: 'França',// widget.equipeAdv,
+                                      nomeCompeticao: 'VNL 2018',//widget.nomeCompeticao,
+                                      dataGame: DateTime.now());
                                   // controller.startGame(x);
-                                  // Navigator.of(context)
-                                  //     .pushNamed('/volleyballGame', arguments: x);
-                                  Navigator.of(context).pushNamed(
-                                      '/selecAtleta',
-                                      arguments: gambi);
+                                  Navigator.of(context)
+                                      .pushNamed('/volleyballGame', arguments: x);
                                 },
                                 shape: new RoundedRectangleBorder(
                                     borderRadius:
